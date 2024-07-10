@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
-import 'package:frango_restaurant_app/presentation/screens/onboard_screen/onboard_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

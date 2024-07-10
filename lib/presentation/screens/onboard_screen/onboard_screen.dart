@@ -71,24 +71,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     const SizedBox(
                       height: 60,
                     ),
-                    ElevatedButton(
-                      onPressed: _completeOnboarding,
-                      //     () {
-                      //   Navigator.pushReplacement(context, MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return const HomeScreen();
-                      //     },
-                      //   ));
-                      // },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryYellow),
-                      child: const Text(
-                        "Ötürün",
-                        style: TextStyle(
-                          color: AppColors.primaryBlack,
-                        ),
-                      ),
-                    ),
+
                     Expanded(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
@@ -127,6 +110,17 @@ class _OnboardScreenState extends State<OnboardScreen> {
             ),
           ),
           const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: _completeOnboarding,
+            style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryYellow),
+            child: const Text(
+              "Ötürün",
+              style: TextStyle(
+                color: AppColors.primaryBlack,
+              ),
+            ),
+          ),
         ],
       ),
     );
