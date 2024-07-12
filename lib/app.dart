@@ -40,11 +40,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: isHome == true
-          ? const HomeScreen()
-          : isSplash == false
-          ? const SplashScreen()
-          : const SplashScreen(),
+      home: isHome == true ? const HomeScreen() : const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
