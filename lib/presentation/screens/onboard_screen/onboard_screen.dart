@@ -49,6 +49,8 @@ class OnboardScreen extends StatelessWidget {
           DotIndicator(
             pageController: pageController,
             itemCount: onboards.length,
+            activeDotColor: AppColors.primaryYellow,
+            dotColor: AppColors.black,
           ),
           const SizedBox(height: 20),
           SkipButton(

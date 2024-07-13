@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/data/models/local/home_screen_scroller_model.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/campaigns.dart';
 import 'package:frango_restaurant_app/presentation/widgets/dot_indicator.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/utils/constants/app_paddings.dart';
+import 'package:frango_restaurant_app/utils/constants/app_radiuses.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,20 +20,30 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.primaryBlack,
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryBlack,
-        foregroundColor: AppColors.primaryYellow,
-        title: const Text('Frango - Döner Sosla Yenir!'),
-        centerTitle: true,
-      ),
-      body: Column(
+      appBar: const AppBarItems(),
+      body: ListView(
         children: [
-          Campaigns(pageController: pageController),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: AppPaddings.a16,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                filled: true,
+                fillColor: AppColors.grey,
+                suffixIconColor: AppColors.primaryYellow,
+                suffixIcon: Icon(
+                  Icons.search,
+                ),
+                border: OutlineInputBorder(borderRadius: AppRadiuses.a24),
+              ),
+            ),
+          ),
+          Campaigns(pageController: pageController),
+          Center(
             child: DotIndicator(
               pageController: pageController,
               itemCount: scrollerModel.length,
+              activeDotColor: AppColors.primaryYellow,
+              dotColor: AppColors.white,
             ),
           ),
         ],

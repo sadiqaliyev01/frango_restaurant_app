@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
   bool? isHome;
   bool? isSplash;
 
-  void getInstanceOrder() async {
+  void getInstanceHome() async {
     SharedPreferences prefsHome = await SharedPreferences.getInstance();
     isHome = prefsHome.getBool("Home");
     setState(() {});
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    getInstanceOrder();
+    getInstanceHome();
     getInstanceSplash();
   }
 
