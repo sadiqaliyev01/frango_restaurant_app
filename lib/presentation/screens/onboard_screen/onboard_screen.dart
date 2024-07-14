@@ -39,7 +39,7 @@ class OnboardScreen extends StatelessWidget {
     _checkIfOnboardingCompleted(context);
 
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.primaryBlack,
       body: Column(
         children: [
           PageViewBuilder(
@@ -50,7 +50,7 @@ class OnboardScreen extends StatelessWidget {
             pageController: pageController,
             itemCount: onboards.length,
             activeDotColor: AppColors.primaryYellow,
-            dotColor: AppColors.black,
+            dotColor: AppColors.white,
           ),
           const SizedBox(height: 20),
           SkipButton(

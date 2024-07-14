@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/data/models/local/home_screen_scroller_model.dart';
+import 'package:frango_restaurant_app/data/models/local/menu_items_model.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/campaigns.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/menu_items_categories.dart';
+import 'package:frango_restaurant_app/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/dot_indicator.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_paddings.dart';
@@ -12,6 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<MenuItemsModel> menuItems = MenuItemsModel.menuItemsNames;
     List<HomeScreenScrollerModel> scrollerModel = HomeScreenScrollerModel.model;
     final PageController pageController = PageController(
       initialPage: 0,
@@ -46,6 +50,7 @@ class HomeScreen extends StatelessWidget {
               dotColor: AppColors.white,
             ),
           ),
+          const MenuItemsCategories(),
         ],
       ),
     );

@@ -3,12 +3,11 @@ import 'package:frango_restaurant_app/presentation/widgets/avatar_image.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_paddings.dart';
 
-class AppBarItems extends StatelessWidget implements PreferredSizeWidget{
+class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
   const AppBarItems({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +19,18 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget{
         children: [
           Text(
             "Deliver to",
-            style: TextStyle(color: AppColors.grey, fontSize: 16.0),
+            style: TextStyle(
+              color: AppColors.lightGrey,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           Text(
             "Babek pr. 95",
-            style: TextStyle(color: AppColors.white, fontSize: 14.0),
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 14.0,
+            ),
           ),
         ],
       ),
@@ -32,14 +38,9 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget{
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(
-              Icons.notifications,
-              color: AppColors.primaryYellow
-          ),
+          icon: const Icon(Icons.notifications, color: AppColors.primaryYellow),
         ),
       ],
     );
   }
-
-
 }
