@@ -12,39 +12,37 @@ class PageViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     List<OnboardModel> onboards = OnboardModel.onboardItems;
 
-    return Expanded(
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: onboards.length,
-        itemBuilder: (context, index) {
-          final items = onboards[index];
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 60,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    items.image,
-                    fit: BoxFit.contain,
-                  ),
+    return PageView.builder(
+      controller: pageController,
+      itemCount: onboards.length,
+      itemBuilder: (context, index) {
+        final items = onboards[index];
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 60,
+            ),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Image.asset(
+                  items.image,
+                  fit: BoxFit.contain,
                 ),
               ),
-              const SizedBox(height: 20),
-              OnboardTitleAndStyle(
-                title: items.title,
-              ),
-              const SizedBox(height: 20),
-              OnboardDescriptionAndStyle(
-                description: items.description,
-              ),
-            ],
-          );
-        },
-      ),
+            ),
+            const SizedBox(height: 20),
+            OnboardTitleAndStyle(
+              title: items.title,
+            ),
+            const SizedBox(height: 20),
+            OnboardDescriptionAndStyle(
+              description: items.description,
+            ),
+          ],
+        );
+      },
     );
   }
 }

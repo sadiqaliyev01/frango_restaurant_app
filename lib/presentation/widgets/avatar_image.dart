@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/utils/constants/app_paddings.dart';
 
 class AvatarImage extends StatelessWidget {
   const AvatarImage({super.key, this.onTap});
