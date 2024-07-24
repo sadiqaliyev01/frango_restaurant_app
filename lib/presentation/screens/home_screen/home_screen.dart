@@ -34,10 +34,10 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
   final ScrollController categoryScrollController = ScrollController();
   int selectedCategoryIndex = 0;
 
-  final double campaignHeight = 200.0; // Campaigns widget height
-  final double searchBoxHeight = 54.0; // SearchBox widget height
-  final double categoryHeaderHeight = 0.0; // Category header height
-  final double categoryItemHeight = 300.0; // Each category's approximate height
+  final double campaignHeight = 200.0;
+  final double searchBoxHeight = 54.0;
+  final double categoryHeaderHeight = 0.0;
+  final double categoryItemHeight = 300.0;
 
   @override
   void initState() {
@@ -56,30 +56,30 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
   void _onScroll() {
     double offset = scrollController.offset;
 
-    // Calculate the adjusted offset based on the height of Campaigns and SearchBox
+// Kampaniyalarin ve SearchBox-un hundurluyune esasen duzelis edilmis ofseti hesabla
     double adjustedOffset = offset - (campaignHeight + searchBoxHeight + categoryHeaderHeight);
 
-    // Calculate the positions of the categories
+    // Kateqoriyalarin movqelerini hesabla
     List<double> categoryPositions = List.generate(
       8,
           (index) => index * categoryItemHeight,
     );
 
-    // Determine which category is in view
+    // Hansi kateqoriya goruntulenir
     int newIndex = categoryPositions.indexWhere((position) {
       return adjustedOffset >= position && adjustedOffset < position + categoryItemHeight;
     });
 
-    // Update only if the new index is valid and different from the current selected index
+    // Yeni indeks valid olduqda ve indiki indeksden ferqli olduqda yenile
     if (newIndex != -1 && newIndex != selectedCategoryIndex) {
       setState(() {
         selectedCategoryIndex = newIndex;
       });
 
-      // Scroll the category headers horizontally
-      double categoryWidth = 100.0; // Each category's width
+      // Kateqoriya basliqlarini scroll etdir
+      double categoryWidth = 100.0;
       categoryScrollController.animateTo(
-        (newIndex * categoryWidth) - (categoryWidth * 2), // Bring the selected category to the center
+        (newIndex * categoryWidth) - (categoryWidth * 2), // secilmis kateoriyani ortaya getir
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -91,15 +91,15 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
       selectedCategoryIndex = index;
     });
     scrollController.animateTo(
-      campaignHeight + searchBoxHeight + categoryHeaderHeight + index * categoryItemHeight, // Adjusted scroll position
+      campaignHeight + searchBoxHeight + categoryHeaderHeight + index * categoryItemHeight, // Duzelmis scroll movqeyi
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
 
-    // Scroll the category headers horizontally
-    double categoryWidth = 100.0; // Each category's width
+    // Kateqoriya basliqlarini scroll etdir
+    double categoryWidth = 100.0;
     categoryScrollController.animateTo(
-      index * categoryWidth, // Bring the selected category to the start
+      index * categoryWidth, // secilmis kateoriyani ortaya getir
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
