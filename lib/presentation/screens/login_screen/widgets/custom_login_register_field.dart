@@ -4,10 +4,12 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 class CustomLoginRegisterField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
+  final TextInputType keyboardType;
 
   const CustomLoginRegisterField({
     required this.hintText,
     this.obscureText = false,
+    this.keyboardType = TextInputType.text,
     super.key,
   });
 
@@ -53,6 +55,7 @@ class _CustomLoginRegisterFieldState extends State<CustomLoginRegisterField> {
       ),
       style: const TextStyle(color: AppColors.white),
       obscureText: _obscureText,
+      keyboardType: widget.keyboardType,
     );
   }
 }

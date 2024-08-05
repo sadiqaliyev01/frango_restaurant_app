@@ -37,4 +37,15 @@ class AppStrings {
   static const String loginGoogle = "Login with Google";
   static const String dontHaveAnAccount = "  Don't have an account? ";
   static const String signUpText = "Sign Up";
+
+  static const String createAccountText = "Create a new account";
+  static const String createAccountSubText =
+      "Please fill in the form to continue";
+  static const String fullName = "Full Name";
+  static const String registerEmail = "Email";
+  static const String phoneNumber = "Phone Number";
+  static const String signUpButton = "SIGN UP";
+  static const String signUpGoogle = "Sign up with Google";
+  static const String haveAnAccount = "  Have an account? ";
+  static const String loginText = "Login";
 }

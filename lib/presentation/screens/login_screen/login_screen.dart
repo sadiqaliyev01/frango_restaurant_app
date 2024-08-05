@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/custom_login_register_field.dart';
@@ -95,30 +97,17 @@ class LoginScreen extends StatelessWidget {
                                   svgIconPath: 'assets/icons/google.svg',
                                 ),
                                 const SizedBox(height: 25),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: const Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: AppStrings.dontHaveAnAccount,
-                                          style: TextStyle(
-                                            color: AppColors.white,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: AppStrings.signUpText,
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
+                                CustomLoginRedirectText(
+                                  normalText: AppStrings.dontHaveAnAccount,
+                                  highlightedText: AppStrings.signUpText,
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUpScreen(),
+                                        ));
+                                  },
                                 ),
                               ],
                             ),
