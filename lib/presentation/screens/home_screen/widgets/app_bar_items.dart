@@ -20,7 +20,7 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
           Text(
             "Deliver to",
             style: TextStyle(
-              color: AppColors.lightGrey,
+              color: AppColors.lightGray,
               fontSize: 14.0,
               fontWeight: FontWeight.w600,
             ),
