@@ -16,17 +16,17 @@ class SearchBox extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadiuses.a24,
           borderSide: BorderSide(
-            color: AppColors.grey,
+            color: AppColors.gray,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadiuses.a24,
           borderSide: BorderSide(
-            color: AppColors.grey,
+            color: AppColors.gray,
           ),
         ),
         filled: true,
-        fillColor: AppColors.grey,
+        fillColor: AppColors.gray,
         suffixIconColor: AppColors.primaryYellow,
         suffixIcon: Icon(
           Icons.search,
