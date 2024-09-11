@@ -48,4 +48,18 @@ class AppStrings {
   static const String signUpGoogle = "Sign up with Google";
   static const String haveAnAccount = "  Have an account? ";
   static const String loginText = "Login";
+
+  static const String displayName = "Username";
+  static const String displayPhoneNumber = "Phone Number";
+  static const String displayEmail = "Email";
+  static const String displayAddress = "Address";
+  static const String displayHomeAddress = "Home";
+  static const String displayUserHomeAddress = "Home Address";
+  static const String displayOfficeAddress = "Office";
+  static const String displayUserOfficeAddress = "Office Address";
+  static const String displayOrderHistory = "Order history";
+  static const String displayPayments = "Payments";
+  static const String displayTableReserv = "Table reservation";
+  static const String displayFoodPlanner = "Food Planner";
+  static const String displayContactUs = "Contact us";
 }
