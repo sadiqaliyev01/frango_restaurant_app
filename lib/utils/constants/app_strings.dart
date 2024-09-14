@@ -62,4 +62,8 @@ class AppStrings {
   static const String displayTableReserv = "Table reservation";
   static const String displayFoodPlanner = "Food Planner";
   static const String displayContactUs = "Contact us";
+
+  static const String verifyOTPText = "Verify OTP!";
+  static const String otpSentText = "Enter the OTP sent to ";
+  static const String resendOTP = "Resend OTP";
 }
