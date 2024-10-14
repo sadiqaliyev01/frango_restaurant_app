@@ -7,6 +7,7 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/p
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class LahmacunCard extends StatelessWidget {
   const LahmacunCard({super.key});
 
@@ -60,7 +61,7 @@ class LahmacunCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Spacer(),
+                              const SizedBox(height: 12),
                               ProductName(
                                 productName: data.name,
                                 style: GoogleFonts.roboto(
@@ -90,11 +91,12 @@ class LahmacunCard extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 60),
-                                    const AddButton(),
+                                    const Expanded(
+                                      child: AddButton(),
+                                    ),
                                   ],
                                 ),
                               ),
-                              const Spacer(),
                             ],
                           ),
                         ),

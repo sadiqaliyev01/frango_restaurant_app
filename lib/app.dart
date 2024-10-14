@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
-import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/splash_screen/splash_screen.dart';

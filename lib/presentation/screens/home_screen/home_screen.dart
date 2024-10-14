@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
+import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/all_products.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/menu_categories.dart';
 
@@ -7,22 +10,51 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.read<HomeCubit>();
-    // List<MenuCategoriesData> menuCategories = MenuCategoriesData.getCategories;
-    //
-    // final ScrollController verticalScrollController = ScrollController();
+    final ScrollController verticalScrollController = ScrollController();
+    final ScrollController horizontalScrollController = ScrollController(); // Yatay scroll controller
+    final cubit = context.read<HomeCubit>();
+
+    verticalScrollController.addListener(() {
+      cubit.onVerticalScrollCurrentCategory(verticalScrollController);
+
+      // vertical scroll sirasinda horizontal scrollu synchronize et
+      final currentIndex = cubit.state is HomeIndexChanged
+          ? (cubit.state as HomeIndexChanged).currentIndex
+          : 0;
+
+      // horizontal scrollu update et
+      final offset = cubit.calculateScrollOffset(currentIndex);
+      horizontalScrollController.animateTo(
+        offset,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
+      );
+    });
+
     return SafeArea(
-      child: ListView(
-        children: const [
-          SizedBox(height: 20),
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
           SizedBox(
             height: 40,
-            child: MenuCategories(), // menu categories
+            child: MenuCategories(
+              onCategorySelected: (index) {
+                cubit.changeIndex(index);
+                cubit.jumpToIndex(index, verticalScrollController);
+              },
+              horizontalScrollController: horizontalScrollController,
+              verticalScrollController: verticalScrollController,
+            ),
           ),
-          SizedBox(height: 20),
-          AllProducts(), // all products          // BlocBuilder<HomeCubit, HomeState>(
+          const SizedBox(height: 20),
+          Expanded(
+            child: AllProducts(
+              scrollController: verticalScrollController,
+            ),
+          ),
         ],
       ),
     );
   }
 }
+

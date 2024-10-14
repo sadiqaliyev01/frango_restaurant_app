@@ -2,52 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/home/home_state.dart';
-import 'package:frango_restaurant_app/data/models//local/menu_categories_data.dart';
+import 'package:frango_restaurant_app/data/models/local/menu_categories_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuCategories extends StatelessWidget {
-  const MenuCategories({super.key});
+  final Function(int) onCategorySelected;
+  final ScrollController horizontalScrollController;
+  final ScrollController verticalScrollController;
+
+  const MenuCategories({
+    required this.onCategorySelected,
+    required this.horizontalScrollController,
+    required this.verticalScrollController,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    List<MenuCategoriesData> menuCategories = MenuCategoriesData.getCategories;
     final cubit = context.read<HomeCubit>();
-    final ScrollController verticalScrollController = ScrollController();
+    List<MenuCategoriesData> categories = MenuCategoriesData.getCategories;
+
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         int selectedIndex = 0;
         if (state is HomeIndexChanged) {
           selectedIndex = state.currentIndex;
         }
+
         return ListView.builder(
-          itemCount: menuCategories.length,
+          physics: const ClampingScrollPhysics(),
           scrollDirection: Axis.horizontal,
+          controller: horizontalScrollController,
+          itemCount: categories.length,
           itemBuilder: (context, index) {
-            final data = menuCategories[index];
+            final MenuCategoriesData data = categories[index];
             final isSelected = selectedIndex == index;
             return GestureDetector(
               onTap: () {
+                onCategorySelected(index);
                 cubit.changeIndex(index);
-
-                if (isSelected == true) {
-                  verticalScrollController.animateTo(0,
-                      duration: const Duration(microseconds: 500),
-                      curve: Curves.easeInOut);
-                }
+                cubit.jumpToIndex(index, verticalScrollController);
               },
               child: Container(
-                alignment: Alignment.center,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: isSelected ? Colors.yellow : Colors.black,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text(
-                  data.categoryNames,
-                  style: GoogleFonts.roboto(
-                    fontSize: 14,
-                    color: isSelected ? Colors.black : Colors.white,
+                child: Center(
+                  child: Text(
+                    data.categoryNames,
+                    style: GoogleFonts.roboto(color: Colors.white, fontSize: 18),
                   ),
                 ),
               ),
@@ -58,3 +64,4 @@ class MenuCategories extends StatelessWidget {
     );
   }
 }
+
