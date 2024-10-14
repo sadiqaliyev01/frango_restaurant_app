@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
+import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/burger_card.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/doner_card.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/doner_kombo_menyu_card.dart';
@@ -10,31 +11,24 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/f
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/frango_pizza_card.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/frango_tako_card.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/frango_tako_menyu_card.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/ickiler_card.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/lahmacun_card.dart';
-
-import '../../../../cubits/home/home_state.dart';
-import 'kombo_menyu_card.dart';
-import 'qarnir_card.dart';
-import 'souslar_card.dart';
-
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/kombo_menyu_card.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/qarnir_card.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/souslar_card.dart';
 
 class AllProducts extends StatelessWidget {
-  const AllProducts({super.key});
+  final ScrollController scrollController;
+
+  const AllProducts({required this.scrollController, super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List<MenuCategoriesData> menuCategories = MenuCategoriesData.getCategories;
-    //
-    // final ScrollController verticalScrollController = ScrollController();
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        int selectedIndex = 0;
-        if (state is HomeIndexChanged) {
-          selectedIndex = state.currentIndex;
-        }
         return ListView(
-          // controller: verticalScrollController,
-          physics: const NeverScrollableScrollPhysics(),
+          controller: scrollController,
+          physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
           children: const [
             FrangoIzgaraKofteCard(),
@@ -47,6 +41,7 @@ class AllProducts extends StatelessWidget {
             KomboMenyuCard(),
             LahmacunCard(),
             FrangoPizzaCard(),
+            IckilerCard(),
             FrangoIskenderunUsuluDonerCard(),
             QarnirCard(),
             SouslarCard(),

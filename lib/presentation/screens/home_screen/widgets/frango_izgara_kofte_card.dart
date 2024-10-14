@@ -60,7 +60,7 @@ class FrangoIzgaraKofteCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Spacer(),
+                            const SizedBox(height:12),
                             ProductName(
                               productName: data.name,
                               style: GoogleFonts.roboto(
@@ -90,11 +90,10 @@ class FrangoIzgaraKofteCard extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 60),
-                                  const AddButton(),
+                                  const Expanded(child: AddButton(),)
                                 ],
                               ),
                             ),
-                            const Spacer(),
                           ],
                         ),
                       ),

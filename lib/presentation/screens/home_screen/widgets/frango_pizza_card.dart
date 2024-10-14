@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/data/models//local/burger_data.dart';
 import 'package:frango_restaurant_app/data/models/local/frango_pizza_data.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/add_button.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_description.dart';
@@ -61,7 +60,7 @@ class FrangoPizzaCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Spacer(),
+                              const SizedBox(height: 12),
                               ProductName(
                                 productName: data.name,
                                 style: GoogleFonts.roboto(
@@ -91,11 +90,12 @@ class FrangoPizzaCard extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 60),
-                                    const AddButton(),
+                                    const Expanded(
+                                      child: AddButton(),
+                                    ),
                                   ],
                                 ),
                               ),
-                              const Spacer(),
                             ],
                           ),
                         ),
