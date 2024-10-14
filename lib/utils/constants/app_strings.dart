@@ -66,4 +66,12 @@ class AppStrings {
   static const String verifyOTPText = "Verify OTP!";
   static const String otpSentText = "Enter the OTP sent to ";
   static const String resendOTP = "Resend OTP";
+
+  static const String managePaymentMethodsText = "Manage Payment Methods";
+  static const String creditAndDebitText = "Credit & Debit Cards";
+  static const String upi = "UPI";
+  static const String googlePayText = "Google Pay";
+  static const String addNewUpiID = "Add New UPI ID";
+  static const String addNewCardText = "Add New Card";
+  static const String morePaymentOptions = "More Payment Options";
 }
