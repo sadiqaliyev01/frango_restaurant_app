@@ -27,10 +27,6 @@ class SouslarData {
       price: "0,56 ₼",
     ),
     SouslarData(
-      name: "Barbekyu Sousu",
-      price: "0,56 ₼",
-    ),
-    SouslarData(
       name: "Cacıki Sousu",
       price: "0,56 ₼",
     ),

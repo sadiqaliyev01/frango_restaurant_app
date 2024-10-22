@@ -53,7 +53,11 @@ class MenuCategories extends StatelessWidget {
                 child: Center(
                   child: Text(
                     data.categoryNames,
-                    style: GoogleFonts.roboto(color: Colors.white, fontSize: 18),
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: 18,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 ),
               ),
@@ -64,4 +68,3 @@ class MenuCategories extends StatelessWidget {
     );
   }
 }
-

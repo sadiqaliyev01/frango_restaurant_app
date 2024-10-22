@@ -53,9 +53,9 @@ class FrangoIzgaraKofteMenyuCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const ProductImage(
+                      ProductImage(
                         imageLink:
-                            'https://imageproxy.wolt.com/venue/612362d89a4171001403701c/05114526-04d2-11ec-b591-0a738749434e_toyuq_doner_coreyde.jpg',
+                            'assets/frango_images/image_${index+2}.jpg',
                       ),
                       const SizedBox(width: 12),
                       Expanded(

@@ -8,11 +8,17 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140,
+      width: 160,
       height: 160,
-      child: Image.network(
-        imageLink,
-        fit: BoxFit.cover,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.horizontal(
+          left: Radius.circular(24),
+        ),
+        child: Image.asset(
+          imageLink,
+          fit: BoxFit.fill,
+          alignment: Alignment.center,
+        ),
       ),
     );
   }
