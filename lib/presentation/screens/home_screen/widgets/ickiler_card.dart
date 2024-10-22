@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/data/models//local/burger_data.dart';
 import 'package:frango_restaurant_app/data/models/local/ickiler_data.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/add_button.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_description.dart';
@@ -17,12 +16,21 @@ class IckilerCard extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Text(
-            "İÇKİLƏR",
-            style: GoogleFonts.roboto(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 8,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "İÇKİLƏR",
+                style: GoogleFonts.roboto(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
           Padding(
@@ -43,9 +51,9 @@ class IckilerCard extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const ProductImage(
+                        ProductImage(
                           imageLink:
-                          'https://imageproxy.wolt.com/venue/612362d89a4171001403701c/05114526-04d2-11ec-b591-0a738749434e_toyuq_doner_coreyde.jpg',
+                              'assets/frango_images/image_${index + 43}.jpg',
                         ),
                         const SizedBox(width: 12),
                         Expanded(

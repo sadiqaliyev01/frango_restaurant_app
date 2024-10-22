@@ -40,7 +40,7 @@ class DonerData {
       price: "9,92 ₼",
     ),
     DonerData(
-      name: "MPorsiyon Toyuq Dönəri",
+      name: "Porsiyon Toyuq Dönəri",
       description: 'Toyuq əti, kartof fri, "Frango" sousu (seçim ilə)',
       price: '6,80 ₼',
     ),
