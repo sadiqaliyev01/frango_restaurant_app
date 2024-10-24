@@ -28,7 +28,6 @@ class AllProducts extends StatelessWidget {
       builder: (context, state) {
         return ListView(
           controller: scrollController,
-          physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
           children: const [
             FrangoIzgaraKofteCard(),

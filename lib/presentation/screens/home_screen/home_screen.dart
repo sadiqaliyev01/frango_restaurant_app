@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/all_products.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/menu_categories.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,27 +34,31 @@ class HomeScreen extends StatelessWidget {
     });
 
     return SafeArea(
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 40,
-            child: MenuCategories(
-              onCategorySelected: (index) {
-                cubit.changeIndex(index);
-                cubit.jumpToIndex(index, verticalScrollController);
-              },
-              horizontalScrollController: horizontalScrollController,
-              verticalScrollController: verticalScrollController,
+      child: Scaffold(
+        backgroundColor: AppColors.primaryBlack,
+        appBar: const AppBarItems(),
+        body: Column(
+          children: [
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 40,
+              child: MenuCategories(
+                onCategorySelected: (index) {
+                  cubit.changeIndex(index);
+                  cubit.jumpToIndex(index, verticalScrollController);
+                },
+                horizontalScrollController: horizontalScrollController,
+                verticalScrollController: verticalScrollController,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: AllProducts(
-              scrollController: verticalScrollController,
+            const SizedBox(height: 20),
+            Expanded(
+              child: AllProducts(
+                scrollController: verticalScrollController,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
