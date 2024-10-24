@@ -6,20 +6,20 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   List<int> categoryHeights = [
-    254, // izqara kofte 1
-    254, // izqara kofte menyu 1
-    462, // tako 2
-    650, // tako menyu 3
-    1380, // doner 7
-    462, // doner kombo menyu 2
-    1200, // burger 6
-    1570, // kombo menyu 8
-    650, // lahmacun 3
-    1750, // pizza 9
-    2100, // ickiler 11
-    1200, // iskenderun 6
-    462, // qarnir 2
-    1380 // souslar 7
+    222, // izqara kofte 1
+    222, // izqara kofte menyu 1
+    432, // tako 2
+    620, // tako menyu 3
+    1348, // doner 7
+    432, // doner kombo menyu 2
+    1168, // burger 6
+    1534, // kombo menyu 8
+    614, // lahmacun 3
+    1718, // pizza 9
+    2086, // ickiler 11
+    1168, // iskenderun 6
+    430, // qarnir 2
+    1348 // souslar 7
 
 
 // Kateqoriya başına düşən hündürlük
@@ -44,9 +44,9 @@ class HomeCubit extends Cubit<HomeState> {
     180, // kombo menyu
     180, // lahmacun
     180, // pizza
-    220, // ickiler
-    100, // iskenderun
-    100, // qarnir
+    250, // ickiler
+    140, // iskenderun
+    140, // qarnir
     100,   // souslar
   ];
 

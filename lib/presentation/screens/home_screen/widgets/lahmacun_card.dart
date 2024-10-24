@@ -6,6 +6,7 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/p
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_image.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LahmacunCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class LahmacunCard extends StatelessWidget {
   Widget build(BuildContext context) {
     List<LahmacunData> lahmacunData = LahmacunData.getLahmacunData;
     return Card(
+      color: AppColors.primaryYellow,
       child: Column(
         children: [
           Padding(
@@ -35,7 +37,7 @@ class LahmacunCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(8),
             child: ListView.builder(
               itemCount: lahmacunData.length,
               shrinkWrap: true,

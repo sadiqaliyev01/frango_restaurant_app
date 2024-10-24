@@ -5,6 +5,7 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/p
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_image.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DonerCard extends StatelessWidget {
@@ -14,6 +15,7 @@ class DonerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DonerData> donerData = DonerData.getFrangoDonerData;
     return Card(
+      color: AppColors.primaryYellow,
       child: Column(
         children: [
           Padding(
@@ -34,7 +36,7 @@ class DonerCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(8),
             child: ListView.builder(
               itemCount: donerData.length,
               shrinkWrap: true,
