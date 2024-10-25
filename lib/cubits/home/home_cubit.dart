@@ -23,10 +23,10 @@ class HomeCubit extends Cubit<HomeState> {
 
 
 // Kateqoriya başına düşən hündürlük
-    // 1ci kateqoriyada 1 product var - 222 pixeldir
-    // 2ci kateqoriyada da 1 product var - 222 pixeldir
-    // 3cu kateqoriyada 2 product var - 432 pixeldir
-    // her kateqoriyadaki 2ci ve novbeti prodcutlar ucun 222 + n*208 dusturunu isledeceyik
+    // 1ci kateqoriyada 1 product var - 184 pixeldir
+    // 2ci kateqoriyada da 1 product var - 184 pixeldir
+    // 3cu kateqoriyada 2 product var - 352 pixeldir
+    // her kateqoriyadaki 2ci ve novbeti prodcutlar ucun 184 + n*208 dusturunu isledeceyik
     // (n = 1 kateqoriyadaki productlarin sayindan 1 vahid azdir)
     // product sayi 4 ve ya daha cox olduqda dustur islemeye biler, bezen dusturda 208 yerin 190 yazanda isleyir
     // bunun ucun her defe kontrol etmek lazimdir
