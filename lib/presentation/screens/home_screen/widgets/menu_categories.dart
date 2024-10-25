@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/data/models/local/menu_categories_data.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MenuCategories extends StatelessWidget {
@@ -47,7 +48,7 @@ class MenuCategories extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.yellow : Colors.black,
+                  color: isSelected ? AppColors.primaryYellow : AppColors.primaryBlack,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Center(
