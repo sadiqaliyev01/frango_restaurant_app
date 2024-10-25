@@ -48,7 +48,7 @@ class FrangoIzgaraKofteMenyuCard extends StatelessWidget {
               itemBuilder: (context, index) {
                 final data = frangoIzgaraKofteMenyuData[index];
                 return Container(
-                  height: 160,
+                  height: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
                     color: Colors.black,

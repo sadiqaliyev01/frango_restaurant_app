@@ -47,7 +47,7 @@ class LahmacunCard extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Container(
-                    height: 160,
+                    height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
                       color: Colors.black,

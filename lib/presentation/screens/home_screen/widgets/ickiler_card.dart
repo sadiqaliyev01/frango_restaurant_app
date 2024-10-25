@@ -46,7 +46,7 @@ class IckilerCard extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Container(
-                    height: 160,
+                    height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
                       color: Colors.black,
@@ -62,7 +62,7 @@ class IckilerCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Spacer(),
+                              const SizedBox(height: 12),
                               ProductName(
                                 productName: data.name,
                                 style: GoogleFonts.roboto(
@@ -92,11 +92,10 @@ class IckilerCard extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 60),
-                                    const AddButton(),
+                                    const Expanded(child: AddButton()),
                                   ],
                                 ),
                               ),
-                              const Spacer(),
                             ],
                           ),
                         ),
