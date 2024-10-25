@@ -37,7 +37,6 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: const Padding(padding: AppPaddings.a4, child: AvatarImage()),
       actions: [
-        // Arama kutusunu ortalamak için bir Container içine alıyoruz
         Container(
           alignment: Alignment.center,
           child: const SizedBox(

@@ -46,7 +46,7 @@ class FrangoIzgaraKofteCard extends StatelessWidget {
               itemBuilder: (context, index) {
                 final data = frangoIzgaraKofteData[index];
                 return Container(
-                  height: 160,
+                  height: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
                     color: Colors.black,

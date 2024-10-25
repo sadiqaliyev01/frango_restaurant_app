@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             SizedBox(
-              height: 40,
+              height: 34,
               child: MenuCategories(
                 onCategorySelected: (index) {
                   cubit.changeIndex(index);

@@ -6,27 +6,27 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   List<int> categoryHeights = [
-    222, // izqara kofte 1
-    222, // izqara kofte menyu 1
-    432, // tako 2
-    620, // tako menyu 3
-    1348, // doner 7
-    432, // doner kombo menyu 2
-    1168, // burger 6
-    1534, // kombo menyu 8
-    614, // lahmacun 3
-    1718, // pizza 9
-    2086, // ickiler 11
-    1168, // iskenderun 6
-    430, // qarnir 2
+    184, // izqara kofte 1
+    184, // izqara kofte menyu 1
+    352, // tako 2
+    494, // tako menyu 3
+    1068, // doner 7
+    356, // doner kombo menyu 2
+    924, // burger 6
+    1216, // kombo menyu 8
+    494, // lahmacun 3
+    1360, // pizza 9
+    1644, // ickiler 11
+    926, // iskenderun 6
+    352, // qarnir 2
     1348 // souslar 7
 
 
 // Kateqoriya başına düşən hündürlük
-    // 1ci kateqoriyada 1 product var - 254 pixeldir
-    // 2ci kateqoriyada da 1 product var - 254 pixeldir
-    // 3cu kateqoriyada 2 product var - 462 pixeldir
-    // her kateqoriyadaki 2ci ve novbeti prodcutlar ucun 254 + n*208 dusturunu isledeceyik
+    // 1ci kateqoriyada 1 product var - 222 pixeldir
+    // 2ci kateqoriyada da 1 product var - 222 pixeldir
+    // 3cu kateqoriyada 2 product var - 432 pixeldir
+    // her kateqoriyadaki 2ci ve novbeti prodcutlar ucun 222 + n*208 dusturunu isledeceyik
     // (n = 1 kateqoriyadaki productlarin sayindan 1 vahid azdir)
     // product sayi 4 ve ya daha cox olduqda dustur islemeye biler, bezen dusturda 208 yerin 190 yazanda isleyir
     // bunun ucun her defe kontrol etmek lazimdir
@@ -46,7 +46,7 @@ class HomeCubit extends Cubit<HomeState> {
     180, // pizza
     250, // ickiler
     140, // iskenderun
-    140, // qarnir
+    70, // qarnir
     100,   // souslar
   ];
 
@@ -65,7 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
   double calculateScrollHeight(int selectedIndex) {
     double height = 0.0;
     for (int i = 0; i < selectedIndex; i++) {
-      height += categoryHeights[i];  // Burada categoryHeights kullanılıyor
+      height += categoryHeights[i];
     }
     return height;
   }
