@@ -7,6 +7,7 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/p
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
 import 'package:frango_restaurant_app/presentation/screens/product_details/product_details.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FrangoIzgaraKofteCard extends StatelessWidget {
@@ -48,16 +49,19 @@ class FrangoIzgaraKofteCard extends StatelessWidget {
                 final data = frangoIzgaraKofteData[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetails(
-                          productName: data.name,
-                          imageLink:
-                              'assets/frango_images/image_${index + 1}.jpg',
-                          description: data.description,
-                          price: data.price,
-                        ),
+                    showModalBottomSheet(
+                      // isScrollControlled: true,
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(24)),
+                      ),
+                      builder: (context) => ProductDetails(
+                        productName: data.name,
+                        imageLink:
+                            'assets/frango_images/image_${index + 1}.jpg',
+                        description: data.description,
+                        price: data.price,
                       ),
                     );
                   },
@@ -106,10 +110,6 @@ class FrangoIzgaraKofteCard extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
                                       ),
-                                    ),
-                                    const SizedBox(width: 60),
-                                    const Expanded(
-                                      child: AddButton(),
                                     ),
                                   ],
                                 ),
