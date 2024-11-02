@@ -48,11 +48,10 @@ class SouslarCard extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
-                      // isScrollControlled: true,
                       context: context,
                       shape: const RoundedRectangleBorder(
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(24)),
+                            BorderRadius.vertical(top: Radius.circular(32)),
                       ),
                       builder: (context) => ProductDetails(
                         productName: data.name,
