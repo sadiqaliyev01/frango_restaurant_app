@@ -15,7 +15,7 @@ class SearchBox extends StatelessWidget {
       decoration: const InputDecoration(
         hintText: "Axtar",
         hintStyle: TextStyle(
-          color: AppColors.white,
+          color: AppColors.primaryYellow,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadiuses.a24,

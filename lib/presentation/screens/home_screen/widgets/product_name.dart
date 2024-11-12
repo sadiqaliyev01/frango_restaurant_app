@@ -11,6 +11,8 @@ class ProductName extends StatelessWidget {
     return Text(
       productName,
       style: style,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
