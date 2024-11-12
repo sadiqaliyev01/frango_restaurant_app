@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/widgets/avatar_image.dart';
 import 'package:frango_restaurant_app/presentation/widgets/search_box.dart'; // Arama kutusunu içe aktardık
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/utils/constants/app_paddings.dart';
 
 class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
   const AppBarItems({super.key});
@@ -35,18 +33,35 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leading: const Padding(padding: AppPaddings.a4, child: AvatarImage()),
+      leading: Builder(
+        builder: (context) {
+          return IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: const Icon(
+              Icons.menu,
+              color: AppColors.primaryYellow,
+            ),
+          );
+        },
+      ),
+      //leading: const Padding(padding: AppPaddings.a4, child: AvatarImage()),
       actions: [
         Container(
           alignment: Alignment.center,
           child: const SizedBox(
-              width: 150,
-              height: 48,
-              child: SearchBox()),
+            width: 150,
+            height: 52,
+            child: SearchBox(),
+          ),
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.notifications, color: AppColors.primaryYellow),
+          icon: const Icon(
+            Icons.notifications,
+            color: AppColors.primaryYellow,
+          ),
         ),
       ],
     );

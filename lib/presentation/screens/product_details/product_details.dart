@@ -4,7 +4,7 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/extansions/price_parsing.dart';
 import 'package:frango_restaurant_app/presentation/screens/manage_payment/manage_payment_methods.dart';
 import 'package:frango_restaurant_app/presentation/screens/product_details/widgets/quantity_selector.dart';
-import 'package:frango_restaurant_app/presentation/screens/product_details/quantity_bloc/product_details_cubit.dart';
+import 'package:frango_restaurant_app/cubits/product_details/product_details_cubit.dart';
 
 class ProductDetails extends StatelessWidget {
   final String productName;

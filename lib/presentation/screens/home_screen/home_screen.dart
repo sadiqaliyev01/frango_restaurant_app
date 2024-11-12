@@ -4,6 +4,7 @@ import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/all_products.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/drawer_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/menu_categories.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
@@ -13,7 +14,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController verticalScrollController = ScrollController();
-    final ScrollController horizontalScrollController = ScrollController(); // Yatay scroll controller
+    final ScrollController horizontalScrollController =
+        ScrollController(); // Yatay scroll controller
     final cubit = context.read<HomeCubit>();
 
     verticalScrollController.addListener(() {
@@ -35,6 +37,7 @@ class HomeScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        drawer: const DrawerItems(),
         backgroundColor: AppColors.primaryBlack,
         appBar: const AppBarItems(),
         body: Column(
