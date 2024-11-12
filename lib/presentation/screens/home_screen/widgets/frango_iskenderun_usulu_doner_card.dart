@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/data/models/local/frango_iskenderun_usulu_doner_data.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/add_button.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_description.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_image.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
 import 'package:frango_restaurant_app/presentation/screens/product_details/product_details.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FrangoIskenderunUsuluDonerCard extends StatelessWidget {

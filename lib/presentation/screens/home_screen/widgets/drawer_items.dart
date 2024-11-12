@@ -16,6 +16,7 @@ class DrawerItems extends StatelessWidget {
           Expanded(
             flex: 3,
             child: ListView(
+              padding: const EdgeInsets.only(top: 14),
               children: [
                 ListTileItems(
                   icon: const Icon(
