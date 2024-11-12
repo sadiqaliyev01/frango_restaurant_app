@@ -1,19 +1,22 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 
 class CustomUPIPaymentBanner extends StatelessWidget {
-  final List<String> upiMethods;
+  final int selectedIndex;
+  final Function(int) onSelected;
 
   const CustomUPIPaymentBanner({
     super.key,
-    required this.upiMethods,
+    required this.selectedIndex,
+    required this.onSelected,
   });
 
   @override
   Widget build(BuildContext context) {
+    List<String> upiMethods = ['Google Pay'];
+
     return Container(
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),
@@ -31,13 +34,21 @@ class CustomUPIPaymentBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (var method in upiMethods) ...[
+          for (var i = 0; i < upiMethods.length; i++) ...[
             Row(
               children: [
-                _buildMethodLogo(method),
+                Radio(
+                  value: i,
+                  groupValue: selectedIndex,
+                  onChanged: (value) {
+                    onSelected(i);
+                  },
+                  activeColor: Colors.white,
+                ),
+                _buildMethodLogo(upiMethods[i]),
                 const SizedBox(width: 10.0),
                 Text(
-                  method,
+                  upiMethods[i],
                   style: const TextStyle(color: Colors.white),
                 ),
               ],
@@ -55,13 +66,13 @@ class CustomUPIPaymentBanner extends StatelessWidget {
               ),
               TextButton.icon(
                 onPressed: () {
-                  log("add upi button pressed");
+                  log("Add UPI button pressed");
                 },
                 label: const Text(
                   AppStrings.addNewUpiID,
                   style: TextStyle(color: Colors.white),
                 ),
-              )
+              ),
             ],
           ),
         ],

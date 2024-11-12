@@ -75,4 +75,6 @@ class AppStrings {
   static const String addNewUpiID = "Add New UPI ID";
   static const String addNewCardText = "Add New Card";
   static const String morePaymentOptions = "More Payment Options";
+  static const String addCardPageTitle =
+      "Please enter your card details for a different payment method";
 }
