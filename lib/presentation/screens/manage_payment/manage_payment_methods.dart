@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/presentation/screens/add_new_card/add_new_card_page.dart';
+import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/payment_method_card_banner.dart';
+import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/upi_payment.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/upi_payment.dart';
-import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/payment_method_card_banner.dart';
 
-class ManagePaymentMethods extends StatelessWidget {
+class ManagePaymentMethods extends StatefulWidget {
   const ManagePaymentMethods({super.key});
+
+  @override
+  _ManagePaymentMethodsState createState() => _ManagePaymentMethodsState();
+}
+
+class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
+  List<String> cardNumbers = [
+    '4111 1111 1111 1111',
+    '5111 1111 1111 1111',
+  ];
+  int selectedIndex = 0;
+  int selectedUPIIndex = -1;
+
+  void _addNewCard(String cardNumber) {
+    setState(() {
+      cardNumbers.add(cardNumber);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +34,22 @@ class ManagePaymentMethods extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.primaryBlack,
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           ),
-          centerTitle: true,
           title: const Text(
             AppStrings.managePaymentMethodsText,
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(20.0),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 AppStrings.creditAndDebitText,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -37,15 +57,28 @@ class ManagePaymentMethods extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomCardPaymentBanner(
-                cardNumbers: [
-                  '4111 1111 1111 1111',
-                  '5111 1111 1111 1111',
-                ],
+                cardNumbers: cardNumbers,
+                selectedIndex: selectedIndex,
+                onCardSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                onAddCardPressed: () async {
+                  final newCardNumber = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddNewCardPage(),
+                    ),
+                  );
+                  if (newCardNumber != null) {
+                    _addNewCard(newCardNumber);
+                  }
+                },
               ),
-              SizedBox(height: 20),
-              Text(
+              const Text(
                 AppStrings.upi,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -53,11 +86,13 @@ class ManagePaymentMethods extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              SizedBox(height: 20),
               CustomUPIPaymentBanner(
-                upiMethods: [
-                  AppStrings.googlePayText,
-                ],
+                selectedIndex: selectedUPIIndex,
+                onSelected: (index) {
+                  setState(() {
+                    selectedUPIIndex = index;
+                  });
+                },
               ),
             ],
           ),
