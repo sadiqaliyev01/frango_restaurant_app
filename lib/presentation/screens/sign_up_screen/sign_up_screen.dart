@@ -3,8 +3,8 @@ import 'package:frango_restaurant_app/presentation/screens/login_screen/login_sc
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/custom_login_register_field.dart';
-import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/custom_login_register_button.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -54,25 +54,26 @@ class SignUpScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 CustomLoginRegisterField(
                                   hintText: AppStrings.fullName,
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 CustomLoginRegisterField(
                                   hintText: AppStrings.registerEmail,
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 CustomLoginRegisterField(
                                   hintText: AppStrings.phoneNumber,
                                   keyboardType: TextInputType.phone,
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 CustomLoginRegisterField(
                                   hintText: AppStrings.passwordHintText,
                                   obscureText: true,
@@ -90,19 +91,17 @@ class SignUpScreen extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 60.0),
                                 child: CustomLoginRegisterButton(
-                                  buttonText: AppStrings.signUpButton,
                                   onPressed: () {},
-                                  backgroundColor:
-                                      AppColors.buttonAndTextFieldGray,
+                                  child: const Text(
+                                    AppStrings.signUpButton,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              CustomLoginRegisterButton(
-                                buttonText: AppStrings.signUpGoogle,
-                                onPressed: () {},
-                                backgroundColor: AppColors.primaryBlack,
-                                svgIconPath: 'assets/icons/google.svg',
-                              ),
                               const SizedBox(height: 25),
                               CustomLoginRedirectText(
                                 normalText: AppStrings.haveAnAccount,
