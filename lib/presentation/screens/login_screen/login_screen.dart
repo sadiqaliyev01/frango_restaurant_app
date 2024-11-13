@@ -1,12 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 
 import '../../../cubits/login/login_cubit.dart';
 
@@ -91,7 +93,30 @@ class LoginScreen extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(top: 60.0),
-                                  child: BlocBuilder<LoginCubit, LoginState>(
+                                  child: BlocConsumer<LoginCubit, LoginState>(
+                                    listener: (context, state) {
+                                      if (state is LoginSuccess) {
+                                        log("Login successful: LoginSuccess");
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomeScreen(),
+                                          ),
+                                          (route) => route.isCurrent,
+                                        );
+                                      } else if (state is LoginFailure) {
+                                        log("Login failed: LoginFailure");
+                                        cubit.showToast(
+                                          context,
+                                          const Text("Incorrect email or password"),
+                                          SnackBarAction(
+                                            label: "OK",
+                                            onPressed: () {},
+                                          ),
+                                        );
+                                      }
+                                    },
                                     builder: (context, state) {
                                       return CustomLoginRegisterButton(
                                         onPressed: () {
@@ -101,7 +126,8 @@ class LoginScreen extends StatelessWidget {
                                             ? const SizedBox(
                                                 height: 20,
                                                 width: 20,
-                                                child: CircularProgressIndicator())
+                                                child:
+                                                    CircularProgressIndicator())
                                             : const Text(
                                                 "LOGIN",
                                                 style: TextStyle(
@@ -113,8 +139,7 @@ class LoginScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                                const SizedBox(height: 5),
-                                const SizedBox(height: 25),
+                                const SizedBox(height: 30),
                                 CustomLoginRedirectText(
                                   normalText: AppStrings.dontHaveAnAccount,
                                   highlightedText: AppStrings.signUpText,

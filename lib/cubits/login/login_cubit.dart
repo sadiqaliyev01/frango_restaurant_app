@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/data/contractor/login_contractor.dart';
 
 part 'login_state.dart';
@@ -19,7 +20,6 @@ class LoginCubit extends Cubit<LoginState> {
         email: emailController.text,
         password: passwordController.text,
       );
-
       if (result) {
         emit(LoginSuccess());
         return;
@@ -34,5 +34,15 @@ class LoginCubit extends Cubit<LoginState> {
     emailController.dispose();
     passwordController.dispose();
     return super.close();
+  }
+
+  void showToast(BuildContext context, Widget content, SnackBarAction? action) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: content,
+        action: action,
+      ),
+    );
   }
 }
