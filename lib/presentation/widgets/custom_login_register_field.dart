@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class CustomLoginRegisterField extends StatelessWidget {
