@@ -142,7 +142,7 @@ class AddNewCardPage extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         'Add Card',
-                        style: TextStyle(color: AppColors.white),
+                        style: TextStyle(color: AppColors.primaryBlack),
                       ),
                     ),
                   ),

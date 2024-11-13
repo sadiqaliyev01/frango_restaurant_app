@@ -77,4 +77,14 @@ class AppStrings {
   static const String morePaymentOptions = "More Payment Options";
   static const String addCardPageTitle =
       "Please enter your card details for a different payment method";
+
+  static const String contactUsTitleText =
+      "You can reach us from the links below,\ntell us your wish and requests, and report any problems.";
+  static const String contactUsEmailContext = "Client";
+  static const String conttactUsEmailMessage = "Hi, Frango Team";
+  static const String frangoCallUsText = "Call Us";
+  static const String frangoEmailText = "Email";
+  static const String frangoAddressDisplayText = "Frango Address";
+  static const String followFrangoInstagram = "Follow Frango on Instagram";
+  static const String followFrangoTikTok = "Follow Frango on TikTok";
 }
