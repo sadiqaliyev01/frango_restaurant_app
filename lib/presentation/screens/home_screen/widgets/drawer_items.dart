@@ -83,7 +83,15 @@ class DrawerItems extends StatelessWidget {
                     color: AppColors.primaryBlack,
                   ),
                   text: const Text("Tənzimləmələr"),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                      (route) => route.isCurrent,
+                    );
+                  },
                 ),
               ],
             ),
