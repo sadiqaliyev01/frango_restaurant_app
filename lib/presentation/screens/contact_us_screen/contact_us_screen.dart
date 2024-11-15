@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/contact_us_screen/widgets/social_media_contact.dart';
-import 'package:frango_restaurant_app/presentation/contact_us_screen/widgets/custom_contact_widget.dart';
-import 'package:frango_restaurant_app/presentation/contact_us_screen/widgets/rectangle_contact_widget.dart';
+import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/widgets/social_media_contact.dart';
+import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/widgets/custom_contact_widget.dart';
+import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/widgets/rectangle_contact_widget.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});
@@ -21,7 +21,8 @@ class ContactUsScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon:
+              const Icon(Icons.arrow_back_ios, color: AppColors.primaryYellow),
         ),
         titleSpacing: 95,
         title: const Text(

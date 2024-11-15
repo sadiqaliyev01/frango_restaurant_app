@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/contact_us_screen/contact_us_screen.dart';
+import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
+import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
@@ -84,12 +85,11 @@ class DrawerItems extends StatelessWidget {
                   ),
                   text: const Text("Tənzimləmələr"),
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+                        builder: (context) => const SettingsScreen(),
                       ),
-                      (route) => route.isCurrent,
                     );
                   },
                 ),
