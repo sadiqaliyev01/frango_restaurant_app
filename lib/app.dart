@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (context) => LoginCubit(LoginRepository(LoginService()))),
         BlocProvider(create: (context) => HomeCubit()),
       ],
       child: MaterialApp(
@@ -30,13 +29,12 @@ class MyApp extends StatelessWidget {
         ),
         home: isOnboardingCompleted
             ? BlocProvider(
-                create: (context) => LoginCubit(
-                  LoginRepository(
-                    LoginService(),
-                  ),
-                ),
-                child: const LoginScreen(),
-              )
+                create: (BuildContext context) => LoginCubit(
+                      LoginRepository(
+                        LoginService(),
+                      ),
+                    ),
+                child: const LoginScreen())
             : const SplashScreen(),
         debugShowCheckedModeBanner: false,
       ),

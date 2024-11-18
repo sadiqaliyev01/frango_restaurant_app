@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:frango_restaurant_app/data/endpoints.dart';
+import 'package:frango_restaurant_app/utils/constants/endpoints.dart';
 import 'package:frango_restaurant_app/utils/constants/extensions/status_code.dart';
 
 class LoginService {
