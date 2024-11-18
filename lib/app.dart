@@ -1,12 +1,13 @@
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
-import 'package:frango_restaurant_app/data/repositories/login_repository.dart';
-import 'package:frango_restaurant_app/data/services/login_service.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/presentation/screens/splash_screen/splash_screen.dart';
+
+import 'data/remote/repositories/login_repository.dart';
+import 'data/remote/services/auth_service.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
             ? BlocProvider(
                 create: (BuildContext context) => LoginCubit(
                       LoginRepository(
-                        LoginService(),
+                        AuthService(),
                       ),
                     ),
                 child: const LoginScreen())

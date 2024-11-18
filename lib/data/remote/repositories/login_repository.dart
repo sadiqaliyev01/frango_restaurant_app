@@ -1,10 +1,10 @@
-import 'package:frango_restaurant_app/data/contractor/login_contractor.dart';
-import 'package:frango_restaurant_app/data/services/login_service.dart';
+import '../contractor/login_contractor.dart';
+import '../services/auth_service.dart';
 
 class LoginRepository implements LoginContractor {
   const LoginRepository(this._loginService);
 
-  final LoginService _loginService;
+  final AuthService _loginService;
 
   @override
   Future<bool> login({
