@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('settings');
-    bool isOnboardingCompleted = box.get('onboardingCompleted', defaultValue: false);
+    bool isOnboardingCompleted =
+        box.get('onboardingCompleted', defaultValue: false);
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginCubit(LoginRepository(LoginService()))),
+        // BlocProvider(create: (context) => LoginCubit(LoginRepository(LoginService()))),
         BlocProvider(create: (context) => HomeCubit()),
       ],
       child: MaterialApp(
@@ -27,7 +28,16 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: isOnboardingCompleted ? const LoginScreen() : const SplashScreen(),
+        home: isOnboardingCompleted
+            ? BlocProvider(
+                create: (context) => LoginCubit(
+                  LoginRepository(
+                    LoginService(),
+                  ),
+                ),
+                child: const LoginScreen(),
+              )
+            : const SplashScreen(),
         debugShowCheckedModeBanner: false,
       ),
     );
