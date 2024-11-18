@@ -9,7 +9,7 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 import '../../../../cubits/login/login_cubit.dart';
 import '../../../../data/remote/repositories/login_repository.dart';
-import '../../../../data/remote/services/auth_service.dart';
+import '../../../../data/remote/services/login_service.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
@@ -118,7 +118,7 @@ class DrawerItems extends StatelessWidget {
                         builder: (context) => BlocProvider(
                               create: (context) => LoginCubit(
                                 LoginRepository(
-                                  AuthService(),
+                                  LoginService(),
                                 ),
                               ),
                               child: const LoginScreen(),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
+import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
+import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/sign_up_form.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -54,33 +53,8 @@ class SignUpScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CustomLoginRegisterField(
-                                  hintText: AppStrings.fullName,
-                                ),
-                                const SizedBox(height: 20),
-                                CustomLoginRegisterField(
-                                  hintText: AppStrings.registerEmail,
-                                ),
-                                const SizedBox(height: 20),
-                                CustomLoginRegisterField(
-                                  hintText: AppStrings.phoneNumber,
-                                  keyboardType: TextInputType.phone,
-                                ),
-                                const SizedBox(height: 20),
-                                CustomLoginRegisterField(
-                                  hintText: AppStrings.passwordHintText,
-                                  obscureText: true,
-                                ),
-                              ],
-                            ),
-                          ),
+                        const Expanded(
+                          child: SignUpForm(),
                         ),
                         const SizedBox(height: 5),
                         Padding(
@@ -101,20 +75,8 @@ class SignUpScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              const SizedBox(height: 25),
-                              CustomLoginRedirectText(
-                                normalText: AppStrings.haveAnAccount,
-                                highlightedText: AppStrings.loginText,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const LoginScreen(),
-                                      ));
-                                },
-                              ),
+                              const SizedBox(height: 30),
+                              const HaveAnAccount(),
                             ],
                           ),
                         ),

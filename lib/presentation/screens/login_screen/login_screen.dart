@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
+import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/dont_have_an_account.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
@@ -140,18 +141,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 30),
-                                CustomLoginRedirectText(
-                                  normalText: AppStrings.dontHaveAnAccount,
-                                  highlightedText: AppStrings.signUpText,
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignUpScreen(),
-                                        ));
-                                  },
-                                ),
+                                const DontHaveAnAccount(),
                               ],
                             ),
                           ),

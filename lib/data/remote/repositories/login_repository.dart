@@ -1,10 +1,10 @@
 import '../contractor/login_contractor.dart';
-import '../services/auth_service.dart';
+import '../services/login_service.dart';
 
 class LoginRepository implements LoginContractor {
   const LoginRepository(this._loginService);
 
-  final AuthService _loginService;
+  final LoginService _loginService;
 
   @override
   Future<bool> login({
