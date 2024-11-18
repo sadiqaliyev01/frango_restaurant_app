@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ScrollController verticalScrollController = ScrollController();
     final ScrollController horizontalScrollController =
-        ScrollController(); // Yatay scroll controller
+        ScrollController(); // horitontal scroll controller
     final cubit = context.read<HomeCubit>();
 
     verticalScrollController.addListener(() {

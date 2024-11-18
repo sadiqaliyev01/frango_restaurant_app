@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+
+import '../../../../cubits/login/login_cubit.dart';
+import '../../../../data/remote/repositories/login_repository.dart';
+import '../../../../data/remote/services/auth_service.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
@@ -107,11 +112,18 @@ class DrawerItems extends StatelessWidget {
                 ),
                 text: const Text("Çıxış Et"),
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
+                        builder: (context) => BlocProvider(
+                              create: (context) => LoginCubit(
+                                LoginRepository(
+                                  AuthService(),
+                                ),
+                              ),
+                              child: const LoginScreen(),
+                            )),
+                    (route) => route.isCurrent,
                   );
                 },
               ),

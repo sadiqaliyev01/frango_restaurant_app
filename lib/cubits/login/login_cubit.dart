@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/data/contractor/login_contractor.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/remote/contractor/login_contractor.dart';
 
 part 'login_state.dart';
 

@@ -102,7 +102,7 @@ class CustomCardPaymentBanner extends StatelessWidget {
         height: 40,
       );
     } else {
-      return Container(width: 40, height: 40);
+      return SizedBox(width: 40, height: 40);
     }
   }
 
