@@ -88,7 +88,7 @@ class CustomUPIPaymentBanner extends StatelessWidget {
         height: 40,
       );
     } else {
-      return SizedBox(width: 40, height: 40);
+      return const SizedBox(width: 40, height: 40);
     }
   }
 }
