@@ -7,6 +7,7 @@ import 'package:frango_restaurant_app/presentation/screens/login_screen/login_sc
 import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/utils/di/locator.dart';
 
 import '../../../../cubits/login/login_cubit.dart';
 import '../../../../data/remote/repositories/login_repository.dart';
@@ -125,14 +126,11 @@ class DrawerItems extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BlocProvider(
-                              create: (context) => LoginCubit(
-                                LoginRepository(
-                                  LoginService(),
-                                ),
-                              ),
-                              child: const LoginScreen(),
-                            )),
+                      builder: (context) => BlocProvider<LoginCubit>(
+                        create: (context) => locator(),
+                        child: const LoginScreen(),
+                      ),
+                    ),
                     (route) => route.isCurrent,
                   );
                 },

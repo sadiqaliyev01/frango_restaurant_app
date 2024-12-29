@@ -1,36 +1,30 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/remote/contractor/login_contractor.dart';
-import '../../data/remote/services/local/local_login_service.dart';
+import '../../../data/remote/contractor/register_contractor.dart';
 
-part 'login_state.dart';
+part 'register_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginContractor, this._loginLocalService) : super(LoginInitial());
+class RegisterCubit extends Cubit<RegisterState> {
+  RegisterCubit(this._registerContractor) : super(RegisterInitial());
 
-  final LoginContractor _loginContractor;
-  final LoginLocalService _loginLocalService;
+  final RegisterContractor _registerContractor;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
-  void login() async {
+  void register() async {
     try {
-      emit(LoginLoading());
-      log("Loading");
-      final response = await _loginContractor.login(
+      emit(RegisterLoading());
+      final result = await _registerContractor.register(
         email: emailController.text,
         password: passwordController.text,
+        username: usernameController.text,
       );
-      log("Success");
-      await _loginLocalService.saveLoginResponse(response);
 
-      emit(LoginSuccess());
+      emit(RegisterSuccess());
     } catch (e) {
-      emit(LoginFailure());
-      log("Error");
+      emit(RegisterFailure());
     }
   }
 
@@ -38,6 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> close() {
     emailController.dispose();
     passwordController.dispose();
+    usernameController.dispose();
     return super.close();
   }
 
