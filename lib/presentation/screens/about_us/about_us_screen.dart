@@ -39,9 +39,9 @@ class AboutUsScreen extends StatelessWidget {
               ),
             );
           } else if (state is AboutUsFailure) {
-            return const Center(child: Text("Haqqımızda ekranı hatası"));
+            return const Center(child: Text("Screen Failure"));
           } else {
-            return const Center(child: Text("Bilinmeyen bir durum"));
+            return const Center(child: Text("Error"));
           }
         },
       ),
