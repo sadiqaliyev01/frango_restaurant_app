@@ -1,18 +1,23 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/about_us/about_us_state.dart';
-import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/abut_us_contractor.dart';
 
 class AboutUsCubit extends Cubit<AboutUsState> {
-  final AboutUsRepository _repository;
+  final AboutUsContractor _contractor;
 
-  AboutUsCubit(this._repository) : super(AboutUsLoading());
+  AboutUsCubit(this._contractor) : super(AboutUsInitial());
 
-  Future<void> fetchAboutUs() async {
+  Future<void> getAboutUs() async {
     try {
-      final aboutUs = await _repository.getAboutUs();
-      emit(AboutUsLoaded(aboutUs));
+      emit(AboutUsLoading());
+      final aboutUs = await _contractor.getAboutUs();
+      log("About Us Fetched: $aboutUs");
+      emit(AboutUsSuccess(aboutUs));
+      log("About Us Success");
     } catch (e) {
-      emit(AboutUsError('Failed to load about us data'));
+      emit(AboutUsFailure('Failed to load about us data: $e'));
     }
   }
 }

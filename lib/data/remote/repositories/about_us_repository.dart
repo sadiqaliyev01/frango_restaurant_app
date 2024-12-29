@@ -1,12 +1,15 @@
-import 'package:frango_restaurant_app/data/remote/models/about_us_model.dart';
+import 'package:frango_restaurant_app/data/models/remote/about_us_response.dart';
 import 'package:frango_restaurant_app/data/remote/services/about_us_services.dart';
 
-class AboutUsRepository {
+import '../contractor/abut_us_contractor.dart';
+
+class AboutUsRepository implements AboutUsContractor {
   final AboutUsService _service;
 
   AboutUsRepository(this._service);
 
-  Future<AboutUs> getAboutUs() {
-    return _service.fetchAboutUs();
+  @override
+  Future<AboutUsResponse> getAboutUs() {
+    return _service.getAboutUs();
   }
 }

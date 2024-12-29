@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/sign_up_form.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
