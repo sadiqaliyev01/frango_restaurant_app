@@ -17,16 +17,8 @@ class MyApp extends StatelessWidget {
     bool isOnboardingCompleted =
         box.get('onboardingCompleted', defaultValue: false);
 
-    return MultiBlocProvider(
-      providers: [
-        // BlocProvider(create: (context) => HomeCubit()),
-        BlocProvider<LoginCubit>(create: (context) => locator()),
-        // BlocProvider(
-        //   create: (context) => AboutUsCubit(
-        //     AboutUsRepository(AboutUsService()),
-        //   ),
-        // ),
-      ],
+    return BlocProvider(
+      create: (context) => LoginCubit(locator(), locator()),
       child: MaterialApp(
         navigatorKey: navKey,
         title: 'Flutter Demo',
