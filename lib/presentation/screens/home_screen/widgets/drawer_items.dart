@@ -73,7 +73,9 @@ class DrawerItems extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return BlocProvider(
-                            create: (context) => AboutUsCubit(AboutUsRepository(AboutUsService()))..getAboutUs(),
+                            create: (context) => AboutUsCubit(
+                                AboutUsRepository(AboutUsService()))
+                              ..getAboutUs(),
                             child: const AboutUsScreen(),
                           );
                         },
@@ -130,13 +132,12 @@ class DrawerItems extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          BlocProvider<LoginCubit>(
-                            create: (context) => locator(),
-                            child: const LoginScreen(),
-                          ),
+                      builder: (context) => BlocProvider<LoginCubit>(
+                        create: (context) => LoginCubit(locator(), locator()),
+                        child: const LoginScreen(),
+                      ),
                     ),
-                        (route) => route.isCurrent,
+                    (route) => false,
                   );
                 },
               ),

@@ -3,7 +3,7 @@ sealed class HomeState {}
 final class HomeInitial extends HomeState {}
 
 final class HomeIndexChanged extends HomeState {
-  final  currentIndex;
+  final int currentIndex;
 
   HomeIndexChanged(this.currentIndex);
 }

@@ -21,12 +21,12 @@ class DontHaveAnAccount extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
-              child: const SignUpScreen(),
               create: (context) => RegisterCubit(
                 RegisterRepository(
                   RegisterService(),
                 ),
               ),
+              child: const SignUpScreen(),
             ),
           ),
           (route) => route.isCurrent,
