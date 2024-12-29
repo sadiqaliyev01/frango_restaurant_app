@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
@@ -65,7 +66,16 @@ class DrawerItems extends StatelessWidget {
                     color: AppColors.primaryBlack,
                   ),
                   text: const Text("Haqqımızda"),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const AboutUsScreen();
+                        },
+                      ),
+                    );
+                  },
                 ),
                 ListTileItems(
                   icon: const Icon(
