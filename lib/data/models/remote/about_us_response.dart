@@ -1,11 +1,11 @@
-class AboutUs {
+class AboutUsResponse {
   final int id;
   final String restaurantName;
   final String address;
   final String number;
   final String email;
 
-  AboutUs({
+  AboutUsResponse({
     required this.id,
     required this.restaurantName,
     required this.address,
@@ -13,8 +13,8 @@ class AboutUs {
     required this.email,
   });
 
-  factory AboutUs.fromJson(Map<String, dynamic> json) {
-    return AboutUs(
+  factory AboutUsResponse.fromJson(Map<String, dynamic> json) {
+    return AboutUsResponse(
       id: json['id'],
       restaurantName: json['restaurantName'],
       address: json['address'],

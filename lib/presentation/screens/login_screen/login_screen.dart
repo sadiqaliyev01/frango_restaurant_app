@@ -2,11 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/dont_have_an_account.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_redirect.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
@@ -101,8 +100,10 @@ class LoginScreen extends StatelessWidget {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomeScreen(),
+                                            builder: (context) => BlocProvider(
+                                              create: (context) => HomeCubit(),
+                                              child: const HomeScreen(),
+                                            ),
                                           ),
                                           (route) => route.isCurrent,
                                         );
@@ -110,7 +111,8 @@ class LoginScreen extends StatelessWidget {
                                         log("Login failed: LoginFailure");
                                         cubit.showToast(
                                           context,
-                                          const Text("Incorrect email or password"),
+                                          const Text(
+                                              "Incorrect email or password"),
                                           SnackBarAction(
                                             label: "OK",
                                             onPressed: () {},

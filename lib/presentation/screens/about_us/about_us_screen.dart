@@ -6,6 +6,11 @@ import 'package:frango_restaurant_app/cubits/about_us/about_us_state.dart';
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
 
+/*
+  bu screen bizimle elaqe sehifesinde olacaq. haqqimizda hissesinde restoranin
+  ozu haqqinda melumatlar olacaq(tarixi, filiallari, iscileri ve s.)
+*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,15 +19,13 @@ class AboutUsScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is AboutUsLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is AboutUsLoaded) {
+          } else if (state is AboutUsSuccess) {
             final aboutUs = state.aboutUs;
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Restaurant Name: ${aboutUs.restaurantName}',
-                      style: const TextStyle(fontSize: 18)),
                   const SizedBox(height: 8),
                   Text('Address: ${aboutUs.address}',
                       style: const TextStyle(fontSize: 18)),
@@ -35,10 +38,10 @@ class AboutUsScreen extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is AboutUsError) {
-            return Center(child: Text(state.message));
+          } else if (state is AboutUsFailure) {
+            return const Center(child: Text("Screen Failure"));
           } else {
-            return const SizedBox.shrink();
+            return const Center(child: Text("Error"));
           }
         },
       ),

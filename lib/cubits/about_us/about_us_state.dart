@@ -1,19 +1,21 @@
-import 'package:frango_restaurant_app/data/remote/models/about_us_model.dart';
+import 'package:frango_restaurant_app/data/models/remote/about_us_response.dart';
 
 class AboutUsState {
   const AboutUsState();
 }
 
+class AboutUsInitial extends AboutUsState {}
+
 class AboutUsLoading extends AboutUsState {}
 
-class AboutUsLoaded extends AboutUsState {
-  final AboutUs aboutUs;
+class AboutUsSuccess extends AboutUsState {
+  AboutUsSuccess(this.aboutUs);
 
-  AboutUsLoaded(this.aboutUs);
+  final AboutUsResponse aboutUs;
 }
 
-class AboutUsError extends AboutUsState {
+class AboutUsFailure extends AboutUsState {
   final String message;
 
-  AboutUsError(this.message);
+  AboutUsFailure(this.message);
 }

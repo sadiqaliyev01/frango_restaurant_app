@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
+import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
+import 'package:frango_restaurant_app/data/remote/services/about_us_services.dart';
 import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
@@ -10,8 +13,6 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
 
 import '../../../../cubits/login/login_cubit.dart';
-import '../../../../data/remote/repositories/login_repository.dart';
-import '../../../../data/remote/services/login_service.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
@@ -71,7 +72,10 @@ class DrawerItems extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const AboutUsScreen();
+                          return BlocProvider(
+                            create: (context) => AboutUsCubit(AboutUsRepository(AboutUsService()))..getAboutUs(),
+                            child: const AboutUsScreen(),
+                          );
                         },
                       ),
                     );
@@ -126,12 +130,13 @@ class DrawerItems extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BlocProvider<LoginCubit>(
-                        create: (context) => locator(),
-                        child: const LoginScreen(),
-                      ),
+                      builder: (context) =>
+                          BlocProvider<LoginCubit>(
+                            create: (context) => locator(),
+                            child: const LoginScreen(),
+                          ),
                     ),
-                    (route) => route.isCurrent,
+                        (route) => route.isCurrent,
                   );
                 },
               ),
