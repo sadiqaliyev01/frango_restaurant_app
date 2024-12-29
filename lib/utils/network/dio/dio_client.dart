@@ -1,11 +1,11 @@
+import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:frango_restaurant_app/utils/network/dio/dio_interceptor.dart';
 
-final dio = Dio(
-  BaseOptions(
-    connectTimeout: const Duration(seconds: 10),
-    headers: {
-      'Accept': 'application/json',
-    },
-  ),
-)..interceptors.add(DioInterceptor()); // Dio-nu cagiranda interceptor yaranacaq
+import 'dio_interceptor.dart';
+
+
+final authDio = Dio()
+  ..interceptors
+      .add(AwesomeDioInterceptor()); // Dio-nu cagiranda interceptor yaranacaq
+
+final clientDio = Dio()..interceptors.add(AwesomeDioInterceptor())..interceptors.add(CustomDioInterceptor());

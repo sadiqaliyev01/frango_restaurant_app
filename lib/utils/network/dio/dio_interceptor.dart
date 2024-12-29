@@ -1,23 +1,23 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/login_contractor.dart';
 
-class DioInterceptor extends Interceptor {
+import '../../../data/remote/services/local/local_login_service.dart';
+import '../../di/locator.dart';
+
+class CustomDioInterceptor extends QueuedInterceptor {
+  final _loginLocalService = locator<LoginLocalService>();
+  final _loginContract = locator<LoginContractor>();
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers = {
-      'Authorization': 'Bearer YOUR_API_TOKEN',
-    };
-    log(options.data);
-    log(options.headers.toString());
+    handler.next(options);
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    log(response.data);
-    log(response.statusCode.toString());
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
+    log('Error: ${err.response?.statusCode}');
+    handler.next(err);
   }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {}
 }

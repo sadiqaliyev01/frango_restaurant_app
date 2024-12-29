@@ -1,3 +1,5 @@
+import 'package:frango_restaurant_app/data/models/remote/login_response.dart';
+
 import '../contractor/login_contractor.dart';
 import '../services/login_service.dart';
 
@@ -7,7 +9,7 @@ class LoginRepository implements LoginContractor {
   final LoginService _loginService;
 
   @override
-  Future<bool> login({
+  Future<LoginResponse> login({
     required String email,
     required String password,
   }) =>
