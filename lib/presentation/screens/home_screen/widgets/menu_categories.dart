@@ -42,13 +42,18 @@ class MenuCategories extends StatelessWidget {
               onTap: () {
                 onCategorySelected(index);
                 cubit.changeIndex(index);
-                cubit.jumpToIndex(index, verticalScrollController);
+                cubit.jumpToIndex(
+                  index,
+                  verticalScrollController,
+                );
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primaryYellow : AppColors.primaryBlack,
+                  color: isSelected
+                      ? AppColors.primaryYellow
+                      : AppColors.primaryBlack,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Center(

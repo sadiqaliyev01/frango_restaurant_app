@@ -14,7 +14,7 @@ class ProductImage extends StatelessWidget {
         borderRadius: const BorderRadius.horizontal(
           left: Radius.circular(24),
         ),
-        child: Image.asset(
+        child: Image.network(
           imageLink,
           fit: BoxFit.fill,
           alignment: Alignment.center,

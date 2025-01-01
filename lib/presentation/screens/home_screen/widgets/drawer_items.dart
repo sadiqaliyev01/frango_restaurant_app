@@ -13,6 +13,7 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
 
 import '../../../../cubits/login/login_cubit.dart';
+import '../../../../data/remote/services/remote/about_us_service.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
