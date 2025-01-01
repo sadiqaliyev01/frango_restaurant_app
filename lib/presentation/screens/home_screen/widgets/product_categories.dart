@@ -31,7 +31,7 @@ class ProductCategories extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (categoryState is CategoryNamesSuccess) {
           final categories =
-              categoryState.categoryNamesResponse.map((categoryName) {
+          categoryState.categoryNamesResponse.map((categoryName) {
             return categoryName.title ?? "No Category";
           }).toList();
 
@@ -60,6 +60,14 @@ class ProductCategories extends StatelessWidget {
                       homeCubit.jumpToIndex(
                         index,
                         verticalScrollController,
+                      );
+
+                      // Calculate the horizontal scroll offset using verticalWidths
+                      double offset = homeCubit.calculateHorizontalScrollOffset(index);
+                      horizontalScrollController.animateTo(
+                        offset,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
                       );
                     },
                     child: Container(
