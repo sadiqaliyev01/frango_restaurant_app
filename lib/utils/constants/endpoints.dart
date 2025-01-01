@@ -6,4 +6,5 @@ class Endpoints{
   static const register = "$_baseUrl/user/register";
   static const aboutUs = "$_baseUrl/aboutUs";
   static const meals = "$_baseUrl/meal";
+  static const categoryNames = "$_baseUrl/mealCategory";
 }

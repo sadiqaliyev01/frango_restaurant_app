@@ -5,14 +5,14 @@ import 'package:frango_restaurant_app/presentation/screens/manage_payment/widget
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 
-class ManagePaymentMethods extends StatefulWidget {
-  const ManagePaymentMethods({super.key});
+class ManagePaymentScreen extends StatefulWidget {
+  const ManagePaymentScreen({super.key});
 
   @override
-  State<ManagePaymentMethods> createState() => _ManagePaymentMethodsState();
+  State<ManagePaymentScreen> createState() => _ManagePaymentScreenState();
 }
 
-class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
+class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
   List<String> cardNumbers = [
     '4111 1111 1111 1111',
     '5111 1111 1111 1111',

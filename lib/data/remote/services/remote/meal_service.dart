@@ -24,7 +24,6 @@ class MealService {
   Future<List<MealResponse>> getMeals() async {
     final response = await clientDio.get(endpoint);
     if (response.statusCode.isSuccess) {
-      // Parse the list of meals
       List<dynamic> data = response.data;
       return data.map((meal) => MealResponse.fromJson(meal)).toList();
     } else if (response.statusCode.isFailure) {

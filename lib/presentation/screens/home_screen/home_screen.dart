@@ -8,9 +8,11 @@ import 'package:frango_restaurant_app/cubits/meal/meal_cubit.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/drawer_items.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/menu_categories.dart';
-import 'package:frango_restaurant_app/test_widget.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_categories.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/products.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+
+import '../../../data/models/remote/meal_response.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,9 +20,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController verticalScrollController = ScrollController();
-    final ScrollController horizontalScrollController =
-    ScrollController(); // horizontal scroll controller
-  
+    final ScrollController horizontalScrollController = ScrollController();
+
     final cubit = context.read<HomeCubit>();
 
     verticalScrollController.addListener(() {
@@ -48,15 +49,22 @@ class HomeScreen extends StatelessWidget {
         body: BlocBuilder<MealCubit, MealState>(
           builder: (context, state) {
             if (state is MealLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: AppColors.primaryYellow,
+              ));
             } else if (state is MealSuccess) {
               final meals = state.mealResponse;
+
+              // Group meals by category
+              final groupedMeals = groupMealsByCategory(meals);
+
               return Column(
                 children: [
                   const SizedBox(height: 20),
                   SizedBox(
                     height: 34,
-                    child: MenuCategories(
+                    child: ProductCategories(
                       onCategorySelected: (index) {
                         cubit.changeIndex(index);
                         cubit.jumpToIndex(index, verticalScrollController);
@@ -66,13 +74,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Expanded( // Wrap ListView.builder in Expanded
+                  Expanded(
                     child: ListView.builder(
-                      itemCount: meals.length,
+                      itemCount: groupedMeals.keys.length,
                       itemBuilder: (context, index) {
-                        final meal = meals[index];
-                        return TestWidget(
-                          mealResponse: meal,
+                        final categoryTitle =
+                            groupedMeals.keys.elementAt(index);
+                        final categoryMeals = groupedMeals[categoryTitle]!;
+
+                        return Products(
+                          categoryTitle: categoryTitle,
+                          meals: categoryMeals,
                           scrollController: verticalScrollController,
                         );
                       },
@@ -95,5 +107,21 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Map<String, List<MealResponse>> groupMealsByCategory(
+      List<MealResponse> meals) {
+    Map<String, List<MealResponse>> groupedMeals = {};
+
+    for (var meal in meals) {
+      final categoryTitle = meal.category?.title ?? "No Category";
+      if (groupedMeals.containsKey(categoryTitle)) {
+        groupedMeals[categoryTitle]!.add(meal);
+      } else {
+        groupedMeals[categoryTitle] = [meal];
+      }
+    }
+
+    return groupedMeals;
   }
 }

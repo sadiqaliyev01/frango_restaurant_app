@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/category_names/category_names_cubit.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_cubit.dart';
+import 'package:frango_restaurant_app/data/remote/repositories/category_names_repository.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/meal_repository.dart';
+import 'package:frango_restaurant_app/data/remote/services/remote/category_names_service.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/meal_service.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/dont_have_an_account.dart';
@@ -115,14 +118,16 @@ class LoginScreen extends StatelessWidget {
                                                     MealService(),
                                                   ),
                                                 )..getMeals(),
+                                              ),
+                                              BlocProvider(
+                                                create: (context) =>
+                                                    CategoryNamesCubit(
+                                                  CategoryNamesRepository(
+                                                    CategoryNamesService(),
+                                                  ),
+                                                )..getCategoryNames(),
                                               )
                                             ], child: const HomeScreen()),
-
-                                            builder: (context) => BlocProvider(
-                                              create: (context) => HomeCubit(),
-                                              child: const HomeScreen(),
-                                            ),
-
                                           ),
                                           (route) => route.isCurrent,
                                         );
