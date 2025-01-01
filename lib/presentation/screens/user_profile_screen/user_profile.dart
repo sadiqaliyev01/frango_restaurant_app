@@ -18,7 +18,8 @@ class UserProfile extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: const Icon(Icons.arrow_back_ios,
+                color: AppColors.primaryYellow),
           ),
         ),
         body: SingleChildScrollView(

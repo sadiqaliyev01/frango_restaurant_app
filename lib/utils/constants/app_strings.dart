@@ -77,4 +77,27 @@ class AppStrings {
   static const String morePaymentOptions = "More Payment Options";
   static const String addCardPageTitle =
       "Please enter your card details for a different payment method";
+
+  static const String contactUsTitleText =
+      "You can reach us from the links below,\ntell us your wish and requests, and report any problems.";
+  static const String contactUsEmailContext = "Client";
+  static const String conttactUsEmailMessage = "Hi, Frango Team";
+  static const String frangoCallUsText = "Call Us";
+  static const String frangoEmailText = "Email";
+  static const String frangoAddressDisplayText = "Frango Address";
+  static const String followFrangoInstagram = "Follow Frango on Instagram";
+  static const String followFrangoTikTok = "Follow Frango on TikTok";
+
+  static const String settings = "Settings";
+  static const String warningDialog = "Warning!";
+  static const String warningText =
+      "Once you delete the account, it cannot be restored. Are you sure?";
+  static const String warningCancel = "Cancel";
+  static const String warningDelete = "Delete";
+  static const String editProfileText = "Edit Profile";
+  static const String resetPassText = "Reset Password";
+  static const String languageText = "Language";
+  static const String themeText = "Dark Mode";
+  static const String deleteAccountText = "Delete Account";
+  static const String successMessage = "Changes saved successfully!";
 }

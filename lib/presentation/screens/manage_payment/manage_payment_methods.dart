@@ -9,7 +9,7 @@ class ManagePaymentMethods extends StatefulWidget {
   const ManagePaymentMethods({super.key});
 
   @override
-  _ManagePaymentMethodsState createState() => _ManagePaymentMethodsState();
+  State<ManagePaymentMethods> createState() => _ManagePaymentMethodsState();
 }
 
 class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
