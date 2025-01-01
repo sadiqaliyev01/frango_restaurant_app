@@ -3,16 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/home/home_cubit.dart';
-import 'package:frango_restaurant_app/cubits/home/home_state.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_cubit.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_state.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/all_products.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/drawer_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_categories.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/products.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-
-import '../../../data/models/remote/meal_response.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,24 +19,12 @@ class HomeScreen extends StatelessWidget {
     final ScrollController verticalScrollController = ScrollController();
     final ScrollController horizontalScrollController = ScrollController();
 
-    final cubit = context.read<HomeCubit>();
+    final homeCubit = context.read<HomeCubit>();
+    final mealCubit = context.read<MealCubit>();
 
-    verticalScrollController.addListener(() {
-      cubit.onVerticalScrollCurrentCategory(verticalScrollController);
-
-      // Synchronize horizontal scroll with vertical scroll
-      final currentIndex = cubit.state is HomeIndexChanged
-          ? (cubit.state as HomeIndexChanged).currentIndex
-          : 0;
-
-      // Update horizontal scroll
-      final offset = cubit.calculateScrollOffset(currentIndex);
-      horizontalScrollController.animateTo(
-        offset,
-        duration: const Duration(milliseconds: 100),
-        curve: Curves.easeInOut,
-      );
-    });
+    // verticalScrollController.addListener(() {
+    //   homeCubit.onVerticalScrollCurrentCategory(verticalScrollController);
+    // });
 
     return SafeArea(
       child: Scaffold(
@@ -50,14 +35,13 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is MealLoading) {
               return const Center(
-                  child: CircularProgressIndicator(
-                color: AppColors.primaryYellow,
-              ));
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryYellow,
+                ),
+              );
             } else if (state is MealSuccess) {
               final meals = state.mealResponse;
-
-              // Group meals by category
-              final groupedMeals = groupMealsByCategory(meals);
+              final groupedMeals = mealCubit.groupMealsByCategory(meals);
 
               return Column(
                 children: [
@@ -66,8 +50,11 @@ class HomeScreen extends StatelessWidget {
                     height: 34,
                     child: ProductCategories(
                       onCategorySelected: (index) {
-                        cubit.changeIndex(index);
-                        cubit.jumpToIndex(index, verticalScrollController);
+                        homeCubit.changeIndex(index);
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          homeCubit.jumpToIndex(
+                              index, verticalScrollController);
+                        });
                       },
                       horizontalScrollController: horizontalScrollController,
                       verticalScrollController: verticalScrollController,
@@ -76,16 +63,17 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Expanded(
                     child: ListView.builder(
+                      controller: verticalScrollController,
                       itemCount: groupedMeals.keys.length,
                       itemBuilder: (context, index) {
                         final categoryTitle =
-                            groupedMeals.keys.elementAt(index);
+                        groupedMeals.keys.elementAt(index);
                         final categoryMeals = groupedMeals[categoryTitle]!;
 
-                        return Products(
+                        return AllProducts(
+                          scrollController: verticalScrollController,
                           categoryTitle: categoryTitle,
                           meals: categoryMeals,
-                          scrollController: verticalScrollController,
                         );
                       },
                     ),
@@ -107,21 +95,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Map<String, List<MealResponse>> groupMealsByCategory(
-      List<MealResponse> meals) {
-    Map<String, List<MealResponse>> groupedMeals = {};
-
-    for (var meal in meals) {
-      final categoryTitle = meal.category?.title ?? "No Category";
-      if (groupedMeals.containsKey(categoryTitle)) {
-        groupedMeals[categoryTitle]!.add(meal);
-      } else {
-        groupedMeals[categoryTitle] = [meal];
-      }
-    }
-
-    return groupedMeals;
   }
 }

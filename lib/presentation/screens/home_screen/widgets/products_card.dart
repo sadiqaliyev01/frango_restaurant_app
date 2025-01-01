@@ -8,16 +8,14 @@ import 'package:frango_restaurant_app/presentation/screens/product_details/produ
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Products extends StatelessWidget {
+class ProductsCard extends StatelessWidget {
   final String categoryTitle;
   final List<MealResponse> meals;
-  final ScrollController scrollController;
 
-  const Products({
+  const ProductsCard({
     super.key,
     required this.categoryTitle,
     required this.meals,
-    required this.scrollController,
   });
 
   @override
@@ -36,7 +34,6 @@ class Products extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
