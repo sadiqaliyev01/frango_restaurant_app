@@ -47,7 +47,7 @@ class ProductsCard extends StatelessWidget {
                         context: context,
                         shape: const RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(24)),
+                          BorderRadius.vertical(top: Radius.circular(24)),
                         ),
                         builder: (context) => ProductDetails(
                           meal: meal,
