@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
+import 'package:frango_restaurant_app/data/remote/services/about_us_services.dart';
 import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';

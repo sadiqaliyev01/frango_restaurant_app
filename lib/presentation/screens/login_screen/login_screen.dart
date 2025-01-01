@@ -117,6 +117,12 @@ class LoginScreen extends StatelessWidget {
                                                 )..getMeals(),
                                               )
                                             ], child: const HomeScreen()),
+
+                                            builder: (context) => BlocProvider(
+                                              create: (context) => HomeCubit(),
+                                              child: const HomeScreen(),
+                                            ),
+
                                           ),
                                           (route) => route.isCurrent,
                                         );
