@@ -2,7 +2,6 @@ import 'package:frango_restaurant_app/data/models/remote/register_response.dart'
 
 import '../contractor/register_contractor.dart';
 import '../services/remote/register_service.dart';
-import '../services/register_service.dart';
 
 class RegisterRepository implements RegisterContractor {
   const RegisterRepository(this._registerService);

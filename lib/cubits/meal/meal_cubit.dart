@@ -8,18 +8,6 @@ class MealCubit extends Cubit<MealState> {
   MealCubit(this._mealContractor) : super(MealInitial());
   final MealContractor _mealContractor;
 
-  // Future<void> getMeals() async {
-  //   try {
-  //     emit(MealLoading());
-  //     final meal = await _mealContractor.getMeals();
-  //     log("Meal Fetched: $meal");
-  //     emit(MealSuccess(meal));
-  //     log("Meal Success");
-  //   } catch (e) {
-  //     emit(MealFailure("Meal Failure: ${e.toString()}"));
-  //   }
-  // }
-
   Future<void> getMeals() async {
     try {
       emit(MealLoading());
