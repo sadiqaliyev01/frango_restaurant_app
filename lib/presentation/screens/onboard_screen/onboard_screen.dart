@@ -13,7 +13,10 @@ class OnboardScreen extends StatelessWidget {
   Future<void> _completeOnboarding(BuildContext context) async {
     var box = Hive.box('settings');
     await box.put('onboardingCompleted', true);
-    _navigateToHome(context);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+    );
   }
 
   void _navigateToHome(BuildContext context) {

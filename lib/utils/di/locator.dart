@@ -5,7 +5,7 @@ import 'package:frango_restaurant_app/data/remote/services/remote/login_service.
 
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
-import '../../data/remote/services/local/local_login_service.dart';
+import '../../data/remote/services/local/login_local_service.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -18,7 +18,7 @@ Future<void> setupLocator() async {
   locator
       .registerLazySingleton<LoginLocalService>(() => LoginLocalService(box));
   locator.registerLazySingleton<LoginService>(() => LoginService());
-  locator.registerLazySingleton(() => LoginCubit(locator(), locator()));
+  locator.registerLazySingleton(() => LoginCubit(locator(), ));
   locator
       .registerLazySingleton<LoginContractor>(() => LoginRepository(locator()));
 }

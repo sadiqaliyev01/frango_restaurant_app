@@ -104,7 +104,7 @@ class HomeCubit extends Cubit<HomeState> {
     double offset = 0.0;
     for (int i = 0; i < selectedIndex; i++) {
       offset +=
-          horizontalWidths[i]; // Use verticalWidths for horizontal scrolling
+      horizontalWidths[i]; // Use verticalWidths for horizontal scrolling
     }
     return offset;
   }
