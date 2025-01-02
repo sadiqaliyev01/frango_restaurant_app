@@ -2,17 +2,18 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/utils/di/locator.dart';
 import '../../data/remote/contractor/login_contractor.dart';
-import '../../data/remote/services/local/local_login_service.dart';
+import '../../data/remote/services/local/login_local_service.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginContractor, this._loginLocalService)
+  LoginCubit(this._loginContractor,)
       : super(LoginInitial());
 
   final LoginContractor _loginContractor;
-  final LoginLocalService _loginLocalService;
+  final _loginLocalService = locator<LoginLocalService>();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

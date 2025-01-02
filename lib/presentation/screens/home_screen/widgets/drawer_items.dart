@@ -133,7 +133,7 @@ class DrawerItems extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider<LoginCubit>(
-                        create: (context) => LoginCubit(locator(), locator()),
+                        create: (context) => LoginCubit(locator()),
                         child: const LoginScreen(),
                       ),
                     ),
