@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/abut_us_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
 import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
@@ -16,6 +17,8 @@ import '../../../../data/remote/services/remote/about_us_service.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
+
+  AboutUsContractor? get aboutUsRepository => null;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +97,12 @@ class DrawerItems extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const ContactUsScreen();
+                          return BlocProvider(
+                            create: (context) => AboutUsCubit(
+                                AboutUsRepository(AboutUsService()))
+                              ..getAboutUs(),
+                            child: const ContactUsScreen(),
+                          );
                         },
                       ),
                     );
