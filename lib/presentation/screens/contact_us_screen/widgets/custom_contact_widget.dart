@@ -4,12 +4,16 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 class CustomContactWidget extends StatelessWidget {
   final IconData icon;
   final String text;
+  final String? additionalText;
+  final TextStyle? additionalTextStyle;
   final VoidCallback onTap;
 
   const CustomContactWidget({
     super.key,
     required this.icon,
     required this.text,
+    this.additionalText,
+    this.additionalTextStyle,
     required this.onTap,
   });
 
@@ -52,6 +56,18 @@ class CustomContactWidget extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+            if (additionalText != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                additionalText!,
+                style: additionalTextStyle ??
+                    const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ],
         ),
       ),
