@@ -61,13 +61,29 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 CustomLoginRegisterField(
-                                  controller: cubit.usernameController,
-                                  hintText: "Username",
+                                  controller: cubit.nameController,
+                                  hintText: "Name",
+                                ),
+                                const SizedBox(height: 20),
+                                CustomLoginRegisterField(
+                                  controller: cubit.surnameController,
+                                  hintText: "Surname",
+                                ),
+                                const SizedBox(height: 20),
+                                CustomLoginRegisterField(
+                                  controller: cubit.phoneNumberController,
+                                  hintText: "Phone Number",
+                                ),
+                                const SizedBox(height: 20),
+                                CustomLoginRegisterField(
+                                  controller: cubit.birthDateController,
+                                  hintText: "Birth Date",
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
@@ -92,16 +108,17 @@ class SignUpScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 60.0),
-                                child: BlocConsumer<RegisterCubit, RegisterState>(
+                                child:
+                                    BlocConsumer<RegisterCubit, RegisterState>(
                                   listener: (context, state) {
                                     if (state is RegisterSuccess) {
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                          const HomeScreen(),
+                                              const HomeScreen(),
                                         ),
-                                            (route) => route.isCurrent,
+                                        (route) => route.isCurrent,
                                       );
                                     } else if (state is RegisterFailure) {
                                       cubit.showToast(
@@ -121,16 +138,17 @@ class SignUpScreen extends StatelessWidget {
                                       },
                                       child: (state is RegisterLoading)
                                           ? const SizedBox(
-                                          height: 20,
-                                          width: 20,
-                                          child: CircularProgressIndicator())
+                                              height: 20,
+                                              width: 20,
+                                              child:
+                                                  CircularProgressIndicator())
                                           : const Text(
-                                        AppStrings.signUpButton,
-                                        style: TextStyle(
-                                          color: AppColors.white,
-                                          fontSize: 14,
-                                        ),
-                                      ),
+                                              AppStrings.signUpButton,
+                                              style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14,
+                                              ),
+                                            ),
                                     );
                                   },
                                 ),
@@ -152,4 +170,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-

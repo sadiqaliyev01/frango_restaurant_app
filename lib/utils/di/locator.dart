@@ -1,7 +1,11 @@
 import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
+import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/login_contractor.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/register_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/login_repository.dart';
+import 'package:frango_restaurant_app/data/remote/repositories/register_repository.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/login_service.dart';
+import 'package:frango_restaurant_app/data/remote/services/remote/register_service.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -18,7 +22,12 @@ Future<void> setupLocator() async {
   locator
       .registerLazySingleton<LoginLocalService>(() => LoginLocalService(box));
   locator.registerLazySingleton<LoginService>(() => LoginService());
-  locator.registerLazySingleton(() => LoginCubit(locator(), ));
+  locator.registerLazySingleton(() => LoginCubit(locator()));
   locator
       .registerLazySingleton<LoginContractor>(() => LoginRepository(locator()));
+
+  locator.registerLazySingleton<RegisterService>(() => RegisterService());
+  locator.registerLazySingleton(() => RegisterCubit(locator()));
+  locator.registerLazySingleton<RegisterContractor>(
+      () => RegisterRepository(locator()));
 }

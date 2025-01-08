@@ -12,11 +12,19 @@ class RegisterRepository implements RegisterContractor {
   Future<RegisterResponse> register({
     required String email,
     required String password,
-    required String username,
+    required String verificationCode,
+    required String name,
+    required String surname,
+    required String phoneNumber,
+    required String birthDate,
   }) =>
       _registerService.register(
         email: email,
         password: password,
-        username: username,
+        verificationCode: verificationCode,
+        name: name,
+        surname: surname,
+        phoneNumber: phoneNumber,
+        birthDate: birthDate,
       );
 }

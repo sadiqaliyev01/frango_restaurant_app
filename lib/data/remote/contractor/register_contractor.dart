@@ -4,6 +4,10 @@ abstract class RegisterContractor {
   Future<RegisterResponse> register({
     required String email,
     required String password,
-    required String username,
+    required String verificationCode,
+    required String name,
+    required String surname,
+    required String phoneNumber,
+    required String birthDate,
   });
 }

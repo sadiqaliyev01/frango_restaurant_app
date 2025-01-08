@@ -7,13 +7,21 @@ class RegisterService {
   Future<RegisterResponse> register({
     required String email,
     required String password,
-    required String username,
+    required String verificationCode,
+    required String name,
+    required String surname,
+    required String phoneNumber,
+    required String birthDate,
   }) async {
     const endpoint = Endpoints.register;
     final requestBody = {
       'email': email,
       'password': password,
-      'username': username,
+      "verificationCode": verificationCode,
+      "name": name,
+      "surname": surname,
+      "phoneNumber": phoneNumber,
+      "birthDate": birthDate,
     };
     final response = await authDio.post(endpoint, data: requestBody);
     if (response.statusCode.isSuccess) {
