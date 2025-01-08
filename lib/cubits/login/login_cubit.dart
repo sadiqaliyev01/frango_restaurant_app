@@ -9,8 +9,9 @@ import '../../data/remote/services/local/login_local_service.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginContractor,)
-      : super(LoginInitial());
+  LoginCubit(
+    this._loginContractor,
+  ) : super(LoginInitial());
 
   final LoginContractor _loginContractor;
   final _loginLocalService = locator<LoginLocalService>();
@@ -42,7 +43,6 @@ class LoginCubit extends Cubit<LoginState> {
     passwordController.dispose();
     return super.close();
   }
-
 
   void showToast(BuildContext context, Widget content, SnackBarAction? action) {
     final scaffold = ScaffoldMessenger.of(context);

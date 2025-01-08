@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/remote/contractor/register_contractor.dart';
@@ -11,17 +13,26 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController verificationCodeController =
+      TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
 
   void register() async {
     try {
       emit(RegisterLoading());
+      log("Register Loading");
       final result = await _registerContractor.register(
         email: emailController.text,
         password: passwordController.text,
-        username: usernameController.text,
+        verificationCode: verificationCodeController.text,
+        name: nameController.text,
+        surname: surnameController.text,
+        phoneNumber: phoneNumberController.text,
+        birthDate: birthDateController.text,
       );
-
       emit(RegisterSuccess());
     } catch (e) {
       emit(RegisterFailure());
@@ -32,7 +43,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> close() {
     emailController.dispose();
     passwordController.dispose();
-    usernameController.dispose();
+    verificationCodeController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
+    birthDateController.dispose();
+    phoneNumberController.dispose();
     return super.close();
   }
 
