@@ -8,7 +8,6 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this._registerContractor) : super(RegisterInitial());
-
   final RegisterContractor _registerContractor;
 
   final TextEditingController emailController = TextEditingController();
