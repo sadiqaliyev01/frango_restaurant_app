@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class CustomLoginRegisterField extends StatelessWidget {
@@ -7,6 +8,10 @@ class CustomLoginRegisterField extends StatelessWidget {
   final TextInputType keyboardType;
   final ValueNotifier<bool> _obscureTextNotifier;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final Widget? prefixIcon;
+  final void Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   CustomLoginRegisterField({
     required this.hintText,
@@ -14,6 +19,10 @@ class CustomLoginRegisterField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     super.key,
     this.controller,
+    this.validator,
+    this.prefixIcon,
+    this.onChanged,
+    this.inputFormatters,
   }) : _obscureTextNotifier = ValueNotifier(obscureText);
 
   @override
@@ -22,14 +31,21 @@ class CustomLoginRegisterField extends StatelessWidget {
       valueListenable: _obscureTextNotifier,
       builder: (context, isObscure, child) {
         return TextFormField(
+          inputFormatters: inputFormatters,
+          validator: validator,
           controller: controller,
           decoration: InputDecoration(
+            prefixIcon: prefixIcon,
+            prefixIconConstraints: const BoxConstraints(
+              minHeight: 0,
+              minWidth: 0,
+            ),
             filled: true,
             fillColor: AppColors.buttonAndTextFieldGray,
             hintText: hintText,
             hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
               borderSide: BorderSide.none,
             ),
             suffixIcon: obscureText
@@ -47,6 +63,7 @@ class CustomLoginRegisterField extends StatelessWidget {
           style: const TextStyle(color: AppColors.white),
           obscureText: isObscure,
           keyboardType: keyboardType,
+          onChanged: onChanged,
         );
       },
     );

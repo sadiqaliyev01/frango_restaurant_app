@@ -15,6 +15,7 @@ import 'package:frango_restaurant_app/presentation/widgets/custom_login_register
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 
 import '../../../cubits/login/login_cubit.dart';
 
@@ -23,7 +24,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<LoginCubit>();
+    final loginCubit = context.read<LoginCubit>();
 
     return SafeArea(
       child: Scaffold(
@@ -77,12 +78,12 @@ class LoginScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   CustomLoginRegisterField(
-                                    controller: cubit.emailController,
+                                    controller: loginCubit.emailController,
                                     hintText: AppStrings.emailOrPhoneHintText,
                                   ),
                                   const SizedBox(height: 20),
                                   CustomLoginRegisterField(
-                                    controller: cubit.passwordController,
+                                    controller: loginCubit.passwordController,
                                     hintText: AppStrings.passwordHintText,
                                     obscureText: true,
                                   ),
@@ -107,33 +108,13 @@ class LoginScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                MultiBlocProvider(providers: [
-                                              BlocProvider(
-                                                create: (context) =>
-                                                    HomeCubit(),
-                                              ),
-                                              BlocProvider(
-                                                create: (context) => MealCubit(
-                                                  MealRepository(
-                                                    MealService(),
-                                                  ),
-                                                )..getMeals(),
-                                              ),
-                                              BlocProvider(
-                                                create: (context) =>
-                                                    CategoryNamesCubit(
-                                                  CategoryNamesRepository(
-                                                    CategoryNamesService(),
-                                                  ),
-                                                )..getCategoryNames(),
-                                              )
-                                            ], child: const HomeScreen()),
+                                                Pager.home(context),
                                           ),
                                           (route) => route.isCurrent,
                                         );
                                       } else if (state is LoginFailure) {
                                         log("Login failed: LoginFailure");
-                                        cubit.showToast(
+                                        loginCubit.showToast(
                                           context,
                                           const Text(
                                               "Incorrect email or password"),
@@ -147,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                                     builder: (context, state) {
                                       return CustomLoginRegisterButton(
                                         onPressed: () {
-                                          cubit.login();
+                                          loginCubit.login();
                                         },
                                         child: (state is LoginLoading)
                                             ? const SizedBox(

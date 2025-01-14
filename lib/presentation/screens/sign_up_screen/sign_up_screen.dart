@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
@@ -14,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<RegisterCubit>();
+    final registerCubit = context.read<RegisterCubit>();
 
     return SafeArea(
       child: Scaffold(
@@ -67,32 +69,53 @@ class SignUpScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 CustomLoginRegisterField(
-                                  controller: cubit.nameController,
+                                  controller: registerCubit.nameController,
                                   hintText: "Name",
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  controller: cubit.surnameController,
+                                  controller: registerCubit.surnameController,
                                   hintText: "Surname",
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  controller: cubit.phoneNumberController,
+                                  prefixIcon: const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                      "+994",
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  controller:
+                                      registerCubit.phoneNumberController,
                                   hintText: "Phone Number",
+                                  inputFormatters: [
+                                    PhoneNumberInputFormatter(),
+                                  ],
+                                  keyboardType: TextInputType.phone,
+                                  validator: (value) {
+                                    if (value != null && value.length != 9) {
+                                      return 'Phone number must be 9 digits long';
+                                    }
+                                    return null; // Return null if validation passes
+                                  },
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  controller: cubit.birthDateController,
+                                  controller: registerCubit.birthdayController,
                                   hintText: "Birth Date",
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  controller: cubit.emailController,
+                                  controller: registerCubit.emailController,
                                   hintText: "Email",
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  controller: cubit.passwordController,
+                                  controller: registerCubit.passwordController,
                                   hintText: "Password",
                                   obscureText: true,
                                 ),
@@ -112,16 +135,9 @@ class SignUpScreen extends StatelessWidget {
                                     BlocConsumer<RegisterCubit, RegisterState>(
                                   listener: (context, state) {
                                     if (state is RegisterSuccess) {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomeScreen(),
-                                        ),
-                                        (route) => route.isCurrent,
-                                      );
+                                      log("Register success in bloc consumer");
                                     } else if (state is RegisterFailure) {
-                                      cubit.showToast(
+                                      registerCubit.showToast(
                                         context,
                                         const Text("Registration failed"),
                                         SnackBarAction(
@@ -134,7 +150,7 @@ class SignUpScreen extends StatelessWidget {
                                   builder: (context, state) {
                                     return CustomLoginRegisterButton(
                                       onPressed: () {
-                                        cubit.register();
+                                        registerCubit.verifyEmail(context);
                                       },
                                       child: (state is RegisterLoading)
                                           ? const SizedBox(
@@ -168,5 +184,25 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PhoneNumberInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // Allow only digits after the +994 prefix
+    if (newValue.text.length > 7 && newValue.text.startsWith('+994')) {
+      // Limit the input to 9 digits after the prefix
+      if (newValue.text.length > 12) {
+        return oldValue; // Prevent further input
+      }
+      return newValue.copyWith(
+        text: newValue.text.substring(0, 7) +
+            newValue.text.substring(7).replaceAll(RegExp(r'[^0-9]'), ''),
+        selection: TextSelection.collapsed(offset: newValue.text.length),
+      );
+    }
+    return newValue;
   }
 }

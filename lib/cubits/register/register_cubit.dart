@@ -1,54 +1,63 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/remote/contractor/register_contractor.dart';
+import '../../data/remote/services/remote/verify_email_service.dart';
+import '../../utils/helpers/pager.dart';
 
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this._registerContractor) : super(RegisterInitial());
-
-  final RegisterContractor _registerContractor;
+  RegisterCubit() : super(RegisterInitial()) {
+    phoneNumberController.text = "+994";
+  }
 
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController verificationCodeController =
-      TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
-  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController birthdayController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
 
-  void register() async {
+  void verifyEmail(BuildContext context) async {
     try {
       emit(RegisterLoading());
       log("Register Loading");
-      final result = await _registerContractor.register(
-        email: emailController.text,
-        password: passwordController.text,
-        verificationCode: verificationCodeController.text,
-        name: nameController.text,
-        surname: surnameController.text,
-        phoneNumber: phoneNumberController.text,
-        birthDate: birthDateController.text,
-      );
+      bool isSuccess =
+          await VerifyEmailService.verifyEmail(emailController.text);
+      if (isSuccess) {
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (_) => Pager.otp(context),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error occured'),
+          ),
+        );
+      }
       emit(RegisterSuccess());
+    } on DioException catch (e) {
+      log("Dio Exception Error on Register Cubit: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Network Error occured'),
+        ),
+      );
+      emit(RegisterFailure());
     } catch (e) {
+      log("Error on Register Cubit: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error occured'),
+        ),
+      );
       emit(RegisterFailure());
     }
-  }
-
-  @override
-  Future<void> close() {
-    emailController.dispose();
-    passwordController.dispose();
-    verificationCodeController.dispose();
-    nameController.dispose();
-    surnameController.dispose();
-    birthDateController.dispose();
-    phoneNumberController.dispose();
-    return super.close();
   }
 
   void showToast(BuildContext context, Widget content, SnackBarAction? action) {
@@ -59,5 +68,16 @@ class RegisterCubit extends Cubit<RegisterState> {
         action: action,
       ),
     );
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
+    passwordController.dispose();
+    phoneNumberController.dispose();
+    birthdayController.dispose();
+    return super.close();
   }
 }

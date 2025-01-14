@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
         box.get('onboardingCompleted', defaultValue: false);
 
     return BlocProvider(
-      create: (context) => LoginCubit(locator(),),
+      create: (context) => LoginCubit(
+        locator(),
+      ),
       child: MaterialApp(
         navigatorKey: navKey,
         title: 'Flutter Demo',

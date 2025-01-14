@@ -5,6 +5,7 @@ import 'package:frango_restaurant_app/data/remote/repositories/register_reposito
 import 'package:frango_restaurant_app/data/remote/services/remote/register_service.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/utils/di/locator.dart';
 
 import '../../../widgets/custom_login_redirect.dart';
 
@@ -21,11 +22,7 @@ class DontHaveAnAccount extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => RegisterCubit(
-                RegisterRepository(
-                  RegisterService(),
-                ),
-              ),
+              create: (context) => RegisterCubit(),
               child: const SignUpScreen(),
             ),
           ),
