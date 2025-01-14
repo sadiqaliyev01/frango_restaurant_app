@@ -1,15 +1,14 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
+import 'package:frango_restaurant_app/utils/constants/extensions/phone_number_extension.dart';
+import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -100,7 +99,7 @@ class SignUpScreen extends StatelessWidget {
                                     if (value != null && value.length != 9) {
                                       return 'Phone number must be 9 digits long';
                                     }
-                                    return null; // Return null if validation passes
+                                    return null;
                                   },
                                 ),
                                 const SizedBox(height: 20),
@@ -184,25 +183,5 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class PhoneNumberInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    // Allow only digits after the +994 prefix
-    if (newValue.text.length > 7 && newValue.text.startsWith('+994')) {
-      // Limit the input to 9 digits after the prefix
-      if (newValue.text.length > 12) {
-        return oldValue; // Prevent further input
-      }
-      return newValue.copyWith(
-        text: newValue.text.substring(0, 7) +
-            newValue.text.substring(7).replaceAll(RegExp(r'[^0-9]'), ''),
-        selection: TextSelection.collapsed(offset: newValue.text.length),
-      );
-    }
-    return newValue;
   }
 }
