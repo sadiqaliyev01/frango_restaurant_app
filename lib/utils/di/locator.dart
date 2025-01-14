@@ -27,7 +27,7 @@ Future<void> setupLocator() async {
       .registerLazySingleton<LoginContractor>(() => LoginRepository(locator()));
 
   locator.registerLazySingleton<RegisterService>(() => RegisterService());
-  locator.registerLazySingleton(() => RegisterCubit(locator()));
-  locator.registerLazySingleton<RegisterContractor>(
-      () => RegisterRepository(locator()));
+  locator.registerLazySingleton(() => RegisterCubit());
+  // locator.registerLazySingleton<RegisterContractor>(
+  //     () => RegisterRepository(locator()));
 }
