@@ -9,9 +9,7 @@ import '../../utils/helpers/pager.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit() : super(RegisterInitial()) {
-    phoneNumberController.text = "+994";
-  }
+  RegisterCubit() : super(RegisterInitial());
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();

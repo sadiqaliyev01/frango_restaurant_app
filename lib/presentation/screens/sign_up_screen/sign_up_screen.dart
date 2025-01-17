@@ -10,6 +10,7 @@ import 'package:frango_restaurant_app/presentation/widgets/custom_login_register
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
+import '../../../utils/helpers/pager.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -92,9 +93,6 @@ class SignUpScreen extends StatelessWidget {
                                   controller:
                                       registerCubit.phoneNumberController,
                                   hintText: "Phone Number",
-                                  inputFormatters: [
-                                    PhoneNumberInputFormatter(),
-                                  ],
                                   keyboardType: TextInputType.phone,
                                   validator: (value) {
                                     if (value != null && value.length != 9) {
@@ -186,23 +184,23 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-class PhoneNumberInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    // Allow only digits after the +994 prefix
-    if (newValue.text.length > 7 && newValue.text.startsWith('+994')) {
-      // Limit the input to 9 digits after the prefix
-      if (newValue.text.length > 12) {
-        return oldValue; // Prevent further input
-      }
-      return newValue.copyWith(
-        text: newValue.text.substring(0, 7) +
-            newValue.text.substring(7).replaceAll(RegExp(r'[^0-9]'), ''),
-        selection: TextSelection.collapsed(offset: newValue.text.length),
-      );
-    }
-    return newValue;
-  }
-}
+//
+// class PhoneNumberInputFormatter extends TextInputFormatter {
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue, TextEditingValue newValue) {
+//     // Allow only digits after the +994 prefix
+//     if (newValue.text.length > 7 && newValue.text.startsWith('+994')) {
+//       // Limit the input to 9 digits after the prefix
+//       if (newValue.text.length > 12) {
+//         return oldValue; // Prevent further input
+//       }
+//       return newValue.copyWith(
+//         text: newValue.text.substring(0, 7) +
+//             newValue.text.substring(7).replaceAll(RegExp(r'[^0-9]'), ''),
+//         selection: TextSelection.collapsed(offset: newValue.text.length),
+//       );
+//     }
+//     return newValue;
+//   }
+// }
