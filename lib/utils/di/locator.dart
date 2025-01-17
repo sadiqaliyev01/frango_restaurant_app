@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
 import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/login_contractor.dart';
@@ -6,6 +7,7 @@ import 'package:frango_restaurant_app/data/remote/repositories/login_repository.
 import 'package:frango_restaurant_app/data/remote/repositories/register_repository.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/login_service.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/register_service.dart';
+import 'package:frango_restaurant_app/data/remote/services/remote/reservation_services.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -28,6 +30,12 @@ Future<void> setupLocator() async {
 
   locator.registerLazySingleton<RegisterService>(() => RegisterService());
   locator.registerLazySingleton(() => RegisterCubit());
+
+  // locator.registerLazySingleton(() => Dio(BaseOptions(
+  //       baseUrl: "http://134.122.65.76:8080/api/",
+  //     )));
+  // locator.registerLazySingleton(() => ReservationService(locator<Dio>()));
+
   // locator.registerLazySingleton<RegisterContractor>(
   //     () => RegisterRepository(locator()));
 }

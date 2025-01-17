@@ -1,16 +1,18 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
+<<<<<<< HEAD
 import '../../../utils/helpers/pager.dart';
+=======
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
+import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
+import 'package:frango_restaurant_app/utils/constants/extensions/phone_number_extension.dart';
+import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
+>>>>>>> 9046b8a53703ee32f84dfb02e74cac1df3c61b77
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -98,7 +100,7 @@ class SignUpScreen extends StatelessWidget {
                                     if (value != null && value.length != 9) {
                                       return 'Phone number must be 9 digits long';
                                     }
-                                    return null; // Return null if validation passes
+                                    return null;
                                   },
                                 ),
                                 const SizedBox(height: 20),
@@ -184,6 +186,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
+
 //
 // class PhoneNumberInputFormatter extends TextInputFormatter {
 //   @override

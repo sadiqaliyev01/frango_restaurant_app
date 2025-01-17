@@ -100,4 +100,6 @@ class AppStrings {
   static const String themeText = "Dark Mode";
   static const String deleteAccountText = "Delete Account";
   static const String successMessage = "Changes saved successfully!";
+
+  static const String aboutUsText = "About Us";
 }
