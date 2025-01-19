@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/reservation_table_card.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
-import 'package:frango_restaurant_app/data/remote/repositories/reservation_repository.dart';
+import 'package:frango_restaurant_app/data/models/remote/reservation_response.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/reservation_services.dart';
-import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_table_card.dart';
 
 class ReservationListScreen extends StatefulWidget {
   const ReservationListScreen({super.key});
