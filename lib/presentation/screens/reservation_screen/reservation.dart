@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/reservation_table_card.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
 import 'package:frango_restaurant_app/data/models/remote/reservation_response.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/reservation_services.dart';
+import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/reservation_table_card.dart';
 
 class ReservationListScreen extends StatefulWidget {
   const ReservationListScreen({super.key});
@@ -13,7 +13,7 @@ class ReservationListScreen extends StatefulWidget {
 
 class _ReservationListScreenState extends State<ReservationListScreen> {
   final reservationService = locator<ReservationService>();
-  late Future<List<Reservation>> reservationsFuture;
+  late Future<List<ReservationResponse>> reservationsFuture;
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _ReservationListScreenState extends State<ReservationListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Reservations")),
-      body: FutureBuilder<List<Reservation>>(
+      body: FutureBuilder<List<ReservationResponse>>(
         future: reservationsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

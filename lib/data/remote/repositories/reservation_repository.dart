@@ -6,7 +6,7 @@ class ReservationRepository {
 
   ReservationRepository(this._service);
 
-  Future<List<Reservation>> getAllReservations() {
+  Future<List<ReservationResponse>> getAllReservations() {
     return _service.getReservations();
   }
 }

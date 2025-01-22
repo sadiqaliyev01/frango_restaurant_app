@@ -8,12 +8,12 @@ class ReservationService {
 
   ReservationService(this._dio);
 
-  Future<List<Reservation>> getReservations() async {
+  Future<List<ReservationResponse>> getReservations() async {
     try {
       final response = await _dio.get(_endpoint);
       if (response.statusCode!.isSuccess) {
         final List<dynamic> data = response.data;
-        return data.map((json) => Reservation.fromJson(json)).toList();
+        return data.map((json) => ReservationResponse.fromJson(json)).toList();
       } else if (response.statusCode.isFailure) {
         throw Exception("Failed to fetch reservations: ${response.statusCode}");
       }

@@ -1,4 +1,4 @@
-class Reservation {
+class ReservationResponse {
   final String id;
   final TableInfo table;
   final UserInfo user;
@@ -7,7 +7,7 @@ class Reservation {
   final String arrivalTime;
   final String leavingTime;
 
-  Reservation({
+  ReservationResponse({
     required this.id,
     required this.table,
     required this.user,
@@ -17,8 +17,8 @@ class Reservation {
     required this.leavingTime,
   });
 
-  factory Reservation.fromJson(Map<String, dynamic> json) {
-    return Reservation(
+  factory ReservationResponse.fromJson(Map<String, dynamic> json) {
+    return ReservationResponse(
       id: json['id'],
       table: TableInfo.fromJson(json['table']),
       user: UserInfo.fromJson(json['user']),
