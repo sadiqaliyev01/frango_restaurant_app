@@ -1,18 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
-<<<<<<< HEAD
-import '../../../utils/helpers/pager.dart';
-=======
+
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
-import 'package:frango_restaurant_app/utils/constants/extensions/phone_number_extension.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
->>>>>>> 9046b8a53703ee32f84dfb02e74cac1df3c61b77
+
+import '../../../utils/helpers/pager.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -82,25 +79,38 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 20),
                                 CustomLoginRegisterField(
-                                  prefixIcon: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(
-                                      "+994",
-                                      style: TextStyle(
-                                        color: AppColors.white,
-                                      ),
-                                    ),
-                                  ),
                                   controller:
                                       registerCubit.phoneNumberController,
                                   hintText: "Phone Number",
                                   keyboardType: TextInputType.phone,
-                                  validator: (value) {
-                                    if (value != null && value.length != 9) {
-                                      return 'Phone number must be 9 digits long';
+                                  onChanged: (value) {
+                                    if (!value.startsWith('+994')) {
+                                      String numbers = value.replaceAll(
+                                          RegExp(r'[^0-9]'), '');
+                                      registerCubit.phoneNumberController.text =
+                                          '+994$numbers';
+                                      registerCubit
+                                              .phoneNumberController.selection =
+                                          TextSelection.fromPosition(
+                                        TextPosition(
+                                          offset: registerCubit
+                                              .phoneNumberController
+                                              .text
+                                              .length,
+                                        ),
+                                      );
                                     }
-                                    return null;
+                                    if (value.length > 13) {
+                                      // +994 + 9 digits
+                                      String formatted = value.substring(0, 13);
+                                      registerCubit.phoneNumberController.text =
+                                          formatted;
+                                      registerCubit
+                                              .phoneNumberController.selection =
+                                          TextSelection.fromPosition(
+                                        TextPosition(offset: formatted.length),
+                                      );
+                                    }
                                   },
                                 ),
                                 const SizedBox(height: 20),
@@ -133,9 +143,15 @@ class SignUpScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 60.0),
                                 child:
                                     BlocConsumer<RegisterCubit, RegisterState>(
-                                  listener: (context, state) {
+                                  listener: (_, state) {
                                     if (state is RegisterSuccess) {
                                       log("Register success in bloc consumer");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (_) => Pager.otp(context),
+                                        ),
+                                      );
                                     } else if (state is RegisterFailure) {
                                       registerCubit.showToast(
                                         context,
@@ -147,24 +163,20 @@ class SignUpScreen extends StatelessWidget {
                                       );
                                     }
                                   },
-                                  builder: (context, state) {
+                                  builder: (_, state) {
                                     return CustomLoginRegisterButton(
-                                      onPressed: () {
-                                        registerCubit.verifyEmail(context);
-                                      },
-                                      child: (state is RegisterLoading)
-                                          ? const SizedBox(
-                                              height: 20,
-                                              width: 20,
-                                              child:
-                                                  CircularProgressIndicator())
-                                          : const Text(
-                                              AppStrings.signUpButton,
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 14,
-                                              ),
-                                            ),
+                                      onPressed: state is RegisterLoading
+                                          ? () =>
+                                              const CircularProgressIndicator()
+                                          : () => registerCubit
+                                              .verifyEmail(context),
+                                      child: const Text(
+                                        AppStrings.signUpButton,
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -186,24 +198,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-//
-// class PhoneNumberInputFormatter extends TextInputFormatter {
-//   @override
-//   TextEditingValue formatEditUpdate(
-//       TextEditingValue oldValue, TextEditingValue newValue) {
-//     // Allow only digits after the +994 prefix
-//     if (newValue.text.length > 7 && newValue.text.startsWith('+994')) {
-//       // Limit the input to 9 digits after the prefix
-//       if (newValue.text.length > 12) {
-//         return oldValue; // Prevent further input
-//       }
-//       return newValue.copyWith(
-//         text: newValue.text.substring(0, 7) +
-//             newValue.text.substring(7).replaceAll(RegExp(r'[^0-9]'), ''),
-//         selection: TextSelection.collapsed(offset: newValue.text.length),
-//       );
-//     }
-//     return newValue;
-//   }
-// }

@@ -6,7 +6,7 @@ import 'package:frango_restaurant_app/utils/constants/extensions/status_code.dar
 import '../../../../utils/network/dio/dio_client.dart';
 
 class VerifyEmailService {
-  static Future<bool> verifyEmail(String email) async {
+  Future<bool> verifyEmail(String email) async {
     const endpoint = Endpoints.verifyEmail;
     log("Verify email endpoint: $endpoint");
     final requestBody = {

@@ -4,6 +4,7 @@ import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/otp_screen/otp_screen.dart';
+import 'package:frango_restaurant_app/utils/di/locator.dart';
 
 import '../../cubits/category_names/category_names_cubit.dart';
 import '../../cubits/home/home_cubit.dart';
@@ -14,11 +15,13 @@ import '../../data/remote/services/remote/category_names_service.dart';
 import '../../data/remote/services/remote/meal_service.dart';
 
 class Pager {
+  Pager._();
+
   static Widget otp(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider.value(value: context.read<RegisterCubit>()),
-          BlocProvider(
-            create: (_) => VerifyEmailCubit(),
+          BlocProvider<VerifyEmailCubit>(
+            create: (_) => locator(),
           ),
         ],
         child: OtpScreen(),
