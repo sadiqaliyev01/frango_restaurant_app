@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryBlack,
         appBar: const AppBarItems(),
         body: BlocBuilder<MealCubit, MealState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is MealLoading) {
               return const Center(
                 child: CircularProgressIndicator(

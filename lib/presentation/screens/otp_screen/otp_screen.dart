@@ -4,10 +4,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_cubit.dart';
+import 'package:frango_restaurant_app/cubits/verify_email/verify_email_state.dart';
 import 'package:frango_restaurant_app/presentation/screens/otp_screen/widgets/opt_sign_button.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/utils/snackbars/custom_snack_bar.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../../utils/helpers/pager.dart';
 
 class OtpScreen extends StatelessWidget {
   final StreamController<bool> _buttonVisibilityController =
@@ -63,6 +67,7 @@ class OtpScreen extends StatelessWidget {
               height: 55,
             ),
             TextFormField(
+              style: const TextStyle(color: Colors.white),
               controller: verifyEmailCubit.otpController,
               decoration: const InputDecoration(hintText: "OTP"),
             ),
@@ -102,14 +107,27 @@ class OtpScreen extends StatelessWidget {
               height: 50,
             ),
             const Spacer(),
-            OtpSignButton(
-              onPressed: () {
-                log("Sign in button pressed");
-                verifyEmailCubit.register(context);
+            BlocConsumer<VerifyEmailCubit, VerifyEmailState>(
+              listener: (_, state) {
+                if (state is VerifyEmailSuccess) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => Pager.home(context),
+                    ),
+                    (route) => route.isCurrent,
+                  );
+                } else if (state is VerifyEmailFailure) {
+                  CustomSnackBar.showError(context);
+                }
               },
-              text: "SIGN IN",
+              builder: (_, state) => OtpSignButton(
+                onPressed: state is VerifyEmailLoading
+                    ? () => const CircularProgressIndicator()
+                    : () => verifyEmailCubit.register(context),
+                text: 'Register',
+              ),
             ),
-
             const Spacer(),
           ],
         ),

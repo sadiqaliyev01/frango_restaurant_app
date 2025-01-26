@@ -3,60 +3,51 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/remote/services/remote/verify_email_service.dart';
-import '../../utils/helpers/pager.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/verify_email_contractor.dart';
 
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit() : super(RegisterInitial()) {
-    phoneNumberController.text = "+994";
-  }
+  RegisterCubit(this._verifyEmailContract) : super(RegisterInitial());
+
+  final VerifyEmailContractor _verifyEmailContract;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController birthdayController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController phoneNumberController =
+      TextEditingController(text: "+994");
 
   void verifyEmail(BuildContext context) async {
     try {
       emit(RegisterLoading());
       log("Register Loading");
-      bool isSuccess =
-          await VerifyEmailService.verifyEmail(emailController.text);
+      final isSuccess =
+          await _verifyEmailContract.verifyEmail(emailController.text);
       if (isSuccess) {
-        Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (_) => Pager.otp(context),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error occured'),
-          ),
-        );
+        emit(RegisterSuccess());
+        return;
       }
-      emit(RegisterSuccess());
+      emit(RegisterFailure());
     } on DioException catch (e) {
       log("Dio Exception Error on Register Cubit: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Network Error occured'),
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     content: Text('Network Error occured'),
+      //   ),
+      // );
       emit(RegisterFailure());
     } catch (e) {
-      log("Error on Register Cubit: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Error occured'),
-        ),
-      );
       emit(RegisterFailure());
+
+      // log("Error on Register Cubit: $e");
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     content: Text('Error occured'),
+      //   ),
+      // );
     }
   }
 

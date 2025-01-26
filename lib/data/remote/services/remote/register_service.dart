@@ -5,7 +5,7 @@ import 'package:frango_restaurant_app/utils/constants/extensions/status_code.dar
 import 'package:frango_restaurant_app/utils/network/dio/dio_client.dart';
 
 class RegisterService {
-  static Future<bool> register({
+  Future<bool> register({
     required String otpCode,
     required String email,
     required String name,

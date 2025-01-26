@@ -7,7 +7,11 @@ final class LoginInitial extends LoginState {}
 
 final class LoginLoading extends LoginState {}
 
-final class LoginFailure extends LoginState {}
+final class LoginFailure extends LoginState {
+  LoginFailure({this.message = 'Login failed'});
+
+  final String message;
+}
 
 final class LoginNetworkError extends LoginState {}
 

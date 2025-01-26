@@ -1,21 +1,20 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_state.dart';
-
-import '../../data/remote/services/remote/register_service.dart';
-import '../../utils/helpers/pager.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/register_contractor.dart';
 
 class VerifyEmailCubit extends Cubit<VerifyEmailState> {
-  VerifyEmailCubit() : super(VerifyEmailInitial());
+  VerifyEmailCubit(this._registerContractor) : super(VerifyEmailInitial());
+
   final TextEditingController otpController = TextEditingController();
+  final RegisterContractor _registerContractor;
 
   void register(BuildContext context) async {
     try {
+      emit(VerifyEmailLoading());
       final registerCubit = context.read<RegisterCubit>();
-      bool isSuccess = await RegisterService.register(
+      final isSuccess = await _registerContractor.register(
         otpCode: otpController.text,
         email: registerCubit.emailController.text,
         name: registerCubit.nameController.text,
@@ -25,35 +24,11 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
         birthDate: registerCubit.birthdayController.text,
       );
       if (isSuccess) {
-        emit(VerifyEmailLoading());
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => Pager.home(context),
-          ),
-          (route) => route.isCurrent,
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error occured'),
-          ),
-        );
+        emit(VerifyEmailSuccess());
+        return;
       }
-      emit(VerifyEmailSuccess());
-    } on SocketException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Network Error occured'),
-        ),
-      );
       emit(VerifyEmailFailure());
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Error occured'),
-        ),
-      );
       emit(VerifyEmailFailure());
     }
   }

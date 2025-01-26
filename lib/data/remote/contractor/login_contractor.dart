@@ -5,6 +5,7 @@ abstract class LoginContractor {
     required String email,
     required String password,
   });
+
   // Future<LoginResponse> refreshToken();
 
 }
