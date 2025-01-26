@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_cubit.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_state.dart';
-import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
+import 'package:frango_restaurant_app/presentation/screens/otp_screen/widgets/opt_sign_button.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/utils/snackbars/custom_snack_bar.dart';
@@ -121,11 +121,11 @@ class OtpScreen extends StatelessWidget {
                   CustomSnackBar.showError(context);
                 }
               },
-              builder: (_, state) => CustomLoginRegisterButton(
+              builder: (_, state) => OtpSignButton(
                 onPressed: state is VerifyEmailLoading
-                    ? null
+                    ? () => const CircularProgressIndicator()
                     : () => verifyEmailCubit.register(context),
-                child: const Text('Register'),
+                text: 'Register',
               ),
             ),
             const Spacer(),

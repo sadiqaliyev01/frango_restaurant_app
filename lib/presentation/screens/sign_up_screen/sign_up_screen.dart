@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
 
@@ -166,17 +167,23 @@ class SignUpScreen extends StatelessWidget {
                                   builder: (_, state) {
                                     return CustomLoginRegisterButton(
                                       onPressed: state is RegisterLoading
-                                          ? () =>
-                                              const CircularProgressIndicator()
+                                          ? () {}
                                           : () => registerCubit
                                               .verifyEmail(context),
-                                      child: const Text(
-                                        AppStrings.signUpButton,
-                                        style: TextStyle(
-                                          color: AppColors.white,
-                                          fontSize: 14,
-                                        ),
-                                      ),
+                                      child: state is RegisterLoading
+                                          ? const SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )
+                                          : const Text(
+                                              AppStrings.signUpButton,
+                                              style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14,
+                                              ),
+                                            ),
                                     );
                                   },
                                 ),

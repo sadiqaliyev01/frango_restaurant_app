@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/widgets/dont_have_an_account.dart';
@@ -8,6 +6,7 @@ import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/utils/helpers/pager.dart';
+import 'package:frango_restaurant_app/utils/snackbars/custom_snack_bar.dart';
 
 import '../../../cubits/login/login_cubit.dart';
 
@@ -93,50 +92,37 @@ class LoginScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 60.0),
                                   child: BlocConsumer<LoginCubit, LoginState>(
-                                    listener: (context, state) {
+                                    listener: (_, state) {
                                       if (state is LoginSuccess) {
-                                        log("Login successful: LoginSuccess");
                                         Navigator.pushAndRemoveUntil(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
+                                          MaterialPageRoute<void>(
+                                            builder: (BuildContext context) =>
                                                 Pager.home(context),
                                           ),
-                                          (route) => route.isCurrent,
+                                          (route) => false,
                                         );
                                       } else if (state is LoginFailure) {
-                                        log("Login failed: LoginFailure");
-                                        loginCubit.showToast(
+                                        CustomSnackBar.showError(
                                           context,
-                                          const Text(
-                                              "Incorrect email or password"),
-                                          SnackBarAction(
-                                            label: "OK",
-                                            onPressed: () {},
-                                          ),
+                                          message: state.message,
                                         );
                                       }
                                     },
-                                    builder: (context, state) {
-                                      return CustomLoginRegisterButton(
-                                        onPressed: () {
-                                          loginCubit.login();
-                                        },
-                                        child: (state is LoginLoading)
-                                            ? const SizedBox(
-                                                height: 20,
-                                                width: 20,
-                                                child:
-                                                    CircularProgressIndicator())
-                                            : const Text(
-                                                "LOGIN",
-                                                style: TextStyle(
-                                                  color: AppColors.white,
-                                                  fontSize: 14,
-                                                ),
+                                    builder: (_, state) =>
+                                        CustomLoginRegisterButton(
+                                      onPressed: state is LoginLoading
+                                          ? null
+                                          : loginCubit.login,
+                                      child: state is LoginLoading
+                                          ? const CircularProgressIndicator()
+                                          : const Text(
+                                              AppStrings.loginButtonText,
+                                              style: TextStyle(
+                                                color: AppColors.white,
                                               ),
-                                      );
-                                    },
+                                            ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 30),
