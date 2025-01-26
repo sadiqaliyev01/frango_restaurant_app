@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/about_us/about_us_state.dart';
-import 'package:frango_restaurant_app/data/remote/contractor/abut_us_contractor.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
 
 class AboutUsCubit extends Cubit<AboutUsState> {
   final AboutUsContractor _contractor;

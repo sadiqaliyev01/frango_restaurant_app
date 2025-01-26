@@ -115,7 +115,12 @@ class LoginScreen extends StatelessWidget {
                                           ? null
                                           : loginCubit.login,
                                       child: state is LoginLoading
-                                          ? const CircularProgressIndicator()
+                                          ? const SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )
                                           : const Text(
                                               AppStrings.loginButtonText,
                                               style: TextStyle(
