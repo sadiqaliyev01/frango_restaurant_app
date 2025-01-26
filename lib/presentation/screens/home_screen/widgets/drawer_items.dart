@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
-import 'package:frango_restaurant_app/data/remote/contractor/abut_us_contractor.dart';
-import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
-import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
-import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
-import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/utils/di/locator.dart';
-
-import '../../../../cubits/login/login_cubit.dart';
-import '../../../../data/remote/services/remote/about_us_service.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
@@ -41,7 +32,7 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
+                        builder: (_) {
                           return const UserProfile();
                         },
                       ),
@@ -62,7 +53,16 @@ class DrawerItems extends StatelessWidget {
                     color: AppColors.primaryBlack,
                   ),
                   text: const Text("Rezervasiya"),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return Pager.reservation;
+                        },
+                      ),
+                    );
+                  },
                 ),
                 ListTileItems(
                   icon: const Icon(
@@ -74,13 +74,8 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          return BlocProvider(
-                            create: (context) => AboutUsCubit(
-                                AboutUsRepository(AboutUsService()))
-                              ..getAboutUs(),
-                            child: const AboutUsScreen(),
-                          );
+                        builder: (_) {
+                          return Pager.aboutUs;
                         },
                       ),
                     );
@@ -96,13 +91,8 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          return BlocProvider(
-                            create: (context) => AboutUsCubit(
-                                AboutUsRepository(AboutUsService()))
-                              ..getAboutUs(),
-                            child: const ContactUsScreen(),
-                          );
+                        builder: (_) {
+                          return Pager.contactUs;
                         },
                       ),
                     );
@@ -118,7 +108,7 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SettingsScreen(),
+                        builder: (_) => const SettingsScreen(),
                       ),
                     );
                   },
@@ -140,10 +130,7 @@ class DrawerItems extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BlocProvider<LoginCubit>(
-                        create: (context) => LoginCubit(locator()),
-                        child: const LoginScreen(),
-                      ),
+                      builder: (_) => Pager.login,
                     ),
                     (route) => false,
                   );

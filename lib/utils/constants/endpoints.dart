@@ -9,4 +9,6 @@ class Endpoints {
   static const aboutUs = "$_baseUrl/aboutUs";
   static const meals = "$_baseUrl/meal";
   static const categoryNames = "$_baseUrl/mealCategory";
+  static const table = "$_baseUrl/table";
+  static const reservation = "$_baseUrl/reservation";
 }
