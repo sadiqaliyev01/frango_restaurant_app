@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
-import 'package:frango_restaurant_app/data/models/remote/reservation_response.dart';
+import 'package:frango_restaurant_app/data/models/remote/reservation_request_model.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/reservation_services.dart';
 
 class ReservationScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class ReservationScreen extends StatefulWidget {
 
 class _ReservationScreenState extends State<ReservationScreen> {
   final reservationService = locator<ReservationService>();
-  late Future<List<ReservationResponse>> reservationsFuture;
+  late Future<List<ReservationRequestModel>> reservationsFuture;
 
   // @override
   // void initState() {
