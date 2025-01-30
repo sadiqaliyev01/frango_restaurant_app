@@ -1,14 +1,8 @@
-import 'package:frango_restaurant_app/data/models/remote/reservation_response.dart';
+import 'package:frango_restaurant_app/data/models/remote/reservation_request_model.dart';
 
 abstract class ReservationContractor {
-  Future<List<ReservationResponse>> postReservation({
-    required String tableId,
-    required String userId,
-    required String note,
-    required int peopleCount,
-    required DateTime arrivalTime,
-    required DateTime leavingTime,
-  });
+  Future<List<ReservationRequestModel>> postReservation(
+      {required ReservationRequestModel postReservation});
   // Future<ReservationResponse> getReservationById(String id);
   // Future<ReservationResponse> createReservation();
   // Future<ReservationResponse> deleteReservation(String id);
