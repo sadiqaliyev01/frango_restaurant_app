@@ -49,7 +49,7 @@ class MealResponse {
       protein: (json['protein'] as num?)?.toDouble() ?? 0.0,
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       salePrice: (json['sale_price'] as num?)?.toDouble() ?? 0.0,
-      rate: (json['rate'] as num?)?.toInt(), // Convert double to int
+      rate: (json['rate'] as num?)?.toInt(),
     );
   }
 }
@@ -64,5 +64,4 @@ class Category {
     this.title,
     this.image,
   });
-
 }

@@ -57,9 +57,8 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) {
-                          return Pager.reservation;
-                        },
+                        builder: (_) => Pager
+                            .reservation(), //cubit yaradılandan sonra table çağırılmalıdır
                       ),
                     );
                   },
