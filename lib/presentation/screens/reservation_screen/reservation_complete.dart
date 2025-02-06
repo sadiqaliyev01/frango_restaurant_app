@@ -48,7 +48,7 @@ class ReservationComplete extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Pager.home(context),
+                      builder: (_) => Pager.home(context),
                     ),
                     (route) => route.isFirst,
                   );
