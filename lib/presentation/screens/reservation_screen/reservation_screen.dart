@@ -68,11 +68,12 @@ class ReservationScreen extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (_) => const ReservationComplete(),
               ),
+              (route) => route.isFirst,
             );
           },
           child: const Text(
