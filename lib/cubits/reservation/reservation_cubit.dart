@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/data/models/remote/reservation_request_model.dart';
@@ -15,6 +14,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   final peopleCountController = TextEditingController();
   final arrivalTimeController = TextEditingController();
   final leavingTimeController = TextEditingController();
+  String tableId = "";
 
   final ReservationContractor _reservationContractor;
   void postReservation() {

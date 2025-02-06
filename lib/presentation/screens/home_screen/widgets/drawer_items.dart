@@ -47,6 +47,22 @@ class DrawerItems extends StatelessWidget {
                   text: const Text("Kampaniyalar"),
                   onTap: () {},
                 ),
+                // ListTileItems(
+                //   icon: Icon(
+                //     Icons.table_bar,
+                //     color: AppColors.black,
+                //   ),
+                //   text: Text("Masalar"),
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (_) => Pager.tables,
+                //         //cubit yaradılandan sonra table çağırılmalıdır
+                //       ),
+                //     );
+                //   },
+                // ),
                 ListTileItems(
                   icon: const Icon(
                     Icons.table_restaurant_sharp,
@@ -54,11 +70,11 @@ class DrawerItems extends StatelessWidget {
                   ),
                   text: const Text("Rezervasiya"),
                   onTap: () {
+                    Scaffold.of(context).closeDrawer();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => Pager
-                            .reservation(), //cubit yaradılandan sonra table çağırılmalıdır
+                        builder: (_) => Pager.tables,
                       ),
                     );
                   },

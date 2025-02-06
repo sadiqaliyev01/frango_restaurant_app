@@ -4,7 +4,6 @@ import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
 import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_cubit.dart';
-import 'package:frango_restaurant_app/data/models/local/table_model.dart';
 import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/home_screen.dart';
@@ -66,4 +65,6 @@ class Pager {
         create: (_) => locator()..getAboutUs(),
         child: const ContactUsScreen(),
       );
+
+  static Widget get tables => TableScreen();
 }

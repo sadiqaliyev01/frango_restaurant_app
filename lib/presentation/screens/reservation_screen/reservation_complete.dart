@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/confirmation_animation.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 
 class ReservationComplete extends StatelessWidget {
   const ReservationComplete({super.key});
@@ -43,7 +44,15 @@ class ReservationComplete extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Pager.home(context),
+                    ),
+                    (route) => route.isFirst,
+                  );
+                },
                 child: const Text(
                   "Əsas səhifəyə keç",
                   style: TextStyle(fontSize: 16, color: AppColors.primaryBlack),
