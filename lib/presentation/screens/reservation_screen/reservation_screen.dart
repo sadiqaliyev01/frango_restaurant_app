@@ -73,7 +73,7 @@ class ReservationScreen extends StatelessWidget {
               MaterialPageRoute(
                 builder: (_) => const ReservationComplete(),
               ),
-              (route) => route.isFirst,
+              (route) => false,
             );
           },
           child: const Text(

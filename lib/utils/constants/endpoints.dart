@@ -6,7 +6,7 @@ class Endpoints {
   // auth
   static const login = "$_baseUrl/auth/login";
   static const register = "$_baseUrl/users/register";
-  static const verifyEmail = "$_baseUrl/users/verifyEmail";
+  static const verifyEmail = "$_baseUrl/users/verify-email";
 
   static const aboutUs = "$_baseUrl/aboutUs";
   static const meals = "$_baseUrl/meals";
