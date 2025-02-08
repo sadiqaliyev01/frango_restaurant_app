@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/meal/meal_cubit.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_radiuses.dart';
 
@@ -12,6 +14,9 @@ class SearchBox extends StatelessWidget {
         color: AppColors.primaryYellow,
       ),
       cursorColor: AppColors.white,
+      onChanged: (query) {
+        context.read<MealCubit>().searchMeals(query); // ✅ Trigger search
+      },
       decoration: const InputDecoration(
         hintText: "Axtar",
         hintStyle: TextStyle(

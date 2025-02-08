@@ -9,9 +9,10 @@ class MealCubit extends Cubit<MealState> {
 
   final MealContractor _mealContractor;
   List<MealResponse> allMeals = [];
+  List<Meal> allProducts = []; // ✅ Store all meals for searching
+  List<Meal> filteredMeals = [];
   List<String> categories = [];
-  String? selectedCategory;
-  List<Meal> filteredMeals = []; // Change from MealResponse to Meal
+  String? selectedCategory = '';
 
   /// ✅ Fetch all meals & categories
   Future<void> getMeals() async {
@@ -19,6 +20,11 @@ class MealCubit extends Cubit<MealState> {
       emit(MealLoading());
       allMeals = await _mealContractor.getMeals();
       categories = extractCategories(allMeals);
+
+      // Store all products from all categories for search
+      allProducts = allMeals
+          .expand<Meal>((mealResponse) => mealResponse.meal ?? [])
+          .toList();
 
       // Default: Show first category meals
       selectedCategory = categories.isNotEmpty ? categories[0] : null;
@@ -37,19 +43,28 @@ class MealCubit extends Cubit<MealState> {
   }
 
   /// ✅ Filter Meals by Category
- void filterMealsByCategory(String category) {
-  selectedCategory = category;
+  void filterMealsByCategory(String category) {
+    selectedCategory = category;
 
-  // Find the category that matches the selected one
-  final selectedMealResponse = allMeals.firstWhere(
-    (mealResponse) => mealResponse.title == category,
-    orElse: () => MealResponse(title: category, meal: []),
-  );
+    final selectedMealResponse = allMeals.firstWhere(
+      (mealResponse) => mealResponse.title == category,
+      orElse: () => MealResponse(title: category, meal: []),
+    );
 
-  // ✅ Assign the correct type (List<Meal>)
-  filteredMeals = selectedMealResponse.meal ?? [];
+    filteredMeals = selectedMealResponse.meal ?? [];
+    emit(MealSuccess(filteredMeals, categories, selectedCategory));
+  }
 
-  emit(MealSuccess(filteredMeals, categories, selectedCategory));
-}
-
+  /// ✅ Search by Product Name
+  void searchMeals(String query) {
+    if (query.isEmpty) {
+      filterMealsByCategory(selectedCategory!); // Reset to selected category
+    } else {
+      filteredMeals = allProducts
+          .where(
+              (meal) => meal.title!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    emit(MealSuccess(filteredMeals, categories, selectedCategory));
+  }
 }
