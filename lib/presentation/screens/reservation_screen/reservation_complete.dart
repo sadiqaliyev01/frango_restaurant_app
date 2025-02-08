@@ -50,7 +50,7 @@ class ReservationComplete extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (_) => Pager.home(context),
                     ),
-                    (route) => route.isFirst,
+                    (route) => false,
                   );
                 },
                 child: const Text(
