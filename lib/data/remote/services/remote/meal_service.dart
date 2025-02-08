@@ -31,4 +31,15 @@ class MealService {
     }
     throw Exception('Failed to load Meal Service data');
   }
+
+  // Future<List<MealResponse>> getMealsCategory() async {
+  //   final response = await clientDio.get(endpoint);
+  //   if (response.statusCode.isSuccess) {
+  //     List<dynamic> data = response.data;
+  //     return data.map((meal) => MealResponse.fromJson(meal)).toList();
+  //   } else if (response.statusCode.isFailure) {
+  //     throw Exception('Meal Service data not found');
+  //   }
+  //   throw Exception('Failed to load Meal Service data');
+  // }
 }

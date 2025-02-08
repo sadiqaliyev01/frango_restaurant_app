@@ -8,13 +8,13 @@ import '../../../../data/models/remote/meal_response.dart';
 
 class AllProducts extends StatelessWidget {
   const AllProducts({super.key,
-    required this.scrollController,
+    // required this.scrollController,
     required this.categoryTitle,
     required this.meals});
 
-  final ScrollController scrollController;
+  // final ScrollController scrollController;
   final String categoryTitle;
-  final List<MealResponse> meals;
+  final List<Meal> meals;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class AllProducts extends StatelessWidget {
       builder: (context, state) {
         return ListView(
           shrinkWrap: true,
-          controller: scrollController,
+          // controller: scrollController,
           children: [
             ProductsCard(categoryTitle: categoryTitle, meals: meals),
           ],

@@ -13,7 +13,7 @@ class ProductDetails extends StatelessWidget {
     required this.meal,
   });
 
-  final MealResponse meal;
+  final Meal meal; // ✅ Change from MealResponse to Meal
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ProductDetails extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: Image.network(
-                      meal.image ?? "no image",
+                      meal.image ?? "no image", // ✅ Directly use meal.image
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -44,7 +44,7 @@ class ProductDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        meal.title ?? "no product title",
+                        meal.title ?? "No product title",
                         style: const TextStyle(
                           color: AppColors.primaryYellow,
                           fontSize: 24,
@@ -53,7 +53,7 @@ class ProductDetails extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        meal.description ?? "no product description",
+                        meal.description ?? "No product description",
                         style: const TextStyle(
                           color: AppColors.primaryYellow,
                           fontSize: 16,
@@ -62,7 +62,8 @@ class ProductDetails extends StatelessWidget {
                       const SizedBox(height: 24),
                       BlocBuilder<ProductDetailsCubit, int>(
                         builder: (context, quantity) {
-                          double totalPrice = meal.price.toDouble() * quantity;
+                          double totalPrice =
+                              (meal.price?.toDouble() ?? 0) * quantity;
                           return Row(
                             children: [
                               QuantitySelector(
@@ -77,7 +78,12 @@ class ProductDetails extends StatelessWidget {
                               const Spacer(),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ManagePaymentScreen(),));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ManagePaymentScreen()),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.primaryYellow,

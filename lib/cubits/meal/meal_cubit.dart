@@ -1,40 +1,55 @@
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_state.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/meal_contractor.dart';
-
 import '../../data/models/remote/meal_response.dart';
 
 class MealCubit extends Cubit<MealState> {
   MealCubit(this._mealContractor) : super(MealInitial());
-  final MealContractor _mealContractor;
 
+  final MealContractor _mealContractor;
+  List<MealResponse> allMeals = [];
+  List<String> categories = [];
+  String? selectedCategory;
+  List<Meal> filteredMeals = []; // Change from MealResponse to Meal
+
+  /// ✅ Fetch all meals & categories
   Future<void> getMeals() async {
     try {
       emit(MealLoading());
-      final meals = await _mealContractor.getMeals(); // This will now be a list
-      log("Meals Fetched: $meals");
-      emit(MealSuccess(meals)); // Emit the list of meals
+      allMeals = await _mealContractor.getMeals();
+      categories = extractCategories(allMeals);
+
+      // Default: Show first category meals
+      selectedCategory = categories.isNotEmpty ? categories[0] : null;
+      filterMealsByCategory(selectedCategory!);
+
+      emit(MealSuccess(filteredMeals, categories, selectedCategory));
       log("Meal Success");
     } catch (e) {
       emit(MealFailure("Meal Failure: ${e.toString()}"));
     }
   }
 
-  Map<String, List<MealResponse>> groupMealsByCategory(
-      List<MealResponse> meals) {
-    Map<String, List<MealResponse>> groupedMeals = {};
-
-    for (var meal in meals) {
-      final categoryTitle = meal.category?.title ?? "No Category";
-      if (groupedMeals.containsKey(categoryTitle)) {
-        groupedMeals[categoryTitle]!.add(meal);
-      } else {
-        groupedMeals[categoryTitle] = [meal];
-      }
-    }
-
-    return groupedMeals;
+  /// ✅ Extract Unique Categories
+  List<String> extractCategories(List<MealResponse> meals) {
+    return meals.map((meal) => meal.title ?? "Unknown").toSet().toList();
   }
+
+  /// ✅ Filter Meals by Category
+ void filterMealsByCategory(String category) {
+  selectedCategory = category;
+
+  // Find the category that matches the selected one
+  final selectedMealResponse = allMeals.firstWhere(
+    (mealResponse) => mealResponse.title == category,
+    orElse: () => MealResponse(title: category, meal: []),
+  );
+
+  // ✅ Assign the correct type (List<Meal>)
+  filteredMeals = selectedMealResponse.meal ?? [];
+
+  emit(MealSuccess(filteredMeals, categories, selectedCategory));
+}
+
 }

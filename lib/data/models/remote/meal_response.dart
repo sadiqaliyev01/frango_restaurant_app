@@ -1,67 +1,103 @@
 class MealResponse {
   final String? id;
+  final int? position;
+  final String? title;
+  final String? image;
+  final List<Meal>? meal;
+
+  MealResponse({
+    this.id,
+    this.position,
+    this.title,
+    this.image,
+    this.meal,
+  });
+
+  factory MealResponse.fromJson(Map<String, dynamic> json) => MealResponse(
+        id: json["id"],
+        position: json["position"],
+        title: json["title"],
+        image: json["image"],
+        meal: json["meal"] == null
+            ? []
+            : List<Meal>.from(json["meal"]!.map((x) => Meal.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "position": position,
+        "title": title,
+        "image": image,
+        "meal": meal == null
+            ? []
+            : List<dynamic>.from(meal!.map((x) => x.toJson())),
+      };
+}
+
+class Meal {
+  final String? id;
   final String? title;
   final String? image;
   final List<String>? ingredientsList;
-  final Category? category;
   final String? description;
-  final double carbohydrates;
-  final double calories;
-  final double fat;
-  final double gram;
-  final double protein;
-  final double price;
-  final double salePrice;
-  final int? rate;
+final double? carbohydrates; // Change to double
+  final double? calories;      // Change to double
+  final double? fat;           // Change to double
+  final double? gram;          // Change to double
+  final double? protein;       // Change to double
+  final double? price;         // Change to double
+  final double? salePrice;     // Change to double
+  final double? rate;          // Change to double
 
-  MealResponse({
+  Meal({
     this.id,
     this.title,
     this.image,
     this.ingredientsList,
-    this.category,
     this.description,
-    required this.carbohydrates,
-    required this.calories,
-    required this.fat,
-    required this.gram,
-    required this.protein,
-    required this.price,
-    required this.salePrice,
+    this.carbohydrates,
+    this.calories,
+    this.fat,
+    this.gram,
+    this.protein,
+    this.price,
+    this.salePrice,
     this.rate,
   });
-  factory MealResponse.fromJson(Map<String, dynamic> json) {
-    return MealResponse(
-      id: json['id'],
-      title: json['title'],
-      image: json['image'],
-      ingredientsList: json['ingredients'] as List<String>? ?? [],
-      category: Category(
-        id: json['category']['id'],
-        title: json['category']['title'],
-        image: json['category']['image'],
-      ),
-      description: json['description'],
-      carbohydrates: (json['carbohydrates'] as num?)?.toDouble() ?? 0.0,
-      calories: (json['calories'] as num?)?.toDouble() ?? 0.0,
-      fat: (json['fat'] as num?)?.toDouble() ?? 0.0,
-      gram: (json['gram'] as num?)?.toDouble() ?? 0.0,
-      protein: (json['protein'] as num?)?.toDouble() ?? 0.0,
-      price: (json['price'] as num?)?.toDouble() ?? 0.0,
-      salePrice: (json['sale_price'] as num?)?.toDouble() ?? 0.0,
-      rate: (json['rate'] as num?)?.toInt(),
-    );
-  }
-}
 
-class Category {
-  final String? id;
-  final String? title;
-  final String? image;
+  factory Meal.fromJson(Map<String, dynamic> json) => Meal(
+        id: json["id"],
+        title: json["title"],
+        image: json["image"],
+        ingredientsList: json["ingredientsList"] == null
+            ? []
+            : List<String>.from(json["ingredientsList"]!.map((x) => x)),
+        description: json["description"],
+        carbohydrates: json["carbohydrates"],
+        calories: json["calories"],
+        fat: json["fat"],
+        gram: json["gram"],
+        protein: json["protein"],
+        price: json["price"],
+        salePrice: json["salePrice"],
+        rate: json["rate"],
+      );
 
-  Category({
-    this.id,
-    this.title,
-    this.image,
-  });
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "image": image,
+        "ingredientsList": ingredientsList == null
+            ? []
+            : List<dynamic>.from(ingredientsList!.map((x) => x)),
+        "description": description,
+        "carbohydrates": carbohydrates,
+        "calories": calories,
+        "fat": fat,
+        "gram": gram,
+        "protein": protein,
+        "price": price,
+        "salePrice": salePrice,
+        "rate": rate,
+      };
 }

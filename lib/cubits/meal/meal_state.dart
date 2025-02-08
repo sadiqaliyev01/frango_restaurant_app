@@ -6,10 +6,13 @@ final class MealInitial extends MealState {}
 
 final class MealLoading extends MealState {}
 
-final class MealSuccess extends MealState {
-  MealSuccess(this.mealResponse);
+class MealSuccess extends MealState {
+  final List<Meal> meals; // ✅ Change to List<Meal>
+  final List<String> categories;
+  final String? selectedCategory;
 
-  final List<MealResponse> mealResponse;
+  MealSuccess(this.meals, this.categories, this.selectedCategory);
+
 }
 
 final class MealFailure extends MealState {
