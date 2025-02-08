@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProductsCard extends StatelessWidget {
   final String categoryTitle;
-  final List<MealResponse> meals;
+  final List<Meal> meals;
 
   const ProductsCard({
     super.key,
@@ -39,21 +39,20 @@ class ProductsCard extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: meals.length,
               itemBuilder: (context, index) {
-                final meal = meals[index];
+                final meal = meals[index]; // ✅ meal is now correctly a Meal
+
                 return GestureDetector(
                   onTap: () {
-                    if (meal.id != null) {
-                      showModalBottomSheet(
-                        context: context,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(24)),
-                        ),
-                        builder: (context) => ProductDetails(
-                          meal: meal,
-                        ),
-                      );
-                    }
+                    showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(24)),
+                      ),
+                      builder: (context) => ProductDetails(
+                        meal: meal, // ✅ Pass Meal directly
+                      ),
+                    );
                   },
                   child: Column(
                     children: [
@@ -66,7 +65,9 @@ class ProductsCard extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            ProductImage(imageLink: meal.image!),
+                            ProductImage(
+                                imageLink: meal.image ??
+                                    ""), // ✅ No need to access meal?.first
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(
@@ -74,7 +75,7 @@ class ProductsCard extends StatelessWidget {
                                 children: [
                                   const Spacer(),
                                   ProductName(
-                                    productName: meal.title!,
+                                    productName: meal.title ?? "No title",
                                     style: GoogleFonts.roboto(
                                       color: Colors.yellow,
                                       fontWeight: FontWeight.bold,
@@ -83,7 +84,8 @@ class ProductsCard extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   ProductDescription(
-                                    description: meal.description!,
+                                    description: meal.description ??
+                                        "No description available",
                                     style: GoogleFonts.roboto(
                                       color: Colors.yellow,
                                       fontSize: 12,
@@ -101,7 +103,7 @@ class ProductsCard extends StatelessWidget {
                                         ),
                                       ),
                                       ProductPrice(
-                                        price: meal.price,
+                                        price: meal.price?.toDouble() ?? 0,
                                         style: GoogleFonts.roboto(
                                           color: Colors.yellow,
                                           fontWeight: FontWeight.bold,

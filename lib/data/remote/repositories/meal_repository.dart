@@ -11,4 +11,5 @@ class MealRepository implements MealContractor {
   Future<List<MealResponse>> getMeals() {
     return _mealService.getMeals();
   }
+  
 }

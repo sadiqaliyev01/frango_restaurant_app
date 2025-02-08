@@ -9,7 +9,7 @@ class Endpoints {
   static const verifyEmail = "$_baseUrl/users/verify-email";
 
   static const aboutUs = "$_baseUrl/aboutUs";
-  static const meals = "$_baseUrl/meals";
+  static const meals = "$_baseUrl/meal-categories/meals-included";
   static const categoryNames = "$_baseUrl/meal-categories";
   static const table = "$_baseUrl/tables";
   static const reservation = "$_baseUrl/reservations";

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/widgets/search_box.dart'; // Arama kutusunu içe aktardık
+import 'package:frango_restaurant_app/presentation/widgets/search_box.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
@@ -12,27 +12,7 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.primaryBlack,
-      title: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Deliver to",
-            style: TextStyle(
-              color: AppColors.lightGray,
-              fontSize: 14.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            "Babek pr. 95",
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 14.0,
-            ),
-          ),
-        ],
-      ),
+      elevation: 0, // ✅ Remove shadow
       leading: Builder(
         builder: (context) {
           return IconButton(
@@ -46,16 +26,11 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
-      //leading: const Padding(padding: AppPaddings.a4, child: AvatarImage()),
+      title: SizedBox(
+        width: MediaQuery.sizeOf(context).width * 0.6, // ✅ Limit width
+        child: const SearchBox(),
+      ),
       actions: [
-        Container(
-          alignment: Alignment.center,
-          child: const SizedBox(
-            width: 150,
-            height: 52,
-            child: SearchBox(),
-          ),
-        ),
         IconButton(
           onPressed: () {},
           icon: const Icon(
