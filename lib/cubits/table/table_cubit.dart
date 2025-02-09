@@ -12,6 +12,7 @@ class TableCubit extends Cubit<TableState> {
   TableCubit(this._tableContractor) : super(TableInitial());
 
   final TableContractor _tableContractor;
+  TableResponse? selectedTable; // Store selected table
 
   Future<void> getTable() async {
     try {
@@ -32,5 +33,16 @@ class TableCubit extends Cubit<TableState> {
       log("Unknown Exception Error on Table Cubit: $e");
       emit(TableFailure("Unknown Exception Error on Table Cubit: $e"));
     }
+  }
+
+  // ✅ Select a table and emit state
+  void selectTable(TableResponse table) {
+    selectedTable = table;
+    emit(TableSelected(table)); // Emit selected table state
+  }
+
+  void clearSelection() {
+    selectedTable = null;
+    emit(TableInitial());
   }
 }
