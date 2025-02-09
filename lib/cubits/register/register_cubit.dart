@@ -20,7 +20,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   final TextEditingController phoneNumberController =
       TextEditingController(text: "+994");
 
-  void verifyEmail(BuildContext context) async {
+  void verifyEmail() async {
     try {
       emit(RegisterLoading());
       log("Register Loading");

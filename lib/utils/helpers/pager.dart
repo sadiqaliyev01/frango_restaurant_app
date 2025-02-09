@@ -55,8 +55,14 @@ class Pager {
         )
       ], child: const HomeScreen());
 
-  static Widget reservation() => BlocProvider<ReservationCubit>(
-        create: (_) => locator(), // locator()..postReservation()
+  static Widget reservation(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+              value: BlocProvider.of<TableCubit>(context)), // TableCubit
+          BlocProvider<ReservationCubit>(
+            create: (_) => locator<ReservationCubit>(), // ReservationCubit
+          ),
+        ],
         child: const ReservationScreen(),
       );
 
