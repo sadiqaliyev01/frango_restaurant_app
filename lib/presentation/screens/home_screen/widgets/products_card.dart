@@ -66,8 +66,8 @@ class ProductsCard extends StatelessWidget {
                         child: Row(
                           children: [
                             ProductImage(
-                                imageLink: meal.image ??
-                                    ""), // ✅ No need to access meal?.first
+                              imageLink: meal.image ?? "",
+                            ), // ✅ No need to access meal?.first
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(

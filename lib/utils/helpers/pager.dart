@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/about_us/about_us_cubit.dart';
 import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
+import 'package:frango_restaurant_app/cubits/table/table_cubit.dart';
 import 'package:frango_restaurant_app/cubits/verify_email/verify_email_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/about_us/about_us_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/contact_us_screen/contact_us_screen.dart';
@@ -66,5 +67,8 @@ class Pager {
         child: const ContactUsScreen(),
       );
 
-  static Widget get tables => TableScreen();
+  static Widget get tables => BlocProvider<TableCubit>(
+        create: (context) => locator()..getTable(),
+        child: TableScreen(),
+      );
 }

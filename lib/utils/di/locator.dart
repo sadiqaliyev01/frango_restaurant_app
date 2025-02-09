@@ -1,11 +1,13 @@
 import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
 import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
+import 'package:frango_restaurant_app/cubits/table/table_cubit.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/category_names_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/login_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/register_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/reservation_contractor.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/table_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/verify_email_contractor.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/about_us_repository.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/category_names_repository.dart';
@@ -13,6 +15,7 @@ import 'package:frango_restaurant_app/data/remote/repositories/login_repository.
 import 'package:frango_restaurant_app/data/remote/repositories/meal_repository.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/register_repository.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/reservation_repository.dart';
+import 'package:frango_restaurant_app/data/remote/repositories/table_repository.dart';
 import 'package:frango_restaurant_app/data/remote/repositories/verify_email_repository.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/about_us_service.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/category_names_service.dart';
@@ -20,6 +23,7 @@ import 'package:frango_restaurant_app/data/remote/services/remote/login_service.
 import 'package:frango_restaurant_app/data/remote/services/remote/meal_service.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/register_service.dart';
 import 'package:frango_restaurant_app/data/remote/services/remote/reservation_services.dart';
+import 'package:frango_restaurant_app/data/remote/services/remote/table_service.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -50,6 +54,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => AboutUsService());
   locator.registerLazySingleton(() => CategoryNamesService());
   locator.registerLazySingleton(() => ReservationService());
+  locator.registerLazySingleton(() => TableService());
 
   // contractors
   locator.registerLazySingleton<LoginContractor>(
@@ -73,6 +78,9 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<ReservationContractor>(
       () => ReservationRepository(locator<ReservationService>()));
 
+  locator.registerLazySingleton<TableContractor>(
+      () => TableRepository(locator<TableService>()));
+
   // cubits
   locator.registerLazySingleton(() => LoginCubit(locator()));
   locator.registerFactory(() => RegisterCubit(locator()));
@@ -81,4 +89,5 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => AboutUsCubit(locator()));
   locator.registerFactory(() => CategoryNamesCubit(locator()));
   locator.registerFactory(() => ReservationCubit(locator()));
+  locator.registerFactory(() => TableCubit(locator()));
 }

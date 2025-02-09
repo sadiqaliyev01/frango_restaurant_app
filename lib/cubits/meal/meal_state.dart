@@ -7,7 +7,7 @@ final class MealInitial extends MealState {}
 final class MealLoading extends MealState {}
 
 class MealSuccess extends MealState {
-  final List<Meal> meals; // ✅ Change to List<Meal>
+  final List<Meal> meals;
   final List<String> categories;
   final String? selectedCategory;
 
