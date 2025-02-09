@@ -40,14 +40,14 @@ class Meal {
   final String? image;
   final List<String>? ingredientsList;
   final String? description;
-final double? carbohydrates; // Change to double
-  final double? calories;      // Change to double
-  final double? fat;           // Change to double
-  final double? gram;          // Change to double
-  final double? protein;       // Change to double
-  final double? price;         // Change to double
-  final double? salePrice;     // Change to double
-  final double? rate;          // Change to double
+  final double? carbohydrates; // Change to double
+  final double? calories; // Change to double
+  final double? fat; // Change to double
+  final double? gram; // Change to double
+  final double? protein; // Change to double
+  final double? price; // Change to double
+  final double? salePrice; // Change to double
+  final double? rate; // Change to double
 
   Meal({
     this.id,
