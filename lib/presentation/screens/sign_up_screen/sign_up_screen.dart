@@ -135,7 +135,7 @@ class SignUpScreen extends StatelessWidget {
                         CustomLoginRegisterButton(
                           onPressed: state is RegisterLoading
                               ? () {}
-                              : () => registerCubit.verifyEmail(context),
+                              : () => registerCubit.verifyEmail(),
                           child: state is RegisterLoading
                               ? const SizedBox(
                                   height: 20,

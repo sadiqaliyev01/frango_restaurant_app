@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
 import 'package:frango_restaurant_app/cubits/table/table_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/table_screen.dart/widgets/build_detail_row.dart';
 import 'package:frango_restaurant_app/utils/helpers/pager.dart';
@@ -90,10 +91,22 @@ class TableScreen extends StatelessWidget {
                               backgroundColor: AppColors.primaryBlack,
                             ),
                             onPressed: () {
+                              final tableCubit = context.read<TableCubit>();
+                              final reservationCubit =
+                                  context.read<ReservationCubit>();
+
+                              // Ensure that you set the selected table
+                              tableCubit.selectTable(table);
+
+                              // Pass the table data to ReservationCubit
+                              reservationCubit.autoFillFromTable(table);
+
+                              // Proceed to the Reservation screen
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Pager.reservation(),
+                                  builder: (_) =>
+                                      Pager.reservation(context),
                                 ),
                               );
                             },
