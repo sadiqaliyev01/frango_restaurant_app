@@ -8,7 +8,7 @@ class ReservationRepository implements ReservationContractor {
   ReservationRepository(this._reservationService);
 
   @override
-  Future<List<ReservationRequestModel>> postReservation(
+  Future<ReservationRequestModel> postReservation(
           {required ReservationRequestModel postReservation}) =>
-      _reservationService.postReservation(postReservation:postReservation);
+      _reservationService.postReservation(postReservation: postReservation);
 }
