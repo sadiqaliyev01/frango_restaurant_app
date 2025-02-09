@@ -8,7 +8,7 @@ import 'package:frango_restaurant_app/utils/network/dio/dio_client.dart';
 class ReservationService {
   final endpoint = Endpoints.reservation;
 
-  Future<List<ReservationRequestModel>> postReservation(
+  Future<ReservationRequestModel> postReservation(
       {required ReservationRequestModel postReservation}) async {
     try {
       log("Reservation Request Body: ${postReservation.toString()}");
@@ -25,9 +25,7 @@ class ReservationService {
 
         log("Reservation Data: ${data.toString()}");
 
-        return data
-            .map((json) => ReservationRequestModel.fromJson(json))
-            .toList();
+        return ReservationRequestModel.fromJson(response.data);
       } else if (response.statusCode.isFailure) {
         throw Exception("Failed to fetch reservations: ${response.statusCode}");
       }
