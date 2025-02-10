@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_cubit.dart';
 import 'package:frango_restaurant_app/cubits/meal/meal_state.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/all_products.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/app_bar_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/drawer_items.dart';
 import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_categories.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
