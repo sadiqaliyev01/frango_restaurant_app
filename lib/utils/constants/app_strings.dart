@@ -102,4 +102,6 @@ class AppStrings {
   static const String successMessage = "Changes saved successfully!";
 
   static const String aboutUsText = "About Us";
+
+  static const String notificationsPageText = "Notifications";
 }
