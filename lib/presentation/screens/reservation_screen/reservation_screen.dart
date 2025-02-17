@@ -2,26 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
-import 'package:frango_restaurant_app/data/models/local/table_model.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_complete.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/reserv_details.dart';
 
 import '../../../cubits/table/table_cubit.dart';
 
 class ReservationScreen extends StatelessWidget {
-  final TableModel? table;
-
-  const ReservationScreen({
-    super.key,
-    this.table,
-  });
+  const ReservationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    final tableCubit = context.watch<TableCubit>();
-
     final reservationCubit = context.read<ReservationCubit>();
+
+    // ✅ Load user ID when screen opens
+    reservationCubit.loadUserId();
 
     return BlocListener<TableCubit, TableState>(
       listener: (context, state) {
@@ -47,91 +41,45 @@ class ReservationScreen extends StatelessWidget {
             style: TextStyle(color: AppColors.lightGray),
           ),
         ),
-        body: BlocBuilder<TableCubit, TableState>(
-          builder: (context, state) {
-            final tableCubit = context.read<TableCubit>();
+        body: Column(
+          children: [
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: ReservDetails(
+                onDateSelected: (date) {
+                  reservationCubit.updateArrivalTime(date, TimeOfDay.now());
+                },
+                onTimeSelected: (time) {
+                  reservationCubit.updateArrivalTime(DateTime.now(), time);
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
 
-            final reservationCubit = context.read<ReservationCubit>();
-
-            if (tableCubit.selectedTable == null) {
-              return const Center(
-                child: Text(
-                  "Masa seçilmədi",
-                  style: TextStyle(color: AppColors.primaryYellow),
-                ),
-              );
-            }
-
-            return Column(
-              children: [
-                const SizedBox(height: 16),
-                Text(
-                  'Seçilən masa: ${tableCubit.selectedTable!.no}',
-                  style: const TextStyle(
-                    color: AppColors.lightGray,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+            /// ✅ **New Note Input Field**
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: TextField(
+                controller: reservationCubit.noteController,
+                decoration: InputDecoration(
+                  hintText: "Qeyd əlavə edin",
+                  hintStyle: const TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: AppColors.buttonAndTextFieldGray,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none,
                   ),
                 ),
-                Text(
-                  'Maksimum tutum: ${tableCubit.selectedTable!.capacity} nəfər',
-                  style: const TextStyle(
-                    color: AppColors.lightGray,
-                    fontSize: 16,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: ReservDetails(),
-                ),
-                Expanded(child: Container()),
-              ],
-            );
-          },
+                maxLines: 3,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+          ],
         ),
-        // body: Column(
-        //   children: [
-        //     const SizedBox(height: 16),
-        //     Text(
-        //       'Seçilən masa: ${tableCubit.selectedTable!.no}',
-        //       style: const TextStyle(
-        //         color: AppColors.lightGray,
-        //         fontSize: 18,
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //     Text(
-        //       'Maksimum tutum: ${tableCubit.selectedTable!.capacity} nəfər',
-        //       style: const TextStyle(
-        //         color: AppColors.lightGray,
-        //         fontSize: 16,
-        //       ),
-        //     ),
-        //     // if (table != null)
-        //     //   Text(
-        //     //     'Seçilən masa: ${table!.tableNo}',
-        //     //     style: const TextStyle(
-        //     //       color: AppColors.lightGray,
-        //     //       fontSize: 18,
-        //     //       fontWeight: FontWeight.bold,
-        //     //     ),
-        //     //   ),
-        //     // if (table == null)
-        //     //   const Text(
-        //     //     'Masa seçilmədi',
-        //     //     style: TextStyle(
-        //     //       color: AppColors.lightGray,
-        //     //       fontSize: 18,
-        //     //       fontWeight: FontWeight.bold,
-        //     //     ),
-        //     //   ),
-        //     const Padding(
-        //       padding: EdgeInsets.symmetric(horizontal: 12.0),
-        //       child: ReservDetails(),
-        //     ),
-        //     Expanded(child: Container()),
-        //   ],
-        // ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
@@ -142,14 +90,25 @@ class ReservationScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const ReservationComplete(),
-                ),
-                (route) => false,
-              );
+            onPressed: () async {
+              await reservationCubit.postReservation();
+              if (context.read<ReservationCubit>().state
+                  is ReservationSuccess) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        const ReservationComplete(isReservation: false),
+                  ),
+                  (route) => false,
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content:
+                          Text("Reservation failed! Check required fields.")),
+                );
+              }
             },
             child: const Text(
               'Rezervi tamamla',

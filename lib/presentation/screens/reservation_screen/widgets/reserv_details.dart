@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class ReservDetails extends StatefulWidget {
-  const ReservDetails({super.key});
+  final void Function(DateTime) onDateSelected;
+  final void Function(TimeOfDay) onTimeSelected;
+
+  const ReservDetails({
+    super.key,
+    required this.onDateSelected,
+    required this.onTimeSelected,
+  });
 
   @override
   _ReservDetailsState createState() => _ReservDetailsState();
@@ -24,6 +31,9 @@ class _ReservDetailsState extends State<ReservDetails> {
       setState(() {
         selectedDate = pickedDate;
       });
+
+      // ✅ Notify parent (ReservationCubit)
+      widget.onDateSelected(pickedDate);
     }
   }
 
@@ -37,6 +47,9 @@ class _ReservDetailsState extends State<ReservDetails> {
       setState(() {
         selectedTime = pickedTime;
       });
+
+      // ✅ Notify parent (ReservationCubit)
+      widget.onTimeSelected(pickedTime);
     }
   }
 
@@ -58,8 +71,7 @@ class _ReservDetailsState extends State<ReservDetails> {
                 child: GestureDetector(
                   onTap: () => _selectDate(context),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.primaryYellow),
                       borderRadius: BorderRadius.circular(8),
@@ -68,8 +80,7 @@ class _ReservDetailsState extends State<ReservDetails> {
                       selectedDate != null
                           ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
                           : 'Tarix seçin',
-                      style: const TextStyle(
-                          fontSize: 17, color: AppColors.primaryYellow),
+                      style: const TextStyle(fontSize: 17, color: AppColors.primaryYellow),
                     ),
                   ),
                 ),
@@ -88,8 +99,7 @@ class _ReservDetailsState extends State<ReservDetails> {
                 child: GestureDetector(
                   onTap: () => _selectTime(context),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.primaryYellow),
                       borderRadius: BorderRadius.circular(8),
@@ -98,8 +108,7 @@ class _ReservDetailsState extends State<ReservDetails> {
                       selectedTime != null
                           ? '${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}'
                           : 'Saat seçin',
-                      style: const TextStyle(
-                          fontSize: 17, color: AppColors.primaryYellow),
+                      style: const TextStyle(fontSize: 17, color: AppColors.primaryYellow),
                     ),
                   ),
                 ),
