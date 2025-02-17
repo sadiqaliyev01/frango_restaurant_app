@@ -18,7 +18,6 @@ class ReservationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tableCubit = context.watch<TableCubit>();
     final reservationCubit = context.read<ReservationCubit>();
 
     return BlocListener<TableCubit, TableState>(
@@ -48,7 +47,6 @@ class ReservationScreen extends StatelessWidget {
         body: BlocBuilder<TableCubit, TableState>(
           builder: (context, state) {
             final tableCubit = context.read<TableCubit>();
-            final reservationCubit = context.read<ReservationCubit>();
 
             if (tableCubit.selectedTable == null) {
               return const Center(

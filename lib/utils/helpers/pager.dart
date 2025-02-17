@@ -19,6 +19,7 @@ import '../../cubits/category_names/category_names_cubit.dart';
 import '../../cubits/home/home_cubit.dart';
 import '../../cubits/login/login_cubit.dart';
 import '../../cubits/meal/meal_cubit.dart';
+import '../../data/models/remote/table_response.dart';
 
 class Pager {
   Pager._();
@@ -55,12 +56,17 @@ class Pager {
         )
       ], child: const HomeScreen());
 
-  static Widget reservation(BuildContext context) => MultiBlocProvider(
+  static Widget reservation(
+    BuildContext context, {
+    required TableResponse table,
+  }) =>
+      MultiBlocProvider(
         providers: [
           BlocProvider.value(
-              value: BlocProvider.of<TableCubit>(context)), // TableCubit
+            value: context.read<TableCubit>(),
+          ), // TableCubit
           BlocProvider<ReservationCubit>(
-            create: (_) => locator<ReservationCubit>(), // ReservationCubit
+            create: (_) => locator()..autoFillFromTable(table), // ReservationCubit
           ),
         ],
         child: const ReservationScreen(),
@@ -73,8 +79,12 @@ class Pager {
         child: const ContactUsScreen(),
       );
 
-  static Widget get tables => BlocProvider<TableCubit>(
-        create: (context) => locator()..getTable(),
-        child: TableScreen(),
+  static Widget get tables => MultiBlocProvider(
+        providers: [
+          BlocProvider<TableCubit>(
+            create: (context) => locator()..getTable(),
+          ), // TableCubit
+        ],
+        child: const TableScreen(),
       );
 }
