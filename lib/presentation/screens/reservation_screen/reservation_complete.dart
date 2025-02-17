@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/confirmation_animation.dart';
-import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 
 class ReservationComplete extends StatelessWidget {
-  const ReservationComplete({super.key});
+  const ReservationComplete({super.key, required this.isReservation});
+  final bool isReservation;
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +20,23 @@ class ReservationComplete extends StatelessWidget {
               child: ConfirmationAnimation(),
             ),
             const SizedBox(height: 24),
-            const Text(
-              "Rezervasiya uğurla qeydə alındı!",
-              style: TextStyle(
+            Text(
+              isReservation
+                  ? "Rezervasiya uğurla qeydə alındı!"
+                  : "Sifariş uğurla tamamlandı!",
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primaryYellow,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              "Rezervasiyanızı dəyişmək və ya silmək istəsəniz,\n istifadəçi profilinə daxil olun.",
+            Text(
+              isReservation
+                  ? "Rezervasiyanızı dəyişmək və ya silmək istəsəniz,\n istifadəçi profilinə daxil olun."
+                  : "Sifariş tarixçəsinə nəzarət etmək üçün\n istifadəçi profilinə daxil olun",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const Spacer(),
             Padding(

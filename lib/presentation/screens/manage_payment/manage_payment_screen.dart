@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frango_restaurant_app/presentation/screens/add_new_card/add_new_card_page.dart';
 import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/payment_method_card_banner.dart';
 import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/upi_payment.dart';
+import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_complete.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 
@@ -93,6 +94,42 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                     selectedUPIIndex = index;
                   });
                 },
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryYellow,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ReservationComplete(
+                            isReservation: false,
+                          ),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                    child: const Text(
+                      'Sifarişi tamamla',
+                      style: TextStyle(
+                        color: AppColors.primaryBlack,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

@@ -56,6 +56,7 @@ class Pager {
         )
       ], child: const HomeScreen());
 
+
   static Widget reservation(
     BuildContext context, {
     required TableResponse table,
@@ -67,6 +68,8 @@ class Pager {
           ), // TableCubit
           BlocProvider<ReservationCubit>(
             create: (_) => locator()..autoFillFromTable(table), // ReservationCubit
+
+
           ),
         ],
         child: const ReservationScreen(),

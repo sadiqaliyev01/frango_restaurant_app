@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/presentation/screens/notifications/notifications_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/search_box.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
@@ -32,7 +33,14 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const NotificationsScreen(),
+              ),
+            );
+          },
           icon: const Icon(
             Icons.notifications,
             color: AppColors.primaryYellow,

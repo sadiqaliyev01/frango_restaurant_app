@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:frango_restaurant_app/data/models/remote/reservation_request_model.dart';
+
 import 'package:frango_restaurant_app/data/models/remote/table_response.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/reservation_contractor.dart';
 
@@ -40,16 +43,5 @@ class ReservationCubit extends Cubit<ReservationState> {
     } catch (e) {
       emit(ReservationFailure(e.toString()));
     }
-  }
-
-  @override
-  Future<void> close() {
-    tableIdController.dispose();
-    userIdController.dispose();
-    noteController.dispose();
-    peopleCountController.dispose();
-    arrivalTimeController.dispose();
-    leavingTimeController.dispose();
-    return super.close();
   }
 }
