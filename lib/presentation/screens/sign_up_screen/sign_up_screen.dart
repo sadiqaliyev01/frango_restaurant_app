@@ -20,7 +20,6 @@ class SignUpScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.primaryBlack,
         body: SingleChildScrollView(
-          // ✅ Added to enable scrolling
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -44,7 +43,6 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // ✅ Wrap Column with a Flexible Container to allow scrolling
                 Column(
                   children: [
                     CustomLoginRegisterField(
@@ -107,7 +105,6 @@ class SignUpScreen extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // ✅ Sign Up Button & "Have an Account" Section
                 BlocConsumer<RegisterCubit, RegisterState>(
                   listener: (_, state) {
                     if (state is RegisterSuccess) {

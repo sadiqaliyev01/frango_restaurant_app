@@ -90,4 +90,5 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => CategoryNamesCubit(locator()));
   locator.registerFactory(() => ReservationCubit(locator()));
   locator.registerFactory(() => TableCubit(locator()));
+  // locator.registerLazySingleton(() => HomeCubit());
 }

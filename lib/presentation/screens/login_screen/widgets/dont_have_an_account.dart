@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frango_restaurant_app/cubits/register/register_cubit.dart';
-import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
-import 'package:frango_restaurant_app/utils/di/locator.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 
 import '../../../widgets/custom_login_redirect.dart';
 
@@ -16,15 +13,11 @@ class DontHaveAnAccount extends StatelessWidget {
       normalText: AppStrings.dontHaveAnAccount,
       highlightedText: AppStrings.signUpText,
       onTap: () {
-        Navigator.pushAndRemoveUntil(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => BlocProvider(
-              create: (context) => RegisterCubit(locator()),
-              child: const SignUpScreen(),
-            ),
+            builder: (context) => Pager.signUp,
           ),
-          (route) => route.isCurrent,
         );
       },
     );

@@ -12,7 +12,7 @@ class MealCubit extends Cubit<MealState> {
   List<Meal> allProducts = []; // ✅ Store all meals for searching
   List<Meal> filteredMeals = [];
   List<String> categories = [];
-  String? selectedCategory = '';
+  String? selectedCategory;
 
   /// ✅ Fetch all meals & categories
   Future<void> getMeals() async {
@@ -23,7 +23,10 @@ class MealCubit extends Cubit<MealState> {
 
       // Store all products from all categories for search
       allProducts = allMeals
-          .expand<Meal>((mealResponse) => mealResponse.meal ?? [])
+          .where(
+              (mealResponse) => mealResponse.meal != null) // ✅ Filter non-null
+          .expand<Meal>(
+              (mealResponse) => mealResponse.meal!) // ✅ Ensure non-null access
           .toList();
 
       // Default: Show first category meals
@@ -39,7 +42,14 @@ class MealCubit extends Cubit<MealState> {
 
   /// ✅ Extract Unique Categories
   List<String> extractCategories(List<MealResponse> meals) {
-    return meals.map((meal) => meal.title ?? "Unknown").toSet().toList();
+    return meals
+        .map((meal) => meal.title)
+        .where((title) =>
+            title != null &&
+            title.isNotEmpty) // ✅ Filter out null & empty titles
+        .cast<String>() // ✅ Ensure non-null list
+        .toSet()
+        .toList();
   }
 
   /// ✅ Filter Meals by Category
@@ -51,7 +61,8 @@ class MealCubit extends Cubit<MealState> {
       orElse: () => MealResponse(title: category, meal: []),
     );
 
-    filteredMeals = selectedMealResponse.meal ?? [];
+    filteredMeals =
+        selectedMealResponse.meal ?? <Meal>[]; // ✅ Ensure a non-null list
     emit(MealSuccess(filteredMeals, categories, selectedCategory));
   }
 
