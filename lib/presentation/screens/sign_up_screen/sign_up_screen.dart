@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import '../../../utils/helpers/pager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubits/register/register_cubit.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
@@ -7,7 +8,6 @@ import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_field.dart';
 import 'package:frango_restaurant_app/presentation/widgets/custom_login_register_button.dart';
 import 'package:frango_restaurant_app/presentation/screens/sign_up_screen/widgets/have_an_account.dart';
-import '../../../utils/helpers/pager.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -90,6 +90,24 @@ class SignUpScreen extends StatelessWidget {
                     CustomLoginRegisterField(
                       controller: registerCubit.birthdayController,
                       hintText: "Birth Date",
+                      readOnly: true,
+                      onTap: () async {
+                        final DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1950),
+                          lastDate: DateTime.now(),
+                        );
+
+                        if (selectedDate != null) {
+                          final formattedDate =
+                              "${selectedDate.year.toString().padLeft(2, '0')}-"
+                              "${selectedDate.month.toString().padLeft(2, '0')}-"
+                              "${selectedDate.day}";
+
+                          registerCubit.birthdayController.text = formattedDate;
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     CustomLoginRegisterField(

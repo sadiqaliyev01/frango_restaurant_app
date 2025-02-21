@@ -12,17 +12,21 @@ class CustomLoginRegisterField extends StatelessWidget {
   final Widget? prefixIcon;
   final void Function(String)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final VoidCallback? onTap;
+  final bool readOnly;
 
   CustomLoginRegisterField({
     required this.hintText,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    super.key,
     this.controller,
     this.validator,
     this.prefixIcon,
     this.onChanged,
     this.inputFormatters,
+    this.onTap,
+    this.readOnly = false,
+    super.key,
   }) : _obscureTextNotifier = ValueNotifier(obscureText);
 
   @override
@@ -34,6 +38,8 @@ class CustomLoginRegisterField extends StatelessWidget {
           inputFormatters: inputFormatters,
           validator: validator,
           controller: controller,
+          readOnly: readOnly,
+          onTap: onTap,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
             prefixIconConstraints: const BoxConstraints(
