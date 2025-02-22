@@ -11,17 +11,24 @@ class CustomLoginRegisterField extends StatefulWidget {
   final Widget? prefixIcon;
   final void Function(String)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final VoidCallback? onTap;
+  final bool readOnly;
 
   const CustomLoginRegisterField({
     required this.hintText,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    super.key,
     this.controller,
     this.validator,
     this.prefixIcon,
     this.onChanged,
     this.inputFormatters,
+
+    this.onTap,
+    this.readOnly = false,
+    super.key,
+  }) : _obscureTextNotifier = ValueNotifier(obscureText);
+
   });
 
   @override
@@ -44,15 +51,24 @@ class _CustomLoginRegisterFieldState extends State<CustomLoginRegisterField> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
       valueListenable: _obscureTextNotifier,
       builder: (context, isObscure, child) {
         return TextFormField(
+
+          inputFormatters: inputFormatters,
+          validator: validator,
+          controller: controller,
+          readOnly: readOnly,
+          onTap: onTap,
+
           inputFormatters: widget.inputFormatters,
           validator: widget.validator,
           controller: widget.controller,
+
           decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             prefixIconConstraints: const BoxConstraints(

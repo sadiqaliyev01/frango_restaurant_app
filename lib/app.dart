@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'data/remote/services/local/login_local_service.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
 import 'package:frango_restaurant_app/cubits/login/login_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/login_screen/login_screen.dart';
 import 'package:frango_restaurant_app/presentation/screens/splash_screen/splash_screen.dart';
-
-import 'data/remote/services/local/login_local_service.dart';
 
 final navKey = GlobalKey<NavigatorState>();
 
