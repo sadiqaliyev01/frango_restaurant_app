@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/notifications/notifications_screen.dart';
 import 'package:frango_restaurant_app/presentation/widgets/search_box.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/presentation/screens/notifications/notifications_screen.dart';
 
 class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
   const AppBarItems({super.key});
@@ -11,24 +10,25 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appBarTheme = Theme.of(context).appBarTheme;
     return AppBar(
-      backgroundColor: AppColors.primaryBlack,
-      elevation: 0, // ✅ Remove shadow
+      backgroundColor: appBarTheme.backgroundColor,
+      elevation: 0,
       leading: Builder(
         builder: (context) {
           return IconButton(
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.menu,
-              color: AppColors.primaryYellow,
+              color: appBarTheme.iconTheme?.color,
             ),
           );
         },
       ),
       title: SizedBox(
-        width: MediaQuery.sizeOf(context).width * 0.6, // ✅ Limit width
+        width: MediaQuery.sizeOf(context).width * 0.6,
         child: const SearchBox(),
       ),
       actions: [
@@ -41,9 +41,9 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
               ),
             );
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.notifications,
-            color: AppColors.primaryYellow,
+            color: appBarTheme.iconTheme?.color,
           ),
         ),
       ],

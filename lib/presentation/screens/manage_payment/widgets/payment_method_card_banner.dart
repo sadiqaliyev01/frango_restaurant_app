@@ -18,12 +18,20 @@ class CustomCardPaymentBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBackground = isDark ? Colors.grey[900] : Colors.white;
+    final borderColor = isDark ? Colors.transparent : Colors.black;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final iconColor = isDark ? Colors.white : Colors.black;
+    final dividerColor = isDark ? AppColors.gray : Colors.black;
+
     return Container(
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: cardBackground,
         borderRadius: BorderRadius.circular(16.0),
+        border: isDark ? null : Border.all(color: borderColor),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
@@ -50,13 +58,13 @@ class CustomCardPaymentBanner extends StatelessWidget {
                         onChanged: (value) {
                           onCardSelected(index);
                         },
-                        activeColor: Colors.white,
+                        activeColor: iconColor,
                       ),
                       _buildCardLogo(cardNumbers[index]),
                       const SizedBox(width: 10.0),
                       Text(
                         _obfuscateCardNumber(cardNumbers[index]),
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: textColor),
                       ),
                     ],
                   ),
@@ -65,20 +73,20 @@ class CustomCardPaymentBanner extends StatelessWidget {
               );
             },
           ),
-          const Divider(color: AppColors.gray),
+          Divider(color: dividerColor),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 onPressed: () => onAddCardPressed(),
-                icon: const Icon(Icons.add_circle, color: Colors.white),
+                icon: Icon(Icons.add_circle, color: iconColor),
                 iconSize: 30,
               ),
               TextButton.icon(
                 onPressed: () => onAddCardPressed(),
-                label: const Text(
+                label: Text(
                   AppStrings.addNewCardText,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: textColor),
                 ),
               ),
             ],

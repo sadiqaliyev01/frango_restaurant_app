@@ -9,17 +9,20 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLightMode = Theme.of(context).brightness == Brightness.light;
+    final scaffoldBg = Theme.of(context).scaffoldBackgroundColor;
+    final appBarBg = Theme.of(context).appBarTheme.backgroundColor;
+    final iconColor = Theme.of(context).appBarTheme.iconTheme?.color;
+    final dynamicTextColor = isLightMode ? AppColors.black : Colors.white;
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: scaffoldBg,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: appBarBg,
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios,
-                color: AppColors.primaryYellow),
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios, color: iconColor),
           ),
         ),
         body: SingleChildScrollView(
@@ -31,35 +34,40 @@ class UserProfile extends StatelessWidget {
                   width: 80,
                   height: 80,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: const Image(
-                          image: AssetImage("assets/png/user_pp.png"))),
+                    borderRadius: BorderRadius.circular(100),
+                    child: const Image(
+                      image: AssetImage("assets/png/user_pp.png"),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   AppStrings.displayName,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
+                    color: dynamicTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
-                const Text(
+                Text(
                   AppStrings.phoneNumber,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14),
+                    color: dynamicTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
                 ),
-                const Text(
+                Text(
                   AppStrings.displayEmail,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14),
+                    color: dynamicTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
                 ),
                 const SizedBox(height: 20),
-                const Divider(
-                  color: AppColors.primaryBlack,
+                Divider(
+                  color: isLightMode ? AppColors.white : AppColors.primaryBlack,
                 ),
                 const SizedBox(height: 20),
                 const CustomExpansionPanel(
@@ -127,9 +135,7 @@ class UserProfile extends StatelessWidget {
                         CustomRedLine(),
                       ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Text(
@@ -172,7 +178,7 @@ class UserProfile extends StatelessWidget {
                         CustomRedLine(),
                         SizedBox(width: 10),
                         Text(
-                          '4 tables ',
+                          '4 tables',
                           style: TextStyle(color: Colors.white70),
                         ),
                         SizedBox(width: 10),
@@ -193,18 +199,24 @@ class UserProfile extends StatelessWidget {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Today',
+                            style: TextStyle(color: Colors.white70),
+                          ),
                         ),
-                        Text(
-                          'Today',
-                          style: TextStyle(color: Colors.white70),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'This week',
+                            style: TextStyle(color: Colors.white70),
+                          ),
                         ),
-                        Text(
-                          'This week',
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                        Text(
-                          'Next week',
-                          style: TextStyle(color: Colors.white70),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Next week',
+                            style: TextStyle(color: Colors.white70),
+                          ),
                         ),
                       ],
                     ),
@@ -219,9 +231,11 @@ class UserProfile extends StatelessWidget {
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Contact',
+                            style: TextStyle(color: Colors.white70),
+                          ),
                         ),
-                        Text('Contact',
-                            style: TextStyle(color: Colors.white70)),
                       ],
                     ),
                   ],

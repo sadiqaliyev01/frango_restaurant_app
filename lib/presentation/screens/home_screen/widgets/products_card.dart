@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/data/models/remote/meal_response.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_description.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_image.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
-import 'package:frango_restaurant_app/presentation/screens/product_details/product_details.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/data/models/remote/meal_response.dart';
+import 'package:frango_restaurant_app/presentation/screens/product_details/product_details.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_name.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_image.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_price.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/product_description.dart';
 
 class ProductsCard extends StatelessWidget {
-  final String categoryTitle;
   final List<Meal> meals;
+  final String categoryTitle;
 
   const ProductsCard({
     super.key,
-    required this.categoryTitle,
     required this.meals,
+    required this.categoryTitle,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
+
     return Card(
       color: AppColors.primaryYellow,
       child: Padding(
@@ -30,16 +32,16 @@ class ProductsCard extends StatelessWidget {
             Text(
               categoryTitle,
               style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black),
             ),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: meals.length,
               itemBuilder: (context, index) {
-                final meal = meals[index]; // ✅ meal is now correctly a Meal
+                final meal = meals[index];
 
                 return GestureDetector(
                   onTap: () {
@@ -50,7 +52,7 @@ class ProductsCard extends StatelessWidget {
                             BorderRadius.vertical(top: Radius.circular(24)),
                       ),
                       builder: (context) => ProductDetails(
-                        meal: meal, // ✅ Pass Meal directly
+                        meal: meal,
                       ),
                     );
                   },
@@ -60,14 +62,14 @@ class ProductsCard extends StatelessWidget {
                       Container(
                         height: 120,
                         decoration: BoxDecoration(
-                          color: AppColors.black,
+                          color: isLightMode ? Colors.white : AppColors.black,
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: Row(
                           children: [
                             ProductImage(
                               imageLink: meal.image ?? "",
-                            ), // ✅ No need to access meal?.first
+                            ),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(
@@ -77,7 +79,9 @@ class ProductsCard extends StatelessWidget {
                                   ProductName(
                                     productName: meal.title ?? "No title",
                                     style: GoogleFonts.roboto(
-                                      color: Colors.yellow,
+                                      color: isLightMode
+                                          ? Colors.black
+                                          : Colors.yellow,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                     ),
@@ -87,7 +91,9 @@ class ProductsCard extends StatelessWidget {
                                     description: meal.description ??
                                         "No description available",
                                     style: GoogleFonts.roboto(
-                                      color: Colors.yellow,
+                                      color: isLightMode
+                                          ? Colors.black
+                                          : Colors.yellow,
                                       fontSize: 12,
                                     ),
                                   ),
@@ -97,7 +103,9 @@ class ProductsCard extends StatelessWidget {
                                       Text(
                                         "Price: ",
                                         style: GoogleFonts.roboto(
-                                          color: Colors.yellow,
+                                          color: isLightMode
+                                              ? Colors.black
+                                              : Colors.yellow,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12,
                                         ),
@@ -105,7 +113,9 @@ class ProductsCard extends StatelessWidget {
                                       ProductPrice(
                                         price: meal.price?.toDouble() ?? 0,
                                         style: GoogleFonts.roboto(
-                                          color: Colors.yellow,
+                                          color: isLightMode
+                                              ? Colors.black
+                                              : Colors.yellow,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12,
                                         ),

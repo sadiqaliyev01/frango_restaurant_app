@@ -9,9 +9,11 @@ class ReservationComplete extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: theme.scaffoldBackgroundColor,
         body: Column(
           children: [
             const Spacer(),
@@ -24,10 +26,9 @@ class ReservationComplete extends StatelessWidget {
               isReservation
                   ? "Rezervasiya uğurla qeydə alındı!"
                   : "Sifariş uğurla tamamlandı!",
-              style: const TextStyle(
-                fontSize: 20,
+              style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryYellow,
+                color: theme.colorScheme.primary,
               ),
             ),
             const SizedBox(height: 8),
@@ -36,14 +37,17 @@ class ReservationComplete extends StatelessWidget {
                   ? "Rezervasiyanızı dəyişmək və ya silmək istəsəniz,\n istifadəçi profilinə daxil olun."
                   : "Sifariş tarixçəsinə nəzarət etmək üçün\n istifadəçi profilinə daxil olun",
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
             ),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryYellow,
+                  backgroundColor: theme.colorScheme.primary,
                   minimumSize: const Size(double.infinity, 48),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -58,9 +62,13 @@ class ReservationComplete extends StatelessWidget {
                     (route) => false,
                   );
                 },
-                child: const Text(
+                child: Text(
                   "Əsas səhifəyə keç",
-                  style: TextStyle(fontSize: 16, color: AppColors.primaryBlack),
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    fontSize: 16,
+                    color: AppColors.primaryBlack,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

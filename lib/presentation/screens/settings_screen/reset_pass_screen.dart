@@ -25,24 +25,25 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: isDark ? Colors.black : Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: isDark ? Colors.black : Colors.white,
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
               Icons.arrow_back_ios,
-              color: AppColors.primaryYellow,
+              color: isDark ? AppColors.primaryYellow : AppColors.black,
             ),
           ),
           titleSpacing: 70,
-          title: const Text(
+          title: Text(
             'Reset Password',
-            style: TextStyle(color: AppColors.lightGray),
+            style: TextStyle(
+              color: isDark ? AppColors.lightGray : AppColors.black,
+            ),
           ),
         ),
         body: Padding(
@@ -53,24 +54,47 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   'Enter your email address to receive password reset instructions.',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Email Address',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                     hintText: 'example@example.com',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(),
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color:
+                            isDark ? AppColors.primaryYellow : AppColors.black,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color:
+                            isDark ? AppColors.primaryYellow : AppColors.black,
+                      ),
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryYellow),
+                      borderSide: BorderSide(
+                        color:
+                            isDark ? AppColors.primaryYellow : AppColors.black,
+                      ),
                     ),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email address';

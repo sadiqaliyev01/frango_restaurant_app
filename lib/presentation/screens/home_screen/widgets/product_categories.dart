@@ -20,7 +20,7 @@ class ProductCategories extends StatelessWidget {
           final selectedCategory = state.selectedCategory;
 
           return SizedBox(
-            height: 40, // Fixed height for categories
+            height: 40,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
@@ -30,20 +30,27 @@ class ProductCategories extends StatelessWidget {
 
                 return GestureDetector(
                   onTap: () {
-                    context.read<MealCubit>().filterMealsByCategory(categoryTitle);
+                    context
+                        .read<MealCubit>()
+                        .filterMealsByCategory(categoryTitle);
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppColors.primaryYellow : AppColors.primaryBlack,
+                      color: isSelected
+                          ? AppColors.primaryYellow
+                          : AppColors.primaryBlack,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
                       child: Text(
                         categoryTitle,
                         style: GoogleFonts.roboto(
-                          color: Colors.white,
+                          color: isSelected
+                              ? AppColors.primaryBlack
+                              : AppColors.white,
                           fontSize: 18,
                           decoration: TextDecoration.none,
                         ),

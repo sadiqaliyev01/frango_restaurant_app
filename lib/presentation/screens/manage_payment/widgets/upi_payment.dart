@@ -15,20 +15,24 @@ class CustomUPIPaymentBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
     List<String> upiMethods = ['Google Pay'];
 
     return Container(
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.grey[900],
+        color: isLightMode ? Colors.white : Colors.grey[900],
+        border:
+            Border.all(color: isLightMode ? Colors.black : Colors.transparent),
         borderRadius: BorderRadius.circular(16.0),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-          ),
+          if (!isLightMode)
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 8,
+            ),
         ],
       ),
       child: Column(
@@ -43,34 +47,37 @@ class CustomUPIPaymentBanner extends StatelessWidget {
                   onChanged: (value) {
                     onSelected(i);
                   },
-                  activeColor: Colors.white,
+                  activeColor: isLightMode ? Colors.black : Colors.white,
                 ),
                 _buildMethodLogo(upiMethods[i]),
                 const SizedBox(width: 10.0),
                 Text(
                   upiMethods[i],
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: isLightMode ? Colors.black : Colors.white),
                 ),
               ],
             ),
             const SizedBox(height: 16.0),
           ],
-          const Divider(color: AppColors.gray),
+          Divider(color: isLightMode ? Colors.black : AppColors.gray),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.add_circle, color: Colors.white),
+                icon: Icon(Icons.add_circle,
+                    color: isLightMode ? Colors.black : Colors.white),
                 iconSize: 30,
               ),
               TextButton.icon(
                 onPressed: () {
                   log("Add UPI button pressed");
                 },
-                label: const Text(
+                label: Text(
                   AppStrings.addNewUpiID,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: isLightMode ? Colors.black : Colors.white),
                 ),
               ),
             ],

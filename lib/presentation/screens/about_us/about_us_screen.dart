@@ -5,28 +5,28 @@ import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
 
-/*
-  bu screen bizimle elaqe sehifesinde olacaq. haqqimizda hissesinde restoranin
-  ozu haqqinda melumatlar olacaq(tarixi, filiallari, iscileri ve s.)
-*/
-
   @override
   Widget build(BuildContext context) {
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
-      backgroundColor: AppColors.primaryBlack,
+      backgroundColor: isLightMode ? AppColors.white : AppColors.primaryBlack,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: isLightMode ? AppColors.white : AppColors.primaryBlack,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon:
-              const Icon(Icons.arrow_back_ios, color: AppColors.primaryYellow),
+          icon: Icon(Icons.arrow_back_ios,
+              color: isLightMode
+                  ? AppColors.primaryBlack
+                  : AppColors.primaryYellow),
         ),
-        titleSpacing: 95,
-        title: const Text(
+        titleSpacing: 100,
+        title: Text(
           AppStrings.aboutUsText,
-          style: TextStyle(color: AppColors.lightGray),
+          style: TextStyle(
+            color: isLightMode ? AppColors.black : AppColors.lightGray,
+          ),
         ),
       ),
       body: Column(

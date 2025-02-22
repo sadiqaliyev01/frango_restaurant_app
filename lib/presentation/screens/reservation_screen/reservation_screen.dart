@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../cubits/table/table_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_complete.dart';
 import 'package:frango_restaurant_app/presentation/screens/reservation_screen/widgets/reserv_details.dart';
-
-import '../../../cubits/table/table_cubit.dart';
 
 class ReservationScreen extends StatelessWidget {
   const ReservationScreen({super.key});
@@ -13,9 +11,10 @@ class ReservationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reservationCubit = context.read<ReservationCubit>();
-
-    // ✅ Load user ID when screen opens
     reservationCubit.loadUserId();
+
+    final theme = Theme.of(context);
+    final isLightMode = theme.brightness == Brightness.light;
 
     return BlocListener<TableCubit, TableState>(
       listener: (context, state) {
@@ -27,18 +26,20 @@ class ReservationScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.primaryBlack,
+          backgroundColor: theme.appBarTheme.backgroundColor,
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios,
-                color: AppColors.primaryYellow),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: theme.appBarTheme.iconTheme?.color,
+            ),
           ),
           titleSpacing: 90,
-          title: const Text(
+          title: Text(
             'Rezervasiya',
-            style: TextStyle(color: AppColors.lightGray),
+            style: theme.appBarTheme.titleTextStyle,
           ),
         ),
         body: Column(
@@ -56,8 +57,6 @@ class ReservationScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-
-            /// ✅ **New Note Input Field**
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: TextField(
@@ -66,17 +65,17 @@ class ReservationScreen extends StatelessWidget {
                   hintText: "Qeyd əlavə edin",
                   hintStyle: const TextStyle(color: Colors.grey),
                   filled: true,
-                  fillColor: AppColors.buttonAndTextFieldGray,
+                  fillColor: theme.colorScheme.surface,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide.none,
                   ),
                 ),
                 maxLines: 3,
-                style: const TextStyle(color: Colors.white),
+                style:
+                    TextStyle(color: isLightMode ? Colors.black : Colors.white),
               ),
             ),
-
             const SizedBox(height: 16),
           ],
         ),
@@ -84,7 +83,7 @@ class ReservationScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryYellow,
+              backgroundColor: theme.colorScheme.primary,
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
@@ -105,15 +104,15 @@ class ReservationScreen extends StatelessWidget {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                      content:
-                          Text("Reservation failed! Check required fields.")),
+                    content: Text("Reservation failed! Check required fields."),
+                  ),
                 );
               }
             },
-            child: const Text(
+            child: Text(
               'Rezervi tamamla',
-              style: TextStyle(
-                color: AppColors.primaryBlack,
+              style: theme.textTheme.labelLarge?.copyWith(
+                color: isLightMode ? Colors.black : Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

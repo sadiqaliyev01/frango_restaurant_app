@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
-import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
-import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
-import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/helpers/pager.dart';
+import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
+import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
+import 'package:frango_restaurant_app/presentation/screens/user_profile_screen/user_profile.dart';
+import 'package:frango_restaurant_app/presentation/screens/settings_screen/settings_screen.dart';
+import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/list_tile_items.dart';
 
 class DrawerItems extends StatelessWidget {
   const DrawerItems({super.key});
@@ -13,8 +13,11 @@ class DrawerItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
+    final drawerBackground = isLight ? AppColors.white : AppColors.primaryBlack;
+
     return Drawer(
-      backgroundColor: AppColors.primaryBlack,
+      backgroundColor: drawerBackground,
       child: Column(
         children: [
           Expanded(
@@ -32,9 +35,7 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) {
-                          return const UserProfile();
-                        },
+                        builder: (_) => const UserProfile(),
                       ),
                     );
                   },
@@ -73,9 +74,7 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) {
-                          return Pager.aboutUs;
-                        },
+                        builder: (_) => Pager.aboutUs,
                       ),
                     );
                   },
@@ -90,9 +89,7 @@ class DrawerItems extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) {
-                          return Pager.contactUs;
-                        },
+                        builder: (_) => Pager.contactUs,
                       ),
                     );
                   },

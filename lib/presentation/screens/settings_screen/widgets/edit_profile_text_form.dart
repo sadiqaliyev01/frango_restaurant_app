@@ -17,6 +17,8 @@ class EditProfileTextForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return TextFormField(
       initialValue: initialValue,
       decoration: InputDecoration(
@@ -25,10 +27,17 @@ class EditProfileTextForm extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.primaryYellow),
         ),
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: TextStyle(
+          color: isDark ? Colors.white : Colors.black,
+        ),
+        hintStyle: TextStyle(
+          color: isDark ? Colors.white70 : Colors.grey,
+        ),
         border: const OutlineInputBorder(),
       ),
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(
+        color: isDark ? Colors.white : Colors.black,
+      ),
       validator: validator,
       onSaved: onSaved,
     );

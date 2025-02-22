@@ -9,38 +9,41 @@ class SearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
     return TextFormField(
-      style: const TextStyle(
-        color: AppColors.primaryYellow,
+      style: TextStyle(
+        color: isLightMode ? Colors.black : AppColors.primaryYellow,
       ),
-      cursorColor: AppColors.white,
+      cursorColor: isLightMode ? Colors.black : AppColors.white,
       onChanged: (query) {
-        context.read<MealCubit>().searchMeals(query); // ✅ Trigger search
+        context.read<MealCubit>().searchMeals(query);
       },
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: "Axtar",
         hintStyle: TextStyle(
-          color: AppColors.primaryYellow,
+          color: isLightMode ? Colors.black : AppColors.primaryYellow,
         ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadiuses.a24,
           borderSide: BorderSide(
-            color: AppColors.gray,
+            color: isLightMode ? Colors.black : AppColors.gray,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadiuses.a24,
           borderSide: BorderSide(
-            color: AppColors.gray,
+            color: isLightMode ? Colors.black : AppColors.gray,
           ),
         ),
         filled: true,
-        fillColor: AppColors.gray,
-        suffixIconColor: AppColors.primaryYellow,
-        suffixIcon: Icon(
+        fillColor: isLightMode ? Colors.white : AppColors.gray,
+        suffixIconColor: isLightMode ? Colors.black : AppColors.primaryYellow,
+        suffixIcon: const Icon(
           Icons.search,
         ),
-        border: OutlineInputBorder(borderRadius: AppRadiuses.a24),
+        border: const OutlineInputBorder(borderRadius: AppRadiuses.a24),
       ),
     );
   }

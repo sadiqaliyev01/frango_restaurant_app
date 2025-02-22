@@ -22,7 +22,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           content: Text('Password has been reset successfully.'),
         ),
       );
-      // Yeni yaradilan şifreni backende buradan göndere bilersen
+      // Yeni teyin olunan şifre backende buradan gönderilecek.
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -34,22 +34,26 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final borderColor = isDark ? AppColors.primaryYellow : AppColors.black;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: isDark ? Colors.black : Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: isDark ? Colors.black : Colors.white,
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios,
-                color: AppColors.primaryYellow),
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: isDark ? AppColors.primaryYellow : AppColors.black,
+            ),
           ),
           titleSpacing: 60,
-          title: const Text(
+          title: Text(
             'Set New Password',
-            style: TextStyle(color: AppColors.lightGray),
+            style: TextStyle(
+              color: isDark ? AppColors.lightGray : Colors.black,
+            ),
           ),
         ),
         body: Padding(
@@ -60,25 +64,34 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   'Set a new password to access your account.',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
                   controller: _newPasswordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'New Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                     hintText: 'Enter new password',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(),
+                    hintStyle: TextStyle(
+                      color: isDark ? Colors.white70 : Colors.grey,
+                    ),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryYellow),
+                      borderSide: BorderSide(color: borderColor),
                     ),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a new password';
@@ -92,17 +105,23 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Confirm Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                     hintText: 'Re-enter new password',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(),
+                    hintStyle: TextStyle(
+                      color: isDark ? Colors.white70 : Colors.grey,
+                    ),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryYellow),
+                      borderSide: BorderSide(color: borderColor),
                     ),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please confirm your password';
@@ -119,7 +138,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryYellow,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     child: const Text(

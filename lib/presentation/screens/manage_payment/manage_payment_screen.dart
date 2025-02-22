@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/add_new_card/add_new_card_page.dart';
-import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/payment_method_card_banner.dart';
-import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/upi_payment.dart';
-import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_complete.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/presentation/screens/add_new_card/add_new_card_page.dart';
+import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/upi_payment.dart';
+import 'package:frango_restaurant_app/presentation/screens/reservation_screen/reservation_complete.dart';
+import 'package:frango_restaurant_app/presentation/screens/manage_payment/widgets/payment_method_card_banner.dart';
 
 class ManagePaymentScreen extends StatefulWidget {
   const ManagePaymentScreen({super.key});
@@ -29,20 +29,29 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final scaffoldBg = theme.scaffoldBackgroundColor;
+    final appBarBg = theme.appBarTheme.backgroundColor;
+    final appBarIconColor = theme.appBarTheme.iconTheme?.color;
+    final appBarTitleStyle = theme.appBarTheme.titleTextStyle;
+    final textColor = isDark ? Colors.white : Colors.black;
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: scaffoldBg,
         appBar: AppBar(
-          backgroundColor: AppColors.primaryBlack,
+          backgroundColor: appBarBg,
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: appBarIconColor,
+            ),
           ),
-          title: const Text(
+          title: Text(
             AppStrings.managePaymentMethodsText,
-            style: TextStyle(color: Colors.white),
+            style: appBarTitleStyle,
           ),
         ),
         body: Padding(
@@ -50,12 +59,12 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppStrings.creditAndDebitText,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: AppColors.white,
+                  color: textColor,
                 ),
               ),
               const SizedBox(height: 20),
@@ -79,12 +88,12 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                   }
                 },
               ),
-              const Text(
+              Text(
                 AppStrings.upi,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: AppColors.white,
+                  color: textColor,
                 ),
               ),
               CustomUPIPaymentBanner(
@@ -104,7 +113,9 @@ class _ManagePaymentScreenState extends State<ManagePaymentScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryYellow,
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 16),
+                        vertical: 16,
+                        horizontal: 16,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),

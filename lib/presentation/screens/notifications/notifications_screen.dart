@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -7,27 +6,31 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
           titleSpacing: 90,
-          backgroundColor: AppColors.primaryBlack,
+          backgroundColor: theme.appBarTheme.backgroundColor,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: theme.appBarTheme.iconTheme?.color,
+            ),
           ),
-          title: const Text(
+          title: Text(
             AppStrings.notificationsPageText,
-            style: TextStyle(color: Colors.white),
+            style: theme.appBarTheme.titleTextStyle,
           ),
         ),
-        body: const Center(
+        body: Center(
           child: Text(
             'No notifications right now',
-            style: TextStyle(color: AppColors.lightGray),
+            style: theme.textTheme.bodyMedium,
           ),
         ),
       ),

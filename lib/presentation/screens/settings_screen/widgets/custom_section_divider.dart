@@ -8,11 +8,13 @@ class CustomSectionDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
+    final dividerColor = isLight ? AppColors.black : AppColors.primaryYellow;
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: AppColors.primaryYellow,
+            color: dividerColor,
             thickness: 1,
           ),
         ),
@@ -20,15 +22,15 @@ class CustomSectionDivider extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             title,
-            style: const TextStyle(
-              color: AppColors.primaryYellow,
+            style: TextStyle(
+              color: dividerColor,
               fontSize: 16,
             ),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: AppColors.primaryYellow,
+            color: dividerColor,
             thickness: 1,
           ),
         ),

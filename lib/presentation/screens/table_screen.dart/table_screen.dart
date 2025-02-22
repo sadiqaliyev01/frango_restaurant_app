@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frango_restaurant_app/cubits/reservation/reservation_cubit.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 import 'package:frango_restaurant_app/cubits/table/table_cubit.dart';
 import 'package:frango_restaurant_app/presentation/screens/table_screen.dart/widgets/build_detail_row.dart';
-import 'package:frango_restaurant_app/utils/helpers/pager.dart';
-import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
 class TableScreen extends StatelessWidget {
   const TableScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.primaryBlack,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: theme.appBarTheme.backgroundColor,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
             Icons.arrow_back_ios,
-            color: AppColors.primaryYellow,
+            color: theme.appBarTheme.iconTheme?.color,
           ),
         ),
         titleSpacing: 105,
-        title: const Text(
+        title: Text(
           'Masalar',
-          style: TextStyle(color: AppColors.lightGray),
+          style: theme.appBarTheme.titleTextStyle,
         ),
       ),
       body: BlocBuilder<TableCubit, TableState>(
@@ -42,7 +39,7 @@ class TableScreen extends StatelessWidget {
               itemBuilder: (_, index) {
                 final table = tables[index];
                 return Card(
-                  color: AppColors.primaryYellow,
+                  color: theme.colorScheme.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -50,7 +47,7 @@ class TableScreen extends StatelessWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                   child: Theme(
-                    data: Theme.of(context).copyWith(
+                    data: theme.copyWith(
                       dividerColor: Colors.transparent,
                       iconTheme: const IconThemeData(color: Colors.black),
                     ),
@@ -88,15 +85,11 @@ class TableScreen extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryBlack,
+                              backgroundColor: theme.scaffoldBackgroundColor,
                             ),
                             onPressed: () {
                               final tableCubit = context.read<TableCubit>();
-
-                              // Ensure that you set the selected table
                               tableCubit.selectTable(table);
-
-                              // Proceed to the Reservation screen
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -107,10 +100,10 @@ class TableScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: const Text(
+                            child: Text(
                               'Rezerv et',
                               style: TextStyle(
-                                color: AppColors.primaryYellow,
+                                color: theme.listTileTheme.textColor,
                               ),
                             ),
                           ),
@@ -122,10 +115,10 @@ class TableScreen extends StatelessWidget {
               },
             );
           } else {
-            return const Center(
+            return Center(
               child: Text(
                 "No data to display",
-                style: TextStyle(color: AppColors.primaryYellow),
+                style: TextStyle(color: theme.listTileTheme.textColor),
               ),
             );
           }

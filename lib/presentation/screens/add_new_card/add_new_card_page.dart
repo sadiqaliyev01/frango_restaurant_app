@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frango_restaurant_app/presentation/screens/add_new_card/widgets/custom_enter_new_card.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/utils/constants/app_strings.dart';
+import 'package:frango_restaurant_app/presentation/screens/add_new_card/widgets/custom_enter_new_card.dart';
 
 class AddNewCardPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -16,21 +16,28 @@ class AddNewCardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? AppColors.primaryBlack : Colors.white;
+    final textColor = isDarkMode ? AppColors.primaryYellow : Colors.black;
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: backgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.primaryBlack,
+          backgroundColor: backgroundColor,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: textColor,
+            ),
           ),
           centerTitle: true,
-          title: const Text(
+          title: Text(
             'Add New Card',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: textColor),
           ),
         ),
         body: Padding(
@@ -44,7 +51,7 @@ class AddNewCardPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
-                    color: AppColors.primaryYellow.withOpacity(0.7),
+                    color: textColor.withOpacity(0.7),
                   ),
                 ),
                 const SizedBox(height: 25.0),
@@ -142,7 +149,7 @@ class AddNewCardPage extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         'Add Card',
-                        style: TextStyle(color: AppColors.primaryBlack),
+                        style: TextStyle(color: AppColors.black),
                       ),
                     ),
                   ),

@@ -15,22 +15,23 @@ class ContactUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBlack,
+        backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.primaryBlack,
+          backgroundColor: theme.appBarTheme.backgroundColor,
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios,
-                color: AppColors.primaryYellow),
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: theme.appBarTheme.iconTheme?.color,
+            ),
           ),
           titleSpacing: 95,
-          title: const Text(
+          title: Text(
             AppStrings.displayContactUs,
-            style: TextStyle(color: AppColors.lightGray),
+            style: theme.appBarTheme.titleTextStyle,
           ),
         ),
         body: BlocConsumer<AboutUsCubit, AboutUsState>(
@@ -57,13 +58,13 @@ class ContactUsScreen extends StatelessWidget {
                       style: GoogleFonts.roboto(
                         fontWeight: FontWeight.normal,
                         fontSize: 14,
-                        color: AppColors.primaryYellow.withOpacity(0.7),
+                        color: theme.brightness == Brightness.light
+                            ? AppColors.black
+                            : theme.colorScheme.primary.withOpacity(0.7),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       const Spacer(),
@@ -73,7 +74,7 @@ class ContactUsScreen extends StatelessWidget {
                         additionalText: aboutUs.number,
                         additionalTextStyle: TextStyle(
                           fontSize: 12,
-                          color: AppColors.gray.withOpacity(0.8),
+                          color: AppColors.black.withOpacity(0.8),
                         ),
                         onTap: () {
                           SocialMediaContact.makePhoneCall(aboutUs.number);
@@ -86,7 +87,7 @@ class ContactUsScreen extends StatelessWidget {
                         additionalText: aboutUs.email,
                         additionalTextStyle: TextStyle(
                           fontSize: 12,
-                          color: AppColors.gray.withOpacity(0.8),
+                          color: AppColors.black.withOpacity(0.8),
                         ),
                         onTap: () {
                           SocialMediaContact.sendEmail(
@@ -99,9 +100,7 @@ class ContactUsScreen extends StatelessWidget {
                       const Spacer(),
                     ],
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
+                  const SizedBox(height: 25),
                   RectangleContactWidget(
                     iconLeading: FontAwesomeIcons.locationArrow,
                     text: AppStrings.frangoAddressDisplayText,
@@ -110,9 +109,7 @@ class ContactUsScreen extends StatelessWidget {
                       SocialMediaContact.openLocationInMaps();
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   RectangleContactWidget(
                     iconLeading: FontAwesomeIcons.instagram,
                     text: AppStrings.followFrangoInstagram,
@@ -121,9 +118,7 @@ class ContactUsScreen extends StatelessWidget {
                       SocialMediaContact.openInstagram();
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   RectangleContactWidget(
                     iconLeading: FontAwesomeIcons.tiktok,
                     text: AppStrings.followFrangoTikTok,
@@ -131,14 +126,14 @@ class ContactUsScreen extends StatelessWidget {
                     onTap: () {
                       SocialMediaContact.openTikTok();
                     },
-                  )
+                  ),
                 ],
               );
             } else {
-              return const Center(
+              return Center(
                 child: Text(
                   "Failed to load data.",
-                  style: TextStyle(color: AppColors.primaryYellow),
+                  style: TextStyle(color: theme.colorScheme.primary),
                 ),
               );
             }
