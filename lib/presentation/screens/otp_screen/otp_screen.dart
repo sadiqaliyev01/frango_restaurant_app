@@ -113,10 +113,11 @@ class OtpScreen extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => Pager.home(context),
+                      builder: (BuildContext context) => Pager.login,
                     ),
                     (route) => route.isCurrent,
                   );
+                  CustomSnackBar.showError(context, message: "Successfully registered");
                 } else if (state is VerifyEmailFailure) {
                   CustomSnackBar.showError(context);
                 }

@@ -92,21 +92,18 @@ class TableScreen extends StatelessWidget {
                             ),
                             onPressed: () {
                               final tableCubit = context.read<TableCubit>();
-                              final reservationCubit =
-                                  context.read<ReservationCubit>();
 
                               // Ensure that you set the selected table
                               tableCubit.selectTable(table);
-
-                              // Pass the table data to ReservationCubit
-                              reservationCubit.autoFillFromTable(table);
 
                               // Proceed to the Reservation screen
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) =>
-                                      Pager.reservation(context),
+                                  builder: (_) => Pager.reservation(
+                                    context,
+                                    table: table,
+                                  ),
                                 ),
                               );
                             },

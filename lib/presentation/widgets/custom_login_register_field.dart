@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 
-class CustomLoginRegisterField extends StatelessWidget {
+class CustomLoginRegisterField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
-  final ValueNotifier<bool> _obscureTextNotifier;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
@@ -15,7 +14,7 @@ class CustomLoginRegisterField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool readOnly;
 
-  CustomLoginRegisterField({
+  const CustomLoginRegisterField({
     required this.hintText,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
@@ -24,10 +23,34 @@ class CustomLoginRegisterField extends StatelessWidget {
     this.prefixIcon,
     this.onChanged,
     this.inputFormatters,
+
     this.onTap,
     this.readOnly = false,
     super.key,
   }) : _obscureTextNotifier = ValueNotifier(obscureText);
+
+  });
+
+  @override
+  _CustomLoginRegisterFieldState createState() =>
+      _CustomLoginRegisterFieldState();
+}
+
+class _CustomLoginRegisterFieldState extends State<CustomLoginRegisterField> {
+  late ValueNotifier<bool> _obscureTextNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureTextNotifier = ValueNotifier(widget.obscureText);
+  }
+
+  @override
+  void dispose() {
+    _obscureTextNotifier.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +58,32 @@ class CustomLoginRegisterField extends StatelessWidget {
       valueListenable: _obscureTextNotifier,
       builder: (context, isObscure, child) {
         return TextFormField(
+
           inputFormatters: inputFormatters,
           validator: validator,
           controller: controller,
           readOnly: readOnly,
           onTap: onTap,
+
+          inputFormatters: widget.inputFormatters,
+          validator: widget.validator,
+          controller: widget.controller,
+
           decoration: InputDecoration(
-            prefixIcon: prefixIcon,
+            prefixIcon: widget.prefixIcon,
             prefixIconConstraints: const BoxConstraints(
               minHeight: 0,
               minWidth: 0,
             ),
             filled: true,
             fillColor: AppColors.buttonAndTextFieldGray,
-            hintText: hintText,
+            hintText: widget.hintText,
             hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
               borderSide: BorderSide.none,
             ),
-            suffixIcon: obscureText
+            suffixIcon: widget.obscureText
                 ? IconButton(
                     icon: Icon(
                       isObscure ? Icons.visibility : Icons.visibility_off,
@@ -68,8 +97,8 @@ class CustomLoginRegisterField extends StatelessWidget {
           ),
           style: const TextStyle(color: AppColors.white),
           obscureText: isObscure,
-          keyboardType: keyboardType,
-          onChanged: onChanged,
+          keyboardType: widget.keyboardType,
+          onChanged: widget.onChanged,
         );
       },
     );

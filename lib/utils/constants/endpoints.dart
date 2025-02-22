@@ -8,7 +8,7 @@ class Endpoints {
   static const register = "$_baseUrl/users/register";
   static const verifyEmail = "$_baseUrl/users/verify-email";
 
-  static const aboutUs = "$_baseUrl/aboutUs";
+  static const aboutUs = "$_baseUrl/about-us";
   static const meals = "$_baseUrl/meal-categories/meals-included";
   static const categoryNames = "$_baseUrl/meal-categories";
   static const table = "$_baseUrl/tables";
