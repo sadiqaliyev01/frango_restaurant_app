@@ -24,6 +24,12 @@ class LoginLocalService {
     }
   }
 
+  Future<void> deleteSaveByKey(String key) async {
+
+    await _box.delete(key);
+    
+  }
+
   Future<int> clearCache() => _box.clear();
 
   String? get token => loginResponse?.token;

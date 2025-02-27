@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frango_restaurant_app/utils/di/locator.dart';
@@ -37,9 +38,9 @@ class MyApp extends StatelessWidget {
             navigatorKey: navKey,
             title: 'Flutter Demo',
             theme: isDarkMode ? darkTheme : lightTheme,
-            home: isOnboardingCompleted
+            home:( loginLocalService.loginResponse?.token??'').isEmpty
                 ? const LoginScreen()
-                : const SplashScreen(),
+                : Pager.home(context),
             debugShowCheckedModeBanner: false,
           );
         },

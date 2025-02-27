@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frango_restaurant_app/data/remote/services/local/login_local_service.dart';
+import 'package:frango_restaurant_app/utils/di/locator.dart';
 import 'package:frango_restaurant_app/utils/helpers/pager.dart';
 import 'package:frango_restaurant_app/utils/constants/app_colors.dart';
 import 'package:frango_restaurant_app/data/remote/contractor/about_us_contractor.dart';
@@ -123,6 +125,8 @@ class DrawerItems extends StatelessWidget {
                 ),
                 text: const Text("Çıxış Et"),
                 onTap: () {
+                  locator<LoginLocalService>().deleteSaveByKey('login');
+
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
