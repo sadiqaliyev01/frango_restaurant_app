@@ -42,7 +42,6 @@ class SignUpScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 20),
-
                 Column(
                   children: [
                     CustomLoginRegisterField(
@@ -101,7 +100,7 @@ class SignUpScreen extends StatelessWidget {
                           final formattedDate =
                               "${selectedDate.year.toString().padLeft(2, '0')}-"
                               "${selectedDate.month.toString().padLeft(2, '0')}-"
-                              "${selectedDate.day}";
+                              "${selectedDate.day.toString().padLeft(2, '0')}";
 
                           registerCubit.birthdayController.text = formattedDate;
                         }
@@ -120,9 +119,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 30),
-
                 BlocConsumer<RegisterCubit, RegisterState>(
                   listener: (_, state) {
                     if (state is RegisterSuccess) {
