@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         builder: (context, isDarkMode) {
           return MaterialApp(
             navigatorKey: navKey,
-            title: 'Flutter Demo',
+            title: 'Frango',
             theme: isDarkMode ? darkTheme : lightTheme,
             home:( loginLocalService.loginResponse?.token??'').isEmpty
                 ? const LoginScreen()
