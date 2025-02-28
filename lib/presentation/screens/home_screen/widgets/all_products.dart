@@ -7,11 +7,12 @@ import 'package:frango_restaurant_app/presentation/screens/home_screen/widgets/p
 import '../../../../data/models/remote/meal_response.dart';
 
 class AllProducts extends StatelessWidget {
-  const AllProducts(
-      {super.key,
-      // required this.scrollController,
-      required this.categoryTitle,
-      required this.meals});
+  const AllProducts({
+    super.key,
+    // required this.scrollController,
+    required this.categoryTitle,
+    required this.meals,
+  });
 
   // final ScrollController scrollController;
   final String categoryTitle;

@@ -72,8 +72,9 @@ class ReservationScreen extends StatelessWidget {
                   ),
                 ),
                 maxLines: 3,
-                style:
-                    TextStyle(color: isLightMode ? Colors.black : Colors.white),
+                style: TextStyle(
+                  color: isLightMode ? Colors.black : Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -90,24 +91,24 @@ class ReservationScreen extends StatelessWidget {
               ),
             ),
             onPressed: () async {
-              await reservationCubit.postReservation();
-              if (context.read<ReservationCubit>().state
-                  is ReservationSuccess) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        const ReservationComplete(isReservation: false),
-                  ),
-                  (route) => false,
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Reservation failed! Check required fields."),
-                  ),
-                );
-              }
+              // await reservationCubit.postReservation();
+              // if (context.read<ReservationCubit>().state
+              //     is ReservationSuccess) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>
+                      const ReservationComplete(isReservation: false),
+                ),
+                (route) => false,
+              );
+              // } else {
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(
+              //       content: Text("Reservation failed! Check required fields."),
+              //     ),
+              //   );
+              // }
             },
             child: Text(
               'Rezervi tamamla',
