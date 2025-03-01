@@ -16,10 +16,11 @@ class AboutUsScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios,
-              color: isLightMode
-                  ? AppColors.primaryBlack
-                  : AppColors.primaryYellow),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color:
+                isLightMode ? AppColors.primaryBlack : AppColors.primaryYellow,
+          ),
         ),
         titleSpacing: 100,
         title: Text(
@@ -29,9 +30,7 @@ class AboutUsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: ListView(
         children: [
           const SizedBox(height: 20),
           Center(
@@ -63,7 +62,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                      '“Dönər sousla yeyilir” devizi ilə bu yola çıxdıq və bir ili tamamlamadan artıq müştərilərimiz tərəfindən sevildik. Müştərilərimiz həm üz-üzə, həm də virtual olaraq Franqo Döneri nə qədər çox sevdiklərini vaxtaşırı ifadə edirlər. Biz bu işi sevirik. Müştərilərimizin xoşbəxt olması bizi də sevindirir. Ötən gün Facebook səhifəmizdə bizə göndərilən bir mesajı sizinlə bölüşmək istərdik. Bu mesajı bizə göndərən şəxsin adı məxfi saxlanılacaq, lakin bunun kimi onlarla mesajın bizə çatmağa davam edəcəyini bilirik. Mesaj budur: Əziz Franqo. Mən sadəcə yemək arabasından sifariş vermişəm. Amma qeyd yaza bilmədim. Çünki qeyd yazanda sifarişim keçmədi. Mən səni qeydsiz buraxmaq istəmirdim. Bax, yay gəlir. Sizcə mən bir qədər kökəlmişəm? Amma hər halda, sən də məni belə sevirsən, hə? Deyirəm ki, yox, pəhriz dönəri mümkün deyil, amma nə edək? İdmanla məşğul olsam yaxşı olar. Mən səni sevirəm, şadam ki, varsan Frango. Təşəkkürlər!',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ],
