@@ -42,14 +42,14 @@ class DrawerItems extends StatelessWidget {
                     );
                   },
                 ),
-                ListTileItems(
-                  icon: const Icon(
-                    Icons.percent,
-                    color: AppColors.primaryBlack,
-                  ),
-                  text: const Text("Kampaniyalar"),
-                  onTap: () {},
-                ),
+                // ListTileItems(
+                //   icon: const Icon(
+                //     Icons.percent,
+                //     color: AppColors.primaryBlack,
+                //   ),
+                //   text: const Text("Kampaniyalar"),
+                //   onTap: () {},
+                // ),
                 ListTileItems(
                   icon: const Icon(
                     Icons.table_restaurant_sharp,
