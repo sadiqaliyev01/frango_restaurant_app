@@ -16,10 +16,11 @@ class AboutUsScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios,
-              color: isLightMode
-                  ? AppColors.primaryBlack
-                  : AppColors.primaryYellow),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color:
+                isLightMode ? AppColors.primaryBlack : AppColors.primaryYellow,
+          ),
         ),
         titleSpacing: 100,
         title: Text(
