@@ -16,8 +16,9 @@ class LoginLocalService {
   LoginResponse? get loginResponse {
     try {
       String? loginResponse = _box.get('login');
+      if (loginResponse == null) return null;
       LoginResponse decodedResponse =
-          LoginResponse.fromJson(jsonDecode(loginResponse!));
+          LoginResponse.fromJson(jsonDecode(loginResponse));
       return decodedResponse;
     } catch (e) {
       return null;

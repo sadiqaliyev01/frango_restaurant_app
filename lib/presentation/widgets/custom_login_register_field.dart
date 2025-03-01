@@ -84,7 +84,6 @@ class CustomLoginRegisterField extends StatefulWidget {
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
-  final ValueNotifier<bool> _obscureTextNotifier;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
@@ -93,7 +92,7 @@ class CustomLoginRegisterField extends StatefulWidget {
   final VoidCallback? onTap;
   final bool readOnly;
 
-  CustomLoginRegisterField({
+  const CustomLoginRegisterField({
     required this.hintText,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
@@ -105,7 +104,7 @@ class CustomLoginRegisterField extends StatefulWidget {
     this.onTap,
     this.readOnly = false,
     super.key,
-  }) : _obscureTextNotifier = ValueNotifier(obscureText);
+  });
 
   @override
   State<CustomLoginRegisterField> createState() =>
@@ -113,65 +112,56 @@ class CustomLoginRegisterField extends StatefulWidget {
 }
 
 class _CustomLoginRegisterFieldState extends State<CustomLoginRegisterField> {
-  late TextEditingController _controller;
+
+  bool isObsecure = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController();
+    isObsecure = widget.obscureText;
   }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: widget._obscureTextNotifier,
-      builder: (context, isObscure, child) {
-        return TextFormField(
-          inputFormatters: widget.inputFormatters,
-          validator: widget.validator,
-          controller: _controller,
-          readOnly: widget.readOnly,
-          onTap: widget.onTap,
-          decoration: InputDecoration(
-            prefixIcon: widget.prefixIcon,
-            prefixIconConstraints: const BoxConstraints(
-              minHeight: 0,
-              minWidth: 0,
-            ),
-            filled: true,
-            fillColor: AppColors.buttonAndTextFieldGray,
-            hintText: widget.hintText,
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: BorderSide.none,
-            ),
-            suffixIcon: widget.obscureText
-                ? IconButton(
-                    icon: Icon(
-                      isObscure ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      widget._obscureTextNotifier.value = !isObscure;
-                    },
-                  )
-                : null,
-          ),
-          style: const TextStyle(color: AppColors.white),
-          obscureText: isObscure,
-          keyboardType: widget.keyboardType,
-          onChanged: widget.onChanged,
-        );
-      },
+    return TextFormField(
+      inputFormatters: widget.inputFormatters,
+      validator: widget.validator,
+      controller: widget.controller,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
+      decoration: InputDecoration(
+        prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: const BoxConstraints(
+          minHeight: 0,
+          minWidth: 0,
+        ),
+        filled: true,
+        fillColor: AppColors.buttonAndTextFieldGray,
+        hintText: widget.hintText,
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25),
+          borderSide: BorderSide.none,
+        ),
+        suffixIcon: widget.obscureText
+            ? IconButton(
+                icon: Icon(
+                  isObsecure ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  isObsecure = !isObsecure;
+                  setState(() {
+                    
+                  });
+                },
+              )
+            : null,
+      ),
+      style: const TextStyle(color: AppColors.white),
+      obscureText: isObsecure,
+      keyboardType: widget.keyboardType,
+      onChanged: widget.onChanged,
     );
   }
 }
