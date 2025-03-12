@@ -12,6 +12,7 @@ class AppBarItems extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final appBarTheme = Theme.of(context).appBarTheme;
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       backgroundColor: appBarTheme.backgroundColor,
       elevation: 0,
       leading: Builder(

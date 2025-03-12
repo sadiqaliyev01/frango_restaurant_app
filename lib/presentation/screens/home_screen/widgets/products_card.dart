@@ -29,13 +29,13 @@ class ProductsCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              categoryTitle,
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black),
-            ),
+            // Text(
+            //   categoryTitle,
+            //   style: const TextStyle(
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.bold,
+            //       color: AppColors.black),
+            // ),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
