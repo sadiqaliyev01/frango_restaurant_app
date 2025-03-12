@@ -82,7 +82,7 @@ Future<void> setupLocator() async {
       () => TableRepository(locator<TableService>()));
 
   // cubits
-  locator.registerLazySingleton(() => LoginCubit(locator()));
+  locator.registerFactory(() => LoginCubit(locator()));
   locator.registerFactory(() => RegisterCubit(locator()));
   locator.registerFactory(() => VerifyEmailCubit(locator()));
   locator.registerFactory(() => MealCubit(locator()));
